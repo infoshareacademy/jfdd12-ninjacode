@@ -1,0 +1,50 @@
+/* universal */
+*{
+box-sizing: border-box;
+}
+
+/* menu */
+
+nav {
+    background-color:#8452ff;
+    display:flex;
+    flex-flow:column;
+    align-items:center;
+}
+
+nav .title
+{
+padding:0.5em;
+color:lightgreen;
+background-color:green;
+width:100%;
+text-align:center;
+}
+
+nav > ul{
+    display:none;
+    width:100%;
+}
+
+nav:hover > ul{
+    display:block;
+    list-style:none;
+    width:100%;
+
+}
+
+nav > ul > li{
+    padding:1em;
+    width:100%;
+}
+nav > ul > li > a {
+    display:inline-block;
+    text-decoration:none;
+    color:white;
+    background:red;
+    padding:1em;
+    width:100%;
+    
+    
+    
+}
