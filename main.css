@@ -1,0 +1,22 @@
+.container {
+    width: 100%;
+    background: red;
+    justify-content: space-around;
+    display: flex;
+}
+
+@media (min-width: 800px) {
+    .container {
+        flex-flow: row
+    }
+
+    .container > * {
+        width: 50%;
+        
+    }
+
+    .container > div {
+        display: flex;
+    flex-flow: column;
+    justify-content: space-between;
+    }
