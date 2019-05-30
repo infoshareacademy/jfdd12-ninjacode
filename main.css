@@ -1,0 +1,24 @@
+/* for all - no media queries */
+
+/* setup & reset */
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    padding: 0;
+    width: 960px;
+}
+.feater_24{
+    background-image: url("img/cashBake.png");
+    background-repeat: no-repeat;
+    height: 500px;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    position: relative;
+}
+.logo {
+    
+}
