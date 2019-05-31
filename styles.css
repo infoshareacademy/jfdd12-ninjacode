@@ -5,6 +5,15 @@
     box-sizing: border-box;
 }
 
+/* variables */
+:root {
+   /* colors */
+   --main-color-1: #845EC2;
+   --main-color-2: #00C9A7;
+   --main-color-3: #4D8076;
+   --main-color-4: #C4FCEF;
+  }
+
 body {
     margin: 0;
     padding: 0;
@@ -15,15 +24,8 @@ body {
     font-family: 'Roboto', sans-serif;
     line-height: 1.4;
     text-align: center;
-    color: #845EC2;
-    color: #00C9A7;
-    color: #4D8076;
-    color: #C4FCEF;
-    
-}
 
-p {
-    
+    color: var(--main-color-4);
 }
 
 h1 {
@@ -33,7 +35,7 @@ h1 {
     /* background-color: azure; */
     background-color: rgba(240, 255, 255, .5); /* color:azure */
     border-radius: 12px;
-    
+    color: var(--main-color-3);
 }
 
 .slogan-page{
@@ -43,14 +45,29 @@ h1 {
     background-size: cover;
     background-attachment: fixed; 
     height: 100vh;
-    background-color: rgba(0,0,0,1);
+    background:
+        /* top, transparent black, faked with gradient */ 
+        linear-gradient(
+          rgba(0, 0, 0, 0.7), 
+          rgba(0, 0, 0, 0.7)
+        ),
+        /* bottom, image */
+        url("img/background_hero.png");
+    
+    /* flex config */
+    display: flex;
+    flex-direction: column;
+    /* border */
+
 }
+
 .slogan-page>.name-app{
     font-family: "Pacifico", cursive;
+    color: var(--main-color-1);
 }
 
 .form>a{
-    background-color: azure;
+    background-color: var(--main-color-4);
     border: solid;
     border-radius: 12px;
     padding: .5rem;
@@ -62,8 +79,9 @@ h1 {
 .feater_30 {
     height: 100vh;
 }
+
 @media screen and (max-width: 499px) {
-    .mobile--hide {
+    .mobile--hide { /* hide description in hero section */
         display: none;
 
     }
