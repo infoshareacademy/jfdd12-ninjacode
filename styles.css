@@ -10,6 +10,30 @@ body {
     padding: 0;
     display: block;
     
+    /* typography section */
+    
+    font-family: 'Roboto', sans-serif;
+    line-height: 1.4;
+    text-align: center;
+    color: #845EC2;
+    color: #00C9A7;
+    color: #4D8076;
+    color: #C4FCEF;
+    
+}
+
+p {
+    
+}
+
+h1 {
+    font-size: 4em;
+    margin-top: 0;
+    padding: .1em;
+    /* background-color: azure; */
+    background-color: rgba(240, 255, 255, .5); /* color:azure */
+    border-radius: 12px;
+    
 }
 
 .slogan-page{
@@ -19,6 +43,10 @@ body {
     background-size: cover;
     background-attachment: fixed; 
     height: 100vh;
+    background-color: rgba(0,0,0,1);
+}
+.slogan-page>.name-app{
+    font-family: "Pacifico", cursive;
 }
 
 .form>a{
@@ -33,4 +61,10 @@ body {
 
 .feater_30 {
     height: 100vh;
+}
+@media screen and (max-width: 499px) {
+    .mobile--hide {
+        display: none;
+
+    }
 }
