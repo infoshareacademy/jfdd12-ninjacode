@@ -1,0 +1,36 @@
+/* for all - no media queries */
+
+/* setup & reset */
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    padding: 0;
+    display: block;
+    
+}
+
+.slogan-page{
+    background-image: url("img/background_hero.png");
+    background-repeat: no-repeat;
+    background-position: 100%;
+    background-size: cover;
+    background-attachment: fixed; 
+    height: 100vh;
+}
+
+.form>a{
+    background-color: azure;
+    border: solid;
+    border-radius: 12px;
+    padding: .5rem;
+
+    text-decoration: none;
+    font: bold 1rem sans-serif;
+}
+
+.feater_30 {
+    height: 100vh;
+}
