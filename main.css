@@ -1,22 +1,20 @@
 .container {
-    width: 100%;
-    background: red;
-    justify-content: space-around;
     display: flex;
+    justify-content: space-around;
 }
 
-@media (min-width: 800px) {
-    .container {
-        flex-flow: row
-    }
+.Lucyna {
+    
 
-    .container > * {
-        width: 50%;
-        
-    }
+}
+.Asia {
+    
+}
 
-    .container > div {
-        display: flex;
-    flex-flow: column;
-    justify-content: space-between;
-    }
+.Damian {
+    
+}
+
+.Marcin {
+   
+}
