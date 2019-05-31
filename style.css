@@ -9,12 +9,12 @@ nav {
     background-color:#8452ff;
     display:flex;
     flex-flow:column;
-    align-items:center;
+    font-size:2em;
 }
 
 nav .title
 {
-padding:0.5em;
+padding:1em;
 color:lightgreen;
 background-color:green;
 width:100%;
@@ -24,27 +24,42 @@ text-align:center;
 nav > ul{
     display:none;
     width:100%;
+    margin:0;
 }
 
 nav:hover > ul{
-    display:block;
+    display:flex;
     list-style:none;
-    width:100%;
-
+    flex-flow:column;
 }
 
-nav > ul > li{
+nav ul li {
     padding:1em;
-    width:100%;
 }
+
 nav > ul > li > a {
-    display:inline-block;
+    
     text-decoration:none;
+    background-color:red;
     color:white;
-    background:red;
     padding:1em;
     width:100%;
-    
-    
-    
+    text-align:center;
+}
+
+/* Desktop & laptop styling */
+@media screen and (min-width:500px){
+
+nav {
+    flex-flow:row;
+}
+
+nav .title{
+    display:none;
+}
+
+
+
+
+
 }
