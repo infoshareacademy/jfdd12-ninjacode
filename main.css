@@ -3,7 +3,7 @@
 }
 
 .feater_30 {
-    background: #8452ff;
+    background: #cfc0f7fa;
 }
 .column {
     display: flex;
@@ -20,4 +20,8 @@
 li {
     display: flex;
     flex-direction: column;
+}
+div.left {
+    display: flex;
+    flex-direction: column-reverse;
 }
