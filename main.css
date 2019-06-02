@@ -1,20 +1,97 @@
-.container {
+.container-32 {
+  
     display: flex;
-    justify-content: space-around;
+    flex-direction: column;
+    flex-wrap: wrap;
+    justify-content: flex-end;
+    align-items: stretch;
+    align-content: stretch;
+ 
+  font-family: 'Cormorant Garamond', serif;
+  margin: 0 auto;
 }
 
-.Lucyna {
-    
 
-}
-.Asia {
-    
+.background {
+  text-align: center;
 }
 
-.Damian {
-    
+.avatar {
+  position: relative;
+  z-index: 2;
+  margin-top: -60px;
+  border-radius: 50%;
+  width: 100px;
+  height: auto;
 }
 
-.Marcin {
-   
+p {
+  text-align: center;
+  margin: 0px;
+  padding: 0px;
+} 
+
+.money {
+  display: block;
+  width: 100%;
+  height: auto;
+  margin: 0 auto; 
+}
+
+.content-1, .content-2, .content-3, .content-4, .title {
+  background: white;
+  flex: 1;
+ 
+  
+}
+
+h1 {
+  text-align: center;
+}
+
+.aboutMe {
+  
+}
+
+.gitHub,
+.linkedin,
+.gmail,
+.user {
+  display: flex;
+  padding: 5px;
+  margin-top: 10px;
+  margin-bottom: 10px;
+ 
+}
+
+h3 {
+  flex: 1;
+  margin: 0;
+  text-align: center;
+}
+
+/* desktop */
+
+@media (max-width: 800px) {
+  .container-32 {
+    display: block;
+  }
+  .content-1, .content-2, .content-3, .content-4 {
+    margin: 0 auto;
+    width: 60%;
+    padding-bottom: 70px;
+  }
+  
+        
+}
+
+@media (min-width:601px) and (max-width: 799px){
+  .money {
+    margin: 0 auto;
+  }
+} 
+@media(max-width: 600px) {
+  .money {
+    margin: 0 auto;
+  }
 }
