@@ -25,3 +25,7 @@ div.left {
     display: flex;
     flex-direction: column-reverse;
 }
+img {
+    width: 60px;
+    height: 60px;
+}
