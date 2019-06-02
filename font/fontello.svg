@@ -1,0 +1,18 @@
+<?xml version="1.0" standalone="no"?>
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+<svg xmlns="http://www.w3.org/2000/svg">
+<metadata>Copyright (C) 2019 by original authors @ fontello.com</metadata>
+<defs>
+<font id="fontello" horiz-adv-x="1000" >
+<font-face font-family="fontello" font-weight="400" font-stretch="normal" units-per-em="1000" ascent="850" descent="-150" />
+<missing-glyph horiz-adv-x="1000" />
+<glyph glyph-name="tag" unicode="&#xe800;" d="M250 600q0 30-21 51t-50 20-51-20-21-51 21-50 51-21 50 21 21 50z m595-321q0-30-20-51l-274-274q-22-21-51-21-30 0-50 21l-399 399q-21 21-36 57t-15 65v232q0 29 21 50t50 22h233q29 0 65-15t57-36l399-399q20-21 20-50z" horiz-adv-x="857.1" />
+
+<glyph glyph-name="database" unicode="&#xf1c0;" d="M429 421q132 0 247 24t181 71v-95q0-38-57-71t-157-52-214-19-215 19-156 52-58 71v95q66-47 181-71t248-24z m0-428q132 0 247 24t181 71v-95q0-39-57-72t-157-52-214-19-215 19-156 52-58 72v95q66-47 181-71t248-24z m0 214q132 0 247 24t181 71v-95q0-38-57-71t-157-52-214-20-215 20-156 52-58 71v95q66-47 181-71t248-24z m0 643q116 0 214-19t157-52 57-72v-71q0-39-57-72t-157-52-214-19-215 19-156 52-58 72v71q0 39 58 72t156 52 215 19z" horiz-adv-x="857.1" />
+
+<glyph glyph-name="history" unicode="&#xf1da;" d="M857 350q0-87-34-166t-91-137-137-92-166-34q-96 0-183 41t-147 114q-4 6-4 13t5 11l76 77q6 5 14 5 9-1 13-7 41-53 100-82t126-29q58 0 110 23t92 61 61 91 22 111-22 111-61 91-92 61-110 23q-55 0-105-20t-90-57l77-77q17-16 8-38-10-23-33-23h-250q-15 0-25 11t-11 25v250q0 24 22 33 22 10 39-8l72-72q60 57 137 88t159 31q87 0 166-34t137-92 91-137 34-166z m-357 161v-250q0-8-5-13t-13-5h-178q-8 0-13 5t-5 13v35q0 8 5 13t13 5h125v197q0 8 5 13t12 5h36q8 0 13-5t5-13z" horiz-adv-x="857.1" />
+
+<glyph glyph-name="chart-line" unicode="&#xf201;" d="M1143-7v-72h-1143v858h71v-786h1072z m-72 696v-242q0-12-10-17t-20 4l-68 68-353-353q-6-6-13-6t-13 6l-130 130-232-233-107 108 327 326q5 6 12 6t13-6l130-130 259 259-67 68q-9 8-5 19t17 11h243q7 0 12-5t5-13z" horiz-adv-x="1142.9" />
+</font>
+</defs>
+</svg>
