@@ -38,7 +38,7 @@ p {
   margin: 0 auto; 
 }
 
-.content-1, .content-2, .content-3, .content-4, .title {
+.content-1, .title {
   background: white;
   flex: 1;
  
@@ -72,26 +72,54 @@ h3 {
 
 /* desktop */
 
-@media (max-width: 800px) {
-  .container-32 {
-    display: block;
+/* @media (min-width: 800px) {
+  .container-32 {  
+    flex-direction: row;    
+        
   }
   .content-1, .content-2, .content-3, .content-4 {
     margin: 0 auto;
-    width: 60%;
+    flex: 25%;
     padding-bottom: 70px;
+    
   }
   
-        
-}
+  .person-container {
+    margin: 5px;
+  }     
+} */
 
-@media (min-width:601px) and (max-width: 799px){
+/* tablet */
+
+@media (min-width:601px) {
+  .container-32 {    
+    flex-direction: row;
+    max-width: 1000px;
+  }
   .money {
     margin: 0 auto;
   }
+
+  .content-1 {
+    margin: 0 auto;        
+    flex: 50%;    
+    padding-bottom: 70px;    
+  }
+
+  .person-container {
+    margin: 50px 20px 50px 20px;
+  }
 } 
+
+/* phone */
 @media(max-width: 600px) {
   .money {
     margin: 0 auto;
+  }
+
+  .content-1 {
+    margin: 0 auto;
+    width: 60%;
+    padding-bottom: 70px;        
   }
 }
