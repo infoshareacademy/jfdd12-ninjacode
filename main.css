@@ -34,7 +34,13 @@ img {
     display: flex;
     flex-direction: column;
     align-items: flex-start;
+} 
+label {
+    display:flex;
+    margin-top: 10px;
+
 }
+
 }
 @media (min-width: 500px) {
     .column {
