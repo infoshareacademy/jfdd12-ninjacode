@@ -1,7 +1,7 @@
 .content {
     display: flex;
     flex-direction: column;
-    
+    background: #fff6e6;
 }
 
 
@@ -15,9 +15,13 @@ p {
 
 h1 {
     padding: 20px;
+    background: #fff6e6;
 }
 
-
+.func {
+    flex: 50%;
+    margin-top: 15px;
+}
   
 .icon {
     text-align: center;
