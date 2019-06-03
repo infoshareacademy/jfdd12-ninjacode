@@ -66,3 +66,5 @@ background:
 https://caniuse.com/#search=var()
 https://www.w3schools.com/css/css3_variables.asp
 
+
+https://pl.pinterest.com/jacobrosenberg/web-uxui-hero-sections/
