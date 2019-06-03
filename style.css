@@ -3,46 +3,7 @@
 box-sizing: border-box;
 }
 
-/* menu */
-
-header nav {
-    display: flex; 
-    flex-direction:column;
-    align-items: stretch;
-    background: #baddad;
-    box-shadow: 0 5px 15px -10px #111;
-    font-family: 'Pacifico', sans-serif;
-    font-size:2em;
-}
-
-header .item {
-text-align: center;
-border-bottom: 1px solid #111;
-padding:24px;
-text-decoration:none;
-color:#111;
-background-color: orange;
-}
-header .logo > a {
-    display:flex;
-    border-radius: 20%;
-    background: #111;
-    box-shadow:
-    0 0 0 5px #beddef,
-    0 0 0 10px #111;
-    font-size: 1.5em;
-    color: #beddef;
-    /* flatten icon w/o text */
-    /* line-height: 24px;  flatten icon */
-    padding: 24px;
-    text-align:center;
-    background-color:green;
-    width:100px;
-    margin:0.5em auto 0.5em;
-  }
-
-
-/* test menu ul-li */
+/* menu  */
 
 nav {
     display: flex; 
@@ -51,16 +12,39 @@ nav {
     background: #baddad;
     box-shadow: 0 5px 15px -10px #111;
     font-family: 'Pacifico', sans-serif;
-    font-size:2em;
-    
+    font-size:2em;    
+}
+
+h4 {
+    font-weight:400;
+    border-radius: 100%;
+    background: #111;
+    box-shadow:
+    0 0 0 5px #beddef,
+    0 0 0 10px #111;
+    font-size: 1.5em;
+    color: #beddef;
+    padding: 24px;
+    text-align:center;
+    background-color:green;
+    width:100px;
+    margin:0.5em auto 0.5em;
 }
 ul{
     padding-inline-start: 0px; /* override user agent */
+    display:none;
+}
+nav:hover ul{
+    display:initial;
+    
 }
 li{
     display:flex;
-    /* align-items:stretch; */
     flex-direction:column;
+}
+
+li a:hover{
+    color:white;
 }
 
 a {
@@ -71,27 +55,28 @@ text-decoration:none;
 background-color: orange;
 color:#111;
 }
-h4 {
-    font-weight:400;
-    border-radius: 100%;
-    background: #111;
-    box-shadow:
-    0 0 0 5px #beddef,
-    0 0 0 10px #111;
-    font-size: 1.5em;
-    color: #beddef;
-    /* flatten icon w/o text */
-    /* line-height: 16px; */
-    padding: 24px;
-    text-align:center;
-    background-color:green;
-    width:100px;
-    margin:0.5em auto 0.5em;
-}
-
 
 /* Desktop & laptop styling */
-@media screen and (min-width:500px){
+@media screen and (min-width:700px){
+
+nav {
+    display:flex;
+    flex-flow: row nowrap;
+    align-items:center;
+}
+h4{
+    display:flex;
+    
+
+}
+nav:hover{
+    display:flex;
+}
+
+ul{
+    display:flex;
+    flex-direction:column;
+}
 
 
 
