@@ -29,6 +29,9 @@ img {
     width: 60px;
     height: 60px;
 }
+h3 {
+    margin-left: 20px;
+}
 @media (max-width: 499px) {
     .column {
     display: flex;
