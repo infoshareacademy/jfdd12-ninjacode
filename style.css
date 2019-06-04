@@ -1,0 +1,104 @@
+/* universal */
+*{
+box-sizing: border-box;
+}
+body{
+    margin:0px;
+    
+}
+/* menu  */
+
+nav {
+    background: #eee;
+    font-family: 'Pacifico', sans-serif;
+    font-size:1em;    
+}
+
+a.logo {
+    border-radius: 1em;
+    background: #111;
+    box-shadow:
+    0 0 0 5px #beddef,
+    0 0 0 10px #111;
+    font-size: 1.5em;
+    color: #beddef;
+    text-align:center;
+    background-color:green;
+    /* width: 120px; */
+    margin:0.5em auto 0.5em;
+}
+ul{
+    display:flex;
+    flex-direction:column;
+    padding-inline-start: 0px;
+    margin:0px;
+}
+ul li :not(.logo){
+    display:none;
+}
+li{
+    display:flex;
+    flex-direction:column;
+}
+
+li a:hover{
+    color:white;
+}
+
+ul:hover li a{
+    display:flex;
+    justify-content:center;
+}
+
+a {
+text-align: center;
+padding:24px;
+text-decoration:none;
+/* background-color: orange; */
+color:#111;
+}
+
+/* Desktop & laptop styling */
+@media screen and (min-width:800px){
+
+header{
+    position:fixed;
+    width:100%;
+    top:0px;
+    /* background:white; */
+}
+nav{
+    /* background:red; */
+    font-size:1em;
+}
+
+ul {
+    display:flex;
+    flex-flow: row nowrap;
+    align-items:center;
+    justify-content:CENTER;
+}
+ul li :not(.logo){
+    display:flex;
+}
+
+ul li:nth-child(2){
+    order:-2;
+}
+ul li:nth-child(3){
+    order:-2;
+}
+
+li a.logo{
+    /* width:80px; */
+}
+
+ul li{
+    display:flex;
+    align-items:center;
+    padding: 0px 1em;
+}
+
+
+
+}
