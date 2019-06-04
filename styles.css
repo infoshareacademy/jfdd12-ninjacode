@@ -24,7 +24,6 @@ body {
     
     font-family: 'Roboto', sans-serif;
     line-height: 1.4;
-    text-align: center;
 
     color: var(--main-text-color);
 }
@@ -40,6 +39,7 @@ h1 {
 }
 
 .slogan-page{
+    text-align: center;
     background-image: url("img/background_hero.png");
     background-repeat: no-repeat;
     background-position: 100%;
