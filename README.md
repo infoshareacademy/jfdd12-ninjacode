@@ -6,3 +6,10 @@
 - menu przesuwa sie przy scrollowaniu (jest stale widoczne)
 
 
+# Feature 32
+
+## Lista członków zespołu
+
+- zdjęcie
+- linki do profili społecznościowych
+- link do strony domowej

@@ -55,3 +55,127 @@
         align-items: center;
     }
 }
+
+/* Feature-32 */
+.feater_32 .container-32 {
+  
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    justify-content: flex-end;
+    align-items: stretch;
+    align-content: stretch;
+ 
+  font-family: 'Cormorant Garamond', serif;
+  margin: 0 auto;
+}
+
+
+.feater_32 .background {
+  text-align: center;
+}
+
+.feater_32 .avatar {
+  position: relative;
+  z-index: 2;
+  margin-top: -60px;
+  border-radius: 50%;
+  width: 100px;
+  height: auto;
+}
+
+.feater_32 p {
+  text-align: center;
+  margin: 0px;
+  padding: 0px;
+} 
+
+.feater_32 .money {
+  display: block;
+  width: 100%;
+  height: auto;
+  margin: 0 auto; 
+}
+
+.feater_32 .content-1, .title {
+  background: white;
+  flex: 1;
+}
+
+.feater_32 h1 {
+  text-align: center;
+}
+
+.feater_32 .aboutMe {
+  
+}
+
+.feater_32 .gitHub,
+.feater_32 .linkedin,
+.feater_32 .gmail,
+.feater_32 .user {
+  display: flex;
+  padding: 5px;
+  margin-top: 10px;
+  margin-bottom: 10px;
+}
+
+.feater_32 h3 {
+  flex: 1;
+  margin: 0;
+  text-align: center;
+}
+
+/* desktop */
+
+/* @media (min-width: 800px) {
+  .container-32 {  
+    flex-direction: row;    
+        
+  }
+  .content-1, .content-2, .content-3, .content-4 {
+    margin: 0 auto;
+    flex: 25%;
+    padding-bottom: 70px;
+    
+  }
+  
+  .person-container {
+    margin: 5px;
+  }     
+} */
+
+/* tablet */
+
+@media (min-width:601px) {
+  .feater_32 .container-32 {    
+    flex-direction: row;
+    max-width: 1000px;
+  }
+  .feater_32 .money {
+    margin: 0 auto;
+  }
+
+  .feater_32 .content-1 {
+    margin: 0 auto;        
+    flex: 50%;    
+    padding-bottom: 70px;    
+  }
+
+  .feater_32 .person-container {
+    margin: 50px 20px 50px 20px;
+  }
+} 
+
+/* phone */
+@media(max-width: 600px) {
+  .feater_32 .money {
+    margin: 0 auto;
+  }
+
+  .feater_32 .content-1 {
+    margin: 0 auto;
+    width: 60%;
+    padding-bottom: 70px;        
+  }
+}
