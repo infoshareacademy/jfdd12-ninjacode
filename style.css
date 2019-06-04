@@ -4,28 +4,11 @@ box-sizing: border-box;
 }
 body{
     margin:0px;
-    
 }
 /* menu  */
-
 nav {
-    background: #eee;
-    font-family: 'Pacifico', sans-serif;
-    font-size:1em;    
-}
-
-nav a.logo {
-    border-radius: 1em;
-    background: #111;
-    box-shadow:
-    0 0 0 5px #beddef,
-    0 0 0 10px #111;
-    font-size: 1.5em;
-    color: #beddef;
-    text-align:center;
-    background-color:green;
-    /* width: 120px; */
-    margin:0.5em auto 0.5em;
+    background:white;
+    font-family: Arial, sans-serif;
 }
 nav ul{
     display:flex;
@@ -36,47 +19,50 @@ nav ul{
 nav ul li :not(.logo){
     display:none;
 }
+nav ul li .logo img{
+    display:inline-block;
+}
 nav li{
     display:flex;
     flex-direction:column;
 }
-
 nav li a:hover{
     color:white;
+    background:purple;
 }
-
+/* show menu in mobile when hovering over logo */
 nav ul:hover li a{
     display:flex;
     justify-content:center;
 }
-
 nav a {
 text-align: center;
-padding:24px;
+padding:8px;
 text-decoration:none;
 /* background-color: orange; */
 color:#111;
+font-size:20px;
+font-weight:700;
 }
 
 /* Desktop & laptop styling */
-@media screen and (min-width:800px){
+@media screen and (min-width:640px){
 
     header{
         position:fixed;
         width:100%;
         top:0px;
-        /* background:white; */
     }
     nav{
-        /* background:red; */
-        font-size:1em;
+        background:white;
+        
     }
 
     nav ul {
         display:flex;
         flex-flow: row nowrap;
         align-items:center;
-        justify-content:CENTER;
+        justify-content:space-around;
     }
     nav ul li :not(.logo){
         display:flex;
@@ -89,16 +75,26 @@ color:#111;
         order:-2;
     }
 
-    nav li a.logo{
-        /* width:80px; */
-    }
-
     nav ul li{
         display:flex;
         align-items:center;
-        padding: 0px 1em;
+        width:100%;
+        line-height:100px;
+        color:white;
     }
 
+    nav ul li .logo img{
+        display:flex;
+    }
+    nav ul li:hover{
+        background:purple;
+        
+    }
+    nav ul li:hover a{
+        color:white;
+    }
 
-
+    main{
+        margin-top:115px;
+    }
 }
