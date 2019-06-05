@@ -4,6 +4,7 @@
 }
 .feater_30 .column {
     display: flex;
+    background: darkgray;
 }
 .feater_30 .left {
     flex: 1;
@@ -20,7 +21,6 @@
 }
 .feater_30 div.left {
     display: flex;
-    flex-direction: column-reverse;
 }
 .feater_30 img {
     width: 60px;
@@ -28,8 +28,19 @@
 }
 .feater_30 h3 {
     margin-left: 20px;
+    text-decoration: underline;
+    text-transform: capitalize;
 }
-@media (max-width: 499px) {
+.feater_33 {
+    background: darkgray;
+}
+.feater_33 p {
+    margin-left: 10px;
+}
+.feater_33 label {
+    margin-left: 10px;
+}
+@media (max-width: 639px) {
     .feater_30 .column {
     display: flex;
     flex-direction: column;
@@ -42,7 +53,7 @@
 }
 
 }
-@media (min-width: 500px) {
+@media (min-width: 640px) {
     .feater_30 .column {
         display: flex;
         flex-direction: row;
