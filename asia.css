@@ -1,15 +1,16 @@
-/* Feature-32 */
+/* Feature-32 * About Us */
 .feater_32 .container-32 {
   
     display: flex;
     flex-direction: column;
+    flex: 50%; 
     flex-wrap: wrap;
     justify-content: flex-end;
     align-items: stretch;
-    align-content: stretch;
+    align-content: stretch; 
  
   font-family: 'Cormorant Garamond', serif;
-  margin: 0 auto;
+  margin: 0 auto; 
 }
 
 
@@ -48,9 +49,7 @@
   text-align: center;
 }
 
-.feater_32 .aboutMe {
-  
-}
+
 
 .feater_32 .gitHub,
 .feater_32 .linkedin,
@@ -68,28 +67,11 @@
   text-align: center;
 }
 
-/* desktop */
 
-/* @media (min-width: 800px) {
-  .container-32 {  
-    flex-direction: row;    
-        
-  }
-  .content-1, .content-2, .content-3, .content-4 {
-    margin: 0 auto;
-    flex: 25%;
-    padding-bottom: 70px;
-    
-  }
-  
-  .person-container {
-    margin: 5px;
-  }     
-} */
 
 /* tablet */
 
-@media (min-width:601px) {
+@media (min-width:640px) {
   .feater_32 .container-32 {    
     flex-direction: row;
     max-width: 1000px;
@@ -109,20 +91,26 @@
   }
 } 
 
-/* phone */
-@media(max-width: 600px) {
+
+@media(max-width: 639px) {
   .feater_32 .money {
     margin: 0 auto;
   }
 
   .feater_32 .content-1 {
-    margin: 0 auto;
-    width: 60%;
-    padding-bottom: 70px;        
-  }
-}
+    flex-direction: column;
+    
 
-/* Feature 34 */
+    
+    padding-bottom: 70px; 
+
+  }
+} 
+
+
+
+
+/* Feature 34  Funck*/
 .feater_34 .content {
     display: flex;
     flex-direction: column;
