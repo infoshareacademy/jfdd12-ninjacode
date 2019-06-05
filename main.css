@@ -36,7 +36,10 @@ body {
         ),
         /* bottom, image */
         url("img/background_hero.png");
-    
+  background-repeat: no-repeat;
+  background-position: 100%;
+  background-size: cover;
+  background-attachment: fixed; 
   
   /* typography section */
   
