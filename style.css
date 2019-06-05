@@ -63,6 +63,7 @@ font-weight:700;
         flex-flow: row nowrap;
         align-items:center;
         justify-content:space-around;
+
     }
     nav ul li :not(.logo){
         display:flex;
