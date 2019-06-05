@@ -1,10 +1,3 @@
-/* universal */
-*{
-box-sizing: border-box;
-}
-body{
-    margin:0px;
-}
 /* menu  */
 nav {
     background:white;
@@ -93,9 +86,5 @@ font-weight:700;
     }
     nav ul li:hover a{
         color:white;
-    }
-
-    main{
-        margin-top:115px;
     }
 }
