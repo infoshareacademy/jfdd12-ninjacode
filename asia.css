@@ -114,7 +114,7 @@
 .feater_34 .content {
     display: flex;
     flex-direction: column;
-    background: #fff6e6;
+    background: white;
 }
 
 
@@ -128,7 +128,7 @@
 
 .feater_34 h1 {
     padding: 20px;
-    background: #fff6e6;
+    background: white;
 }
 
 .feater_34 .func {

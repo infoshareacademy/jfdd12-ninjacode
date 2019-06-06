@@ -2,26 +2,12 @@
 .slogan-page{
     color: var(--main-text-color);
     text-align: center;
-    background-image: url("img/background_hero.png");
-    background-repeat: no-repeat;
-    background-position: 100%;
-    background-size: cover;
-    background-attachment: fixed; 
-    height: 100vh;
-    background:
-        /* top, transparent black, faked with gradient */ 
-        linear-gradient(
-          rgba(0, 0, 0, 0.7), 
-          rgba(0, 0, 0, 0.7)
-        ),
-        /* bottom, image */
-        url("img/background_hero.png");
-    
+
+    height: 82vh; /* height: 82vh; */ 
+
     /* flex config */
     display: flex;
     flex-direction: column;
-    /* border */
-
 }
 
 .slogan-page>.name-app{
@@ -37,7 +23,7 @@
     padding: 20px;
 }
 
-.form>a{
+.slogan-page>.form>a{
     background-color: var(--main-color-4);
     border: solid;
     border-radius: 12px;
@@ -50,6 +36,5 @@
 @media screen and (max-width: 499px) {
     .mobile--hide { /* hide description in hero section */
         display: none;
-
     }
 }
