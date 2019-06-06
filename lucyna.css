@@ -4,7 +4,8 @@
 }
 .feater_30 .column {
     display: flex;
-    background: darkgray;
+    background: #436984;
+    color:white;
 }
 .feater_30 .left {
     flex: 1;
