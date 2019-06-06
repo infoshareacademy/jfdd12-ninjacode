@@ -7,7 +7,8 @@
     flex-wrap: wrap;
     justify-content: flex-end;
     align-items: stretch;
-    align-content: stretch; 
+    align-content: stretch;
+    max-width: 500px;
  
   font-family: 'Cormorant Garamond', serif;
   margin: 0 auto; 
@@ -43,6 +44,7 @@
 .feater_32 .content-1, .title {
   background: white;
   flex: 1;
+  
 }
 
 .feater_32 h1 {
