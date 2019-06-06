@@ -1,31 +1,17 @@
 /* Feature-32 * About Us */
-.feater_32 .container-32 {
-  
+.feater_32 .container-32 {  
     display: flex;
-    flex-direction: column;
-    flex: 50%; 
-    flex-wrap: wrap;
-    justify-content: flex-end;
-    align-items: stretch;
-    align-content: stretch;
-    max-width: 500px;
- 
-  font-family: 'Cormorant Garamond', serif;
-  margin: 0 auto; 
+    flex-direction: column;     
+    flex-wrap: nowrap;  
+    max-width: 500px; 
+    font-family: 'Cormorant Garamond', serif;
+    margin: 0 auto; 
 }
 
-
-.feater_32 .background {
-  text-align: center;
-}
-
-.feater_32 .avatar {
-  /* position: relative; */
-  z-index: 2;
+.feater_32 .avatar { 
   margin-top: -60px;
   border-radius: 50%;
-  width: 100px;
-  height: auto;
+  width: 100px;  
 }
 
 .feater_32 p {
@@ -36,15 +22,12 @@
 
 .feater_32 .money {
   display: block;
-  width: 100%;
-  height: auto;
+  width: 100%;  
   margin: 0 auto; 
 }
 
-.feater_32 .content-1, .title {
-  background: white;
-  flex: 1;
-  
+.feater_32 .content-1 {
+  background: white;    
 }
 
 .feater_32 h1 {
@@ -56,15 +39,13 @@
 .feater_32 .gitHub,
 .feater_32 .linkedin,
 .feater_32 .gmail,
-.feater_32 .user {
-  display: flex;
+.feater_32 .user {  
   padding: 5px;
   margin-top: 10px;
   margin-bottom: 10px;
 }
 
-.feater_32 h3 {
-  flex: 1;
+.feater_32 h3 {  
   margin: 0;
   text-align: center;
 }
@@ -77,38 +58,17 @@
   .feater_32 .container-32 {    
     flex-direction: row;
     max-width: 1000px;
-  }
-  .feater_32 .money {
-    margin: 0 auto;
+    flex-wrap: wrap;
   }
 
-  .feater_32 .content-1 {
-    margin: 0 auto;        
-    flex: 50%;    
-    padding-bottom: 70px;    
+  .feater_32 .content-1 {    
+    flex: 50%;            
   }
 
   .feater_32 .person-container {
-    margin: 50px 20px 50px 20px;
+    margin: 20px 20px 20px 20px;
   }
-} 
-
-
-@media(max-width: 639px) {
-  .feater_32 .money {
-    margin: 0 auto;
-  }
-
-  .feater_32 .content-1 {
-    flex-direction: column;
-    
-
-    
-    padding-bottom: 70px; 
-
-  }
-} 
-
+}
 
 
 
