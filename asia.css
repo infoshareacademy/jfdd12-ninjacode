@@ -31,19 +31,24 @@
 }
 
 .feater_32 h1 {
+  padding: 20px;
   text-align: center;
+  flex: 100%;
+  background: white;
+  margin-bottom: 0px;
 }
 
-
-
-.feater_32 .gitHub,
-.feater_32 .linkedin,
-.feater_32 .gmail,
-.feater_32 .user {  
-  padding: 5px;
-  margin-top: 10px;
-  margin-bottom: 10px;
+.feater_32 .social-icons {
+  display: flex;
+  flex-direction: row;  
+  justify-content: center;  
 }
+
+.feater_32 .social-icons img {  
+  max-width: 30px;    
+  margin: 10px;
+}
+ 
 
 .feater_32 h3 {  
   margin: 0;
@@ -72,37 +77,71 @@
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 /* Feature 34  Funck*/
 .feater_34 .content {
-    display: flex;
+    display: flex; 
     flex-direction: column;
     background: white;
+    flex-wrap: nowrap;
 }
 
-
+.feater_34 img {
+  max-width: 50px;
+}
 .feater_34 .title {
     text-align: center;
 }
 
 .feater_34 p {
     margin: 20px;
+    text-align: center;
 }
 
+.feater_34 h4 {
+  text-align: center;
+}
 .feater_34 h1 {
     padding: 20px;
+    text-align: center;
+    flex: 100%;
     background: white;
 }
 
 .feater_34 .func {
-    flex: 50%;
+    flex: 25%;
     margin-top: 15px;
 }
   
 .feater_34 .icon {
     text-align: center;
+    
 }
 
-@media (max-width: 800px) {
+@media (min-width: 640px)
+{
+  .feater_34 .content {
+    display: flex; 
+    flex-direction: row;
+    background: white;
+    flex-wrap: wrap;
+}
+}
+/* @media (max-width: 800px) {
     .feater_34 .content {
         display: flex;
         flex-direction: column;
@@ -127,11 +166,11 @@
     }
 }
 /* phone */
-@media(max-width: 600px) {
+/* @media(max-width: 600px) {
     .feater_34 .content {
         display: flex;
         flex-direction: column;
        
     }
      
-}
+} * */
