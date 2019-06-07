@@ -1,40 +1,62 @@
 
+.slogan-page .hero-text {
+    /* grid */
+    grid-area: hero-text
+}
+.slogan-page .slogan {
+    /* grid */
+    grid-area: slogan
+}
+
+.slogan-page .hero-news {
+   /* grid */
+   grid-area: hero-news
+}
+.slogan-page>a{
+   background-color: white;
+   border: solid black;
+   color: black;
+   border-radius: 12px;
+   padding: .5rem;
+
+   text-decoration: none;
+   font: bold 1rem sans-serif;
+
+   /* grid */
+   grid-area: button-newsletter;
+   justify-self: center;
+
+}
+
 .slogan-page{
-    color: var(--main-text-color);
-    text-align: center;
-
     height: 82vh; /* height: 82vh; */ 
+    color: white;
+    font-size: 34px;
 
-    /* flex config */
-    display: flex;
-    flex-direction: column;
+    /* grid */
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-template-rows: repeat(3, 1fr);
+    grid-template-areas: 
+    "slogan slogan ........."
+    "...... hero-text hero-news"
+    "...... hero-text button-newsletter";
+}
+.slogan-page h1 {
+    font-size: 3rem;
 }
 
-.slogan-page>.name-app{
-    font-family: "Pacifico", cursive;
-    color: var(--main-color-1);
-}
-.slogan-page>.form{
-    flex-grow: 1;
-    display: flex;
-    flex-direction: column;
-    justify-content: flex-end;
-    align-items: center;
-    padding: 20px;
-}
-
-.slogan-page>.form>a{
-    background-color: var(--main-color-4);
-    border: solid;
-    border-radius: 12px;
-    padding: .5rem;
-
-    text-decoration: none;
-    font: bold 1rem sans-serif;
-}
 
 @media screen and (max-width: 499px) {
-    .mobile--hide { /* hide description in hero section */
-        display: none;
-    }
+    .slogan-page{
+        /* grid */
+    display: grid;
+    grid-template-columns: repeat(1, 1fr);
+    grid-template-rows: repeat(4, 1fr);
+    grid-template-areas: 
+    "slogan"
+    "hero-text"
+    "hero-news"
+    "button-newsletter";
+}
 }
