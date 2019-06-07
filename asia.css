@@ -9,9 +9,9 @@
 }
 
 .feature_32 .avatar { 
-  margin-top: -60px;
+  /* margin-top: -60px; */
   border-radius: 50%;
-  width: 100px;  
+  width: 150px;  
 }
 
 .feature_32 p {
