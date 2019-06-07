@@ -25,6 +25,7 @@
    /* grid */
    grid-area: button-newsletter;
    justify-self: center;
+   align-self: center;
 
 }
 
@@ -38,12 +39,14 @@
     grid-template-columns: repeat(3, 1fr);
     grid-template-rows: repeat(3, 1fr);
     grid-template-areas: 
-    "slogan slogan ........."
-    "...... hero-text hero-news"
-    "...... hero-text button-newsletter";
+    "slogan slogan slogan"
+    "...... hero-text hero-text"
+    "...... hero-news button-newsletter";
 }
 .slogan-page h1 {
     font-size: 3rem;
+    text-align: center;
+    
 }
 
 
@@ -58,5 +61,5 @@
     "hero-text"
     "hero-news"
     "button-newsletter";
-}
+    }
 }
