@@ -2,13 +2,10 @@
     box-sizing: border-box;
 }
 
-/* for all - no media queries */
 
-/* setup & reset */
-* {
-  box-sizing: border-box;
+html {
+  scroll-behavior: smooth;
 }
-
 /* variables */
 :root {
  /* colors */

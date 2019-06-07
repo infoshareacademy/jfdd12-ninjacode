@@ -21,7 +21,7 @@ nav li{
 }
 nav li a:hover{
     color:white;
-    background:purple;
+    background:#436984;
 }
 /* show menu in mobile when hovering over logo */
 nav ul:hover li a{
@@ -121,7 +121,7 @@ font-weight:700;
         display:flex;
     }
     nav ul li:hover{
-        background:purple;
+        background:#436984;
         
     }
     nav ul li:hover a{
