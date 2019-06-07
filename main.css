@@ -30,10 +30,10 @@ body {
   display: block;
   background:
         /* top, transparent black, faked with gradient */ 
-        linear-gradient(
+        /* linear-gradient(
           rgba(0, 0, 0, 0.7), 
           rgba(0, 0, 0, 0.7)
-        ),
+        ), */
         /* bottom, image */
         url("img/background_hero.png");
   background-repeat: no-repeat;
@@ -52,11 +52,12 @@ h1 {
   margin-top: 0;
   padding: .1em;
   /* background-color: azure; */
-  background-color: rgba(240, 255, 255, .5); /* color:azure */
-  border-radius: 12px;
-  color: var(--main-color-3);
+  /* border-radius: 12px; */
 }
 
+main section{
+  margin:15px 0;
+}
 
 
 

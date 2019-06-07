@@ -4,6 +4,8 @@
 }
 .feater_30 .column {
     display: flex;
+    background: #436984;
+    color:white;
 }
 .feater_30 .left {
     flex: 1;
@@ -20,7 +22,6 @@
 }
 .feater_30 div.left {
     display: flex;
-    flex-direction: column-reverse;
 }
 .feater_30 img {
     width: 60px;
@@ -28,8 +29,36 @@
 }
 .feater_30 h3 {
     margin-left: 20px;
+    text-decoration: underline;
+    text-transform: capitalize;
 }
-@media (max-width: 499px) {
+.feater_30 h1 {
+    background: #436984;
+    padding: 20px;
+    text-align: center;
+    margin: 0;
+    color: white;
+}
+.feater_33 {
+    background: #436984;
+    color: white;
+    text-align: center;
+    font-size: 20px;
+}
+.feater_33 p {
+    margin-left: 10px;
+    font-size: 24px;
+}
+.feater_33 label {
+    margin-left: 10px;
+}
+.feater_33 input {
+    font-size: 20px;
+}
+.feater_33 button {
+    font-size: 20px;
+}
+@media (max-width: 639px) {
     .feater_30 .column {
     display: flex;
     flex-direction: column;
@@ -42,7 +71,7 @@
 }
 
 }
-@media (min-width: 500px) {
+@media (min-width: 640px) {
     .feater_30 .column {
         display: flex;
         flex-direction: row;
