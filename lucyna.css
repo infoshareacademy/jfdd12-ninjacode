@@ -32,6 +32,13 @@
     text-decoration: underline;
     text-transform: capitalize;
 }
+.feater_30 h1 {
+    background: #436984;
+    padding: 20px;
+    text-align: center;
+    margin: 0;
+    color: white;
+}
 .feater_33 {
     background: #436984;
     color: white;
