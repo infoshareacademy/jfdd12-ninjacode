@@ -3,7 +3,7 @@
     display: flex;
     flex-direction: column;     
     flex-wrap: nowrap;  
-    max-width: 500px; 
+    /* max-width: 500px;  */
     font-family: 'Cormorant Garamond', serif;
     margin: 0 auto; 
 }
@@ -31,6 +31,13 @@
 }
 
 .feature_32 h1 {
+  padding: 20px;
+  text-align: center;
+  flex: 100%;
+  background: white;
+  margin-bottom: 0px;
+}
+.feature_32 h2 {
   padding: 20px;
   text-align: center;
   flex: 100%;
