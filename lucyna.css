@@ -29,7 +29,7 @@
 }
 .feater_30 h3 {
     margin-left: 20px;
-    text-decoration: underline;
+    text-decoration: none;
     text-transform: capitalize;
 }
 .feater_30 h1 {
@@ -44,6 +44,8 @@
     color: white;
     text-align: center;
     font-size: 20px;
+    padding-top: 30px;
+    padding-bottom: 30px;
 }
 .feater_33 p {
     margin-left: 10px;
