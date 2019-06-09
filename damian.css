@@ -39,9 +39,8 @@
 
    /* FIXME: add ripple effect to button */
 }
-.slogan-page .hero-news a:hover {
+.slogan-page a:hover {
     background-color:  #b1beca;
-    ;
 }
 
 .slogan-page{
