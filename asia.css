@@ -7,7 +7,6 @@
 }
 
 .feature_32 .avatar { 
-  /* margin-top: -60px; */
   border-radius: 50%;
   width: 150px;  
 }
@@ -19,11 +18,7 @@
   
 } 
 
-.feature_32 .money {
-  display: block;
-  width: 100%;  
-  margin: 0 auto; 
-}
+
 
 .feature_32 .content-1 {
   background: white;
@@ -38,6 +33,7 @@
   margin-bottom: 0px;
   color: #222;
 }
+
 .feature_32 h3 {
   padding: 20px;
   text-align: center;
@@ -59,15 +55,7 @@
 }
  
 
-.feature_32 h3 {  
-  margin: 0;
-  text-align: center;
-}
-
-
-
-
-
+/* desktop */
 @media (min-width:640px) {
   .feature_32 .container-32 {    
     flex-direction: row;
@@ -85,7 +73,7 @@
 
 
 
-/* Feature 34  Funck*/
+/* Feature 34  Usługi*/
 .feature_34 .content {
     display: flex; 
     flex-direction: column;
@@ -129,6 +117,7 @@
     
 }
 
+/* Desktop */
 @media (min-width: 640px)
 {
   .feature_34 .content {
