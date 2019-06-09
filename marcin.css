@@ -1,13 +1,16 @@
-/* menu styling */
+/******************/
+/* mobile styling */
+/******************/
 nav {
     background:white;
-    font-family: Arial, sans-serif;
+    text-transform:uppercase; 
 }
 nav ul{
     display:flex;
     flex-direction:column;
     padding-inline-start: 0px;
     margin:0px;
+    box-shadow: 0px -10px 10px 10px black;
 }
 nav ul li :not(.logo){
     display:none;
@@ -23,7 +26,6 @@ nav li a:hover{
     color:white;
     background:#436984;
 }
-/* show menu in mobile when hovering over logo */
 nav ul:hover li a{
     display:flex;
     justify-content:center;
@@ -32,9 +34,9 @@ nav a {
 text-align: center;
 padding:8px;
 text-decoration:none;
-color:#111;
-font-size:20px;
-font-weight:700;
+color:#444;
+font-size:22px;
+font-weight:400;
 }
 
 /* footer styling */
@@ -47,7 +49,6 @@ font-weight:700;
     justify-content:center;
     align-items:center;
 }
-
 .foot .block1, .foot .block2, .foot .block3{
     display:flex;
     flex-direction:row;
@@ -55,11 +56,9 @@ font-weight:700;
     align-items:center;
     width:170px;
 }
-
 .foot .block3{
     padding:20px 0;
 }
-
 .foot p{
     padding:2px 10px;
     font-size:14px;
@@ -68,17 +67,17 @@ font-weight:700;
     text-align:center;
     font-weight:700;
 }
-
 .foot img{
     height:50px;
 }
-
 .foot a{
     text-decoration:none;
     color:black;
 }
-
+/****************************/
 /* Desktop & laptop styling */
+/****************************/
+
 @media screen and (min-width:640px){
 
     header{
@@ -86,49 +85,37 @@ font-weight:700;
         width:100%;
         top:0px;
     }
-    nav{
-        background:white;
-        
-    }
-
     nav ul {
         display:flex;
         flex-flow: row nowrap;
         align-items:center;
-        justify-content:space-around;
-
+        justify-content:center;
     }
     nav ul li :not(.logo){
         display:flex;
     }
-
-    nav ul li:nth-child(2){
-        order:-2;
-    }
-    nav ul li:nth-child(3){
-        order:-2;
-    }
-
     nav ul li{
         display:flex;
         align-items:center;
-        width:100%;
+        width:15%;
+        min-width:120px;
         line-height:100px;
-        color:white;
+        color:white;  
     }
-
     nav ul li .logo img{
         display:flex;
     }
     nav ul li:hover{
-        background:#436984;
-        
+        background:#436984;  
     }
     nav ul li:hover a{
         color:white;
     }
+    nav ul li a{
+        font-size:17px;
+    }
 
-    /* menu styling */
+    /* footer styling */
 
     .foot{
         flex-direction:row;
@@ -137,7 +124,6 @@ font-weight:700;
         flex-direction:column;
         align-content:space-between;
         width:100%;
-        /* background:red; */
         height:100px;
     }
     .foot .block2 img{
