@@ -126,7 +126,7 @@ footer a:hover img{
     nav ul li .logo img{
         display:flex;
         margin:0 auto;
-        /* padding:0 auto; */
+        width:80px;
     }
 
     nav ul li a{
