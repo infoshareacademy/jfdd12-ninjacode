@@ -6,15 +6,6 @@
 html {
   scroll-behavior: smooth;
 }
-/* variables */
-:root {
- /* colors */
- --main-color-1: #845EC2;
- --main-color-2: #00C9A7;
- --main-color-3: #4D8076;
- --main-color-4: #C4FCEF;
- --main-text-color: white;
-}
 
 .container{
   margin:0px auto;
@@ -25,19 +16,12 @@ body {
   margin: 0;
   padding: 0;
   display: block;
-  background:
-        /* top, transparent black, faked with gradient */ 
-        /* linear-gradient(
-          rgba(0, 0, 0, 0.7), 
-          rgba(0, 0, 0, 0.7)
-        ), */
-        /* bottom, image */
-        url("img/background_hero.png");
+  background: url("img/background_hero.png");
   background-repeat: no-repeat;
   background-position: 100%;
   background-size: cover;
-  background-attachment: fixed; 
-  
+  background-attachment: fixed;
+
   /* typography section */
   
   font-family: 'Lato', sans-serif;
@@ -49,16 +33,12 @@ h1 {
   font-size: 30px;
   margin-top: 0;
   padding: .1em;
-  /* background-color: azure; */
-  /* border-radius: 12px; */
+  text-shadow:5px 5px 10px black; 
 }
 
 main section{
   margin:15px 0;
 }
-
-
-
 
 @media screen and (min-width:640px){
   main{
@@ -72,5 +52,5 @@ h6 span{
   position:absolute;
   top:-115px;
 }
-}
+} /* END media section */
 

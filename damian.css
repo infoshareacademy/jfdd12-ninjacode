@@ -3,28 +3,30 @@
     /* grid */
     grid-area: hero-text;
 
-    padding-left: 44px;
+    /* padding-left: 44px; */
+    font-weight: bold;
+    text-shadow:5px 5px 10px black;
+    
 }
 .slogan-page .slogan {
     /* grid */
     grid-area: slogan;
 
-    justify-self: center;
-    align-self: center;
 }
 
 .slogan-page .hero-news {
    /* grid */
    grid-area: hero-news;
    justify-self: end;
+   
+   font-weight: bold;
+   text-shadow:5px 5px 10px black; 
 
 }
 .slogan-page>a{
    /* grid */
    grid-area: button-newsletter;
-   justify-self: center;
-   align-self: center;
-
+  
     /* border */
    background-color: white;
    border: solid black;
@@ -37,11 +39,24 @@
 
    /* FIXME: add ripple effect to button */
 }
+.slogan-page .hero-news a:hover {
+    background-color:  #b1beca;
+    ;
+}
 
 .slogan-page{
+    /* background */
+
+    background: 
+    linear-gradient(
+    rgba(44, 68, 84, 0.1),
+    rgba(44, 68, 84, 0.2)
+    ); 
+
     height: 82vh; /* desktop */ 
     color: white;
-    font-size: 27px;
+    font-size: 30px;
+    
 
     /* grid */
     display: grid;
@@ -70,6 +85,9 @@
         text-align: center;
         height: auto; /* for mobile */ 
 
+        /* background */
+        /* background-image: url(img/background_hero.png); */
+
         /* grid */
         display: grid;
         grid-template-columns: 1fr;
@@ -83,6 +101,10 @@
     }
     .slogan-page .hero-text {
         padding: 0;
+        
+    }
+    .slogan-page .hero-news{
+        justify-self: inherit;
     }
 
 }
