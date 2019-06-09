@@ -25,6 +25,7 @@ nav li{
 nav li a:hover{
     color:white;
     background:#436984;
+    transition:0.3s;
 }
 nav ul:hover li a{
     display:flex;
@@ -49,7 +50,6 @@ footer {
     flex-flow: row nowrap;
     justify-content:center;
     font-size:17px;
-
 }
 
 footer .text{
@@ -58,7 +58,6 @@ footer .text{
     justify-content:space-around;
     flex: 1 1;
 }
-
 
 footer span{
 display:inline-block;
@@ -84,7 +83,6 @@ footer .sep{
     display:none;
 }
 
-
 footer img{
     width:30px;
     opacity:0.5;
@@ -95,8 +93,6 @@ footer a:hover img{
     opacity:1;
     transition: 0.5s;
 }
-
-
 
 /****************************/
 /* Desktop & laptop styling */
@@ -117,6 +113,7 @@ footer a:hover img{
     }
     nav ul li :not(.logo){
         display:flex;
+        justify-content:center;
     }
     nav ul li{
         display:flex;
@@ -128,15 +125,16 @@ footer a:hover img{
     }
     nav ul li .logo img{
         display:flex;
+        margin:0 auto;
+        /* padding:0 auto; */
     }
-    nav ul li:hover{
-        background:#436984;  
-    }
-    nav ul li:hover a{
-        color:white;
-    }
+
     nav ul li a{
         font-size:17px;
+        width:100%;
+        padding:0;
+        margin:0;
+        text-align:center;
     }
 
     /* footer styling */
