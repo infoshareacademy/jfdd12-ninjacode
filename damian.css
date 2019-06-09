@@ -16,10 +16,15 @@
 .slogan-page .hero-news {
    /* grid */
    grid-area: hero-news;
-   padding: 75px 0 0;
+   justify-self: end;
 
 }
 .slogan-page>a{
+   /* grid */
+   grid-area: button-newsletter;
+   justify-self: center;
+   align-self: center;
+
     /* border */
    background-color: white;
    border: solid black;
@@ -28,26 +33,22 @@
    padding: .5rem;
 
    text-decoration: none;
-   font: bold 1.5rem Lato;
+   font: bold 1.5rem Lato, sans-serif;
 
-   /* grid */
-   grid-area: button-newsletter;
-   justify-self: center;
-   align-self: center;
-    
+   /* FIXME: add ripple effect to button */
 }
 
 .slogan-page{
-    height: 82vh; /* height: 82vh; */ 
+    height: 82vh; /* desktop */ 
     color: white;
-    font-size: 34px;
+    font-size: 27px;
 
     /* grid */
     display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    grid-template-rows: repeat(3, 1fr);
+    grid-template-columns: 1fr 1fr 1fr;
+    grid-template-rows: 1fr 1.9fr 0.1fr;
     grid-template-areas: 
-    "slogan slogan slogan"
+    "slogan slogan    slogan"
     "...... hero-text hero-text"
     "hero-news hero-news button-newsletter";
 
@@ -57,27 +58,31 @@
     align-items: center;
 }
 .slogan-page h1 {
-    font-size: 3rem;
+    font-size: 2.9rem;
     text-align: center;
-    
 }
 
 
 @media screen and (max-width: 499px) {
     .slogan-page{
-     
-    /* grid */
-    display: grid;
-    grid-template-columns: repeat(1, 1fr);
-    grid-template-rows: repeat(4, 1fr);
-    grid-template-areas: 
-    "slogan"
-    "hero-text"
-    "hero-news"
-    "button-newsletter";
-    
-    /* button */
-    height: auto;
+        /* fonts */
+        font-size: 22px; 
+        text-align: center;
+        height: auto; /* for mobile */ 
+
+        /* grid */
+        display: grid;
+        grid-template-columns: 1fr;
+        grid-template-rows: 1fr;
+        grid-template-areas: 
+        "slogan"
+        "hero-news"
+        "button-newsletter"
+        "hero-text"
+        ;
+    }
+    .slogan-page .hero-text {
+        padding: 0;
     }
 
 }
