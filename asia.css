@@ -37,6 +37,7 @@
   background: white;
   margin-bottom: 0px;
   color: #222;
+  text-shadow:2px 2px 10px #436984; 
 }
 .feature_32 h3 {
   padding: 20px;
@@ -117,6 +118,7 @@
     flex: 100%;
     background: white;
     color: #222;
+    text-shadow:2px 2px 10px #436984; 
 }
 
 .feature_34 .func {
