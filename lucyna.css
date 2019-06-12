@@ -67,13 +67,19 @@
     display: flex;
     flex-direction: column;
     align-items: flex-start;
+    padding-right: 40px;
 } 
 .feater_30 label {
     display:flex;
     margin-top: 10px;
 
 }
-
+  .feater_33 {
+    padding: 20px;
+  }
+  .feater_33 button {
+      margin: 20px;
+  }
 }
 @media (min-width: 640px) {
     .feater_30 .column {

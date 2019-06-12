@@ -311,15 +311,15 @@
                     Zapisz się na premierę! </br>
                 </p>
                 <p>
-                    <form action="/signup" method="post">
+                    <form id="emailForm" action="/gra" method="post">
 
-                        <label>Email</label>
-                        <input type="email" name="email" title="Twój e-mail" placeholder="Twój e-mail">
-                        <button type="submit" form="nameform" value="Submit">Submit</button>
+                        <label>Email</label> 
+                        <input type="email" name="email" title="Twój e-mail" placeholder="Twój e-mail" required>
+                        <button type="submit" form="emailForm" value="Submit">Wyślij</button>
                         <p>
                             Twoje dane są bezpieczne. Wyślemy tylko jednego maila</br>
                             z powiadomieniem o premierze!
-                    </form>
+                        </form>
 
                     <label>
                         <input type="checkbox" value="terms">
@@ -346,3 +346,9 @@
 </body>
 
 </html>
+
+<!-- document.getElementById('emailForm').addEventListener('submit', (e) => {
+    e.preventDefault();
+    alert('Thanks');
+    window.location.pathname="/gra"
+    }) -->
