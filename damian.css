@@ -5,7 +5,6 @@
 
     /* padding-left: 44px; */
     font-weight: bold;
-    text-shadow:5px 5px 10px black;
     
 }
 .slogan-page .slogan {
@@ -20,7 +19,6 @@
     justify-self: end;
     
     font-weight: bold;
-    text-shadow:5px 5px 10px black; 
 
 }
 .slogan-page>a{
@@ -28,7 +26,6 @@
     grid-area: button-newsletter;
 
     /* border */
-    grid-area: button-newsletter;
     background-color: rgb(48,128,235);
     border: solid white;
     color: white;
