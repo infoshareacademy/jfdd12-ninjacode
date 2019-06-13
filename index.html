@@ -312,19 +312,25 @@
                 </p>
                 <p>
                     <form id="emailForm" action="/gra" method="post">
-
-                        <label>Email</label> 
+ 
                         <input type="email" name="email" title="Twój e-mail" placeholder="Twój e-mail" required>
+
                         <button type="submit" form="emailForm" value="Submit">Wyślij</button>
+                        <div id="myModal" class="modal">
+                            <div class="modal-content">
+                                <span class="close">&times;</span>
+                                <p>Dziękujemy za podanie maila!</p>
+                                <p>Czy chcesz zagrać w mini-grę?</p>
+                                <button type="button">YES</button>
+                                <button type="button">NO</button>
+                            </div>
+                        </div>
                         <p>
                             Twoje dane są bezpieczne. Wyślemy tylko jednego maila</br>
-                            z powiadomieniem o premierze!
+                            z powiadomieniem o premierze!</p>
                         </form>
+                    
 
-                    <label>
-                        <input type="checkbox" value="terms">
-                        Wyrażam zgodę
-                    </label>
                 </p>
                 </p>
             </section>
@@ -343,6 +349,7 @@
             </footer>
         </main>
     </div>
+    <script src="lucyna.js"></script>
 </body>
 
 </html>
