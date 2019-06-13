@@ -94,6 +94,11 @@ footer a:hover img{
     transition: 0.5s;
 }
 
+.terms{
+    background:white;
+    padding:40px;
+}
+
 /****************************/
 /* Desktop & laptop styling */
 /****************************/
