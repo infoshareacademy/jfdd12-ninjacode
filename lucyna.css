@@ -58,10 +58,19 @@
 }
 .feater_33 input {
     font-size: 20px;
+    border-color: white;
+    border-radius: 16px;
+    padding: 5px 10px 5px 10px;
 }
 .feater_33 button {
-    font-size: 20px;
+    font-size: 24px;
     cursor: pointer;
+    border-radius: 16px;
+    border: solid white;
+    background-color: rgb(48,128,235);
+    color: white;
+    padding-left: 20px;
+    padding-right: 20px;
 }
 @media (max-width: 639px) {
     .feater_30 .column {
