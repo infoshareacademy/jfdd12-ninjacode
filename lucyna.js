@@ -10,7 +10,7 @@ document.getElementById("emailForm").addEventListener('submit', function(event) 
       modal.style.display = "none"
     }
 });
-const openPageButton = document.getElementsByClassName('open-page')
+const openPageButton = document.getElementsByClassName('open-page')[0]
 openPageButton.onclick = function(){
   window.location.pathname = "game/index.html"
 }
@@ -30,8 +30,9 @@ var span = document.getElementsByClassName("close")[0]
 // When the user clicks on <span> (x), close the modal
 span.onclick = function() {
   modal.style.display = "none";
-  //window.location.pathname = 'game.html';dodać do buttona YES
 }
+  //window.location.pathname = 'game.html';dodać do buttona YES
+
 
 // When the user clicks anywhere outside of the modal, close it
 window.onclick = function(event) {
