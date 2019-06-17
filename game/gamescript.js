@@ -12,6 +12,31 @@ const COIN_HEIGHT = 40
 
 // instruction-end
 
+// Canvas on global
+const canvas = document.createElement("canvas")
+canvas.setAttribute("height", `${GAME_HEIGHT}px`)
+canvas.setAttribute("width", `${GAME_WIDTH}px`)
+// setCanvasSize(canvas)
+
+this.context = canvas.getContext("2d")
+const body = document.querySelector("#game")
+body.append(canvas)
+
+const gameBody = document.querySelector("body")
+
+gameBody.addEventListener('keydown', event => {
+  console.log(event)
+  if (event.key === 'ArrowRight') {
+    // move rigth
+    this.direction = 1
+  } else if (event.key === 'ArrowLeft') {
+    this.direction = -1
+
+  }
+  console.log('this: ' + this + 'direction: ', this.direction)
+})
+
+
 // game (Damian)
 /* 
 TODO: 
@@ -19,7 +44,7 @@ TODO:
 [x] rewrite image onload() to prototype GameArea
 [x] draw background image
 [x] draw floor image
-[ ] draw Player on floor
+[x] draw Player on floor
 [ ] draw Coin
 [ ] add move player on dx direction
 [ ] add animation player
@@ -34,6 +59,8 @@ function Coin(x, y) {
   this.initX = x
   this.initY = y
 }
+
+
 
 Coin.prototype = {
   draw: function (context) { },
@@ -51,18 +78,18 @@ Coin.prototype = {
   }
 }
 
-function CashBakeManPlayer(x, move = 1, direction = 1) {
-  this.initX = x
-  this.step = move // TODO: how fast this Player go by frame
+function CashBakeManPlayer(positionX, move = 1, direction = 1) {
+  this.initX = positionX
+  this.x =
+    this.move = move // TODO: how fast this Player go by frame
   this.direction = direction // left move -1; rigth move 1
 }
 
 CashBakeManPlayer.prototype = {
-  draw: function (context, imageUrl, x, y, w, h, onload = () => { }) {
+  draw: function (imageUrl, x, y, w, h, onload = () => { }) {
     this.x = x
     this.y = y
     this.w = w
-    console.log(context)
 
     const image = new Image()
     image.src = `${IMAGES_PATH}${imageUrl}`
@@ -72,13 +99,15 @@ CashBakeManPlayer.prototype = {
     }
   },
   move: function () {
-    this.x += move
+    this.x += this.move * this.direction
+
   },
   jump: function () {
     // TODO: (optional) - when press spacebar or tap screen
   },
   restartPosition: function () { }
 }
+
 
 function GameArea(
   width,
@@ -90,8 +119,9 @@ function GameArea(
   this.difficultyLevel = difficultyLevel //TODO: add difficulty choice in begin game
   this.generateCanvas()
 }
+
 GameArea.prototype = {
-  drawMyImage: function (context, imageUrl, x, y, w, h, onload = () => { }) {
+  drawMyImage: function (imageUrl, x, y, w, h, onload = () => { }) {
     this.x = x
     this.y = y
     this.w = w
@@ -105,7 +135,6 @@ GameArea.prototype = {
   },
   drawFloor: function (context) {
     const floorImage = this.drawMyImage(
-      context,
       "floor.png",
       0,
       GAME_HEIGHT - FLOOR_HEIGHT,
@@ -115,34 +144,22 @@ GameArea.prototype = {
   },
   drawBackground: function (context) {
     const backgroundImage = this.drawMyImage(
-      context,
       "background-day.png",
       0,
       0,
       GAME_WIDTH,
       GAME_HEIGHT
     )
-
-    // const image = new Image()
-    // image.src = `${IMAGES_PATH}background-day.png`
-    // image.onload = function() {
-    //   context.drawImage(image, 0, 0)
   },
   clearCanvas: function () { },
   generateCanvas: function () {
     // TODO: end this
-    const canvas = document.createElement("canvas")
-    setCanvasSize(canvas)
-
-    this.context = canvas.getContext("2d")
-    const body = document.querySelector("#game")
-    body.append(canvas)
 
     this.drawBackground(this.context)
     this.drawFloor(this.context)
 
     let player = new CashBakeManPlayer(10, 1, 1)
-    player.draw(this.context, 'cashBakeMan.png', (GAME_WIDTH - CASHMAN_WIDTH) / 2, GAME_HEIGHT - FLOOR_HEIGHT - CASHMAN_HEIGHT, CASHMAN_WIDTH, CASHMAN_HEIGHT)
+    player.draw('cashBakeMan.png', (GAME_WIDTH - CASHMAN_WIDTH) / 2, GAME_HEIGHT - FLOOR_HEIGHT - CASHMAN_HEIGHT, CASHMAN_WIDTH, CASHMAN_HEIGHT)
   },
   gameLoop: function (time) {
     /*  TODO: add game simulation metod
@@ -151,6 +168,7 @@ GameArea.prototype = {
         [ ] dodaj ruch playera
         [ ]     dodaj animacje playera
          */
+
 
 
     requestAnimationFrame(this.gameLoop.bind(this))
@@ -170,9 +188,13 @@ const game = new GameArea(600, 500, "easy")
 game.gameLoop()
 
 function setCanvasSize(canvas) {
-  canvas.setAttribute("height", `${GAME_HEIGHT}px`)
-  canvas.setAttribute("width", `${GAME_WIDTH}px`)
+
 }
+
+
+
+
+
 //TODO: add  loop function
 
 // game-end(Damian)
