@@ -286,20 +286,26 @@
                     Zapisz się na premierę! </>
                 </p>
                 <p>
-                    <form action="/signup" method="post">
+                    <form id="emailForm" action="/gra" method="post">
+ 
+                        <input type="email" name="email" title="Twój e-mail" placeholder="Twój e-mail" required>
 
-                        <label>Email</label>
-                        <input type="email" name="email" title="Twój e-mail" placeholder="Twój e-mail">
-                        <button type="submit" form="nameform" value="Submit">Submit</button>
+                        <button type="submit" form="emailForm" value="Submit">Wyślij</button>
+                        <div id="myModal" class="modal">
+                            <div class="modal-content">
+                                <span class="close">&times;</span>
+                                <p>Dziękujemy za podanie maila!</p>
+                                <p>Czy chcesz zagrać w mini-grę?</p>
+                                <button type="button">TAK</button>
+                                <button type="button">NIE</button>
+                            </div>
+                        </div>
                         <p>
                             Twoje dane są bezpieczne. Wyślemy tylko jednego maila</br>
-                            z powiadomieniem o premierze!
-                    </form>
+                            z powiadomieniem o premierze!</p>
+                        </form>
+                    
 
-                    <label>
-                        <input type="checkbox" value="terms">
-                        Wyrażam zgodę
-                    </label>
                 </p>
                 </p>
             </section>
@@ -308,16 +314,22 @@
             
             <footer>
                <div class="text">
-                   <span>© 2019 <a href="#ninja">ninjaCode</a></span><div class="sep">|</div>
-                   <span><a href="#">EULA</a></span><div class="sep">|</div>
-                   <span><a href="#">RODO</a></span><div class="sep">|</div>
+                   <span>© 2019 <a href="https://github.com/infoshareacademy/jfdd12-ninjacode" target="_blank">ninjaCode</a></span><div class="sep">|</div>
+                   <span><a href="terms.html">Terms & Conditions</a></span><div class="sep">|</div>
                    <span>ost.aktual.: 05.2019</span><div class="sep">|</div>
                    <span>start: 07.2019</span>
                </div>
-               <div class="icons"><a href="#"><img src="icons/github.svg" alt="github icon"></a><a href="#"><img src="icons/linkedin.svg" alt="linkedin icon"></a></div>
+               <div class="icons"><a href="https://github.com/infoshareacademy/jfdd12-ninjacode"><img src="icons/github.svg" alt="github icon"></a></div>
             </footer>
         </main>
     </div>
+    <script src="lucyna.js"></script>
 </body>
 
 </html>
+
+<!-- document.getElementById('emailForm').addEventListener('submit', (e) => {
+    e.preventDefault();
+    alert('Thanks');
+    window.location.pathname="/gra"
+    }) -->

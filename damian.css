@@ -5,7 +5,6 @@
 
     /* padding-left: 44px; */
     font-weight: bold;
-    text-shadow:5px 5px 10px black;
     
 }
 .slogan-page .slogan {
@@ -15,42 +14,41 @@
 }
 
 .slogan-page .hero-news {
-   /* grid */
-   grid-area: hero-news;
-   justify-self: end;
-   
-   font-weight: bold;
-   text-shadow:5px 5px 10px black; 
+    /* grid */
+    grid-area: hero-news;
+    justify-self: end;
+    
+    font-weight: bold;
 
 }
 .slogan-page>a{
-   /* grid */
-   grid-area: button-newsletter;
-  
-    /* border */
-   background-color: white;
-   border: solid black;
-   color: black;
-   border-radius: 12px;
-   padding: .5rem;
+    /* grid */
+    grid-area: button-newsletter;
 
-   text-decoration: none;
-   font: bold 1.5rem Lato, sans-serif;
+    /* border */
+    background-color: rgb(48,128,235);
+    border: solid white;
+    color: white;
+    border-radius: 24px;
+    padding: 6px 20px;
+    
+    text-decoration: none;
+    font: bold 1.5rem Lato, sans-serif;
 
    /* FIXME: add ripple effect to button */
 }
 .slogan-page a:hover {
-    background-color:  #b1beca;
+    background-color: rgb(13, 102, 208);
 }
 
 .slogan-page{
     /* background */
 
     background: 
-    linear-gradient(
-    rgba(44, 68, 84, 0.1),
-    rgba(44, 68, 84, 0.2)
-    ); 
+        linear-gradient(
+        rgba(44, 68, 84, 0.1),
+        rgba(14, 36, 51, 0.2)
+        ); 
 
     height: 82vh; /* desktop */ 
     color: white;
@@ -59,8 +57,8 @@
 
     /* grid */
     display: grid;
-    grid-template-columns: 1fr 1fr 1fr;
-    grid-template-rows: 1fr 1.9fr 0.1fr;
+    grid-template-columns: 1fr 2fr 3fr;
+    grid-template-rows: 1fr 1fr 1fr;
     grid-template-areas: 
     "slogan slogan    slogan"
     "...... hero-text hero-text"
