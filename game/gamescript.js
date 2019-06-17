@@ -4,6 +4,10 @@ var opensModal = document.getElementById("instrukcja");
 opensModal.onclick = function() {
   modal.style.display = "block";
 };
+var closeButton = document.getElementsByClassName("exit")[0]
+closeButton.onclick = function() {
+  modal.style.display = "none"
+}
 // instruction-end
 
 // game (Damian)

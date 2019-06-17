@@ -51,6 +51,9 @@ main {
   text-decoration: none;
   cursor: pointer;
 }
+.control {
+  padding-bottom: 20px;
+}
 
 /* instruction-end */
 /* score */
