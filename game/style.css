@@ -32,8 +32,9 @@ main {
   background-color: #fefefe;
   margin: auto;
   padding: 20px;
-  border: 1px solid #888;
-  width: 80%;
+  border: 5px solid #436984;
+  width: 60%;
+  text-align: center;
 }
 
 /* The Close Button */
@@ -49,6 +50,9 @@ main {
   color: #000;
   text-decoration: none;
   cursor: pointer;
+}
+.control {
+  padding-bottom: 20px;
 }
 
 /* instruction-end */
