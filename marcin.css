@@ -31,24 +31,29 @@ nav .logo img {
 nav ul {
   margin-block-start: 0;
   margin-block-end: 0;
-  display: none;
   flex-flow: column nowrap;
   width: 100%;
-  /* background: green; */
   list-style-type: none;
   margin-block-start: 0;
   margin-block-end: 0;
   padding-inline-start: 0;
   text-align: center;
   justify-content: flex-end;
+  height: 0px;
+  transition: 300ms;
+  overflow: hidden;
+}
+
+.menu-fold {
+  height: 300px;
+  transition: 300ms;
 }
 
 nav ul li a {
   width: 100%;
   display: block;
-  /* background: yellow; */
   text-decoration: none;
-  padding: 20px 0px;
+  padding: 22px 0px;
   font-size: 22px;
   color: #333;
 }
@@ -130,12 +135,18 @@ footer a:hover img {
   }
 
   nav #icons {
-    max-width: 350px;
+    max-width: 130px;
+    /* background: red; */
   }
   nav ul {
     flex-flow: row nowrap;
-    max-width: 600px;
+    max-width: 800px;
     display: flex;
+    height: 100px;
+  }
+
+  .menu-fold {
+    height: 100px;
   }
 
   nav #burger {
