@@ -10,7 +10,7 @@ function toggleMenu() {
 }
 
 let scrollButton = document.querySelector("#scrollButton");
-scrollButton.addEventListener("click", topFunction);
+scrollButton.addEventListener("click", backToTop);
 
 window.onscroll = function() {
   scrollFunction();
@@ -21,14 +21,13 @@ function scrollFunction() {
     document.body.scrollTop > 500 ||
     document.documentElement.scrollTop > 500
   ) {
-    scrollButton.style.display = "block";
+    scrollButton.style.opacity = 0.8;
   } else {
-    scrollButton.style.display = "none";
+    scrollButton.style.opacity = 0;
   }
 }
 
-// When the user clicks on the button, scroll to the top of the document
-function topFunction() {
+function backToTop() {
   document.body.scrollTop = 0;
   document.documentElement.scrollTop = 0;
 }

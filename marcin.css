@@ -116,17 +116,18 @@ footer a:hover img {
 }
 
 #scrollButton {
-  color: #111;
+  color: #fff;
   position: fixed;
   bottom: 20px;
-  right: 20px;
-  background: white;
-  padding: 10px;
-  border-radius: 25px;
-  border: 1px solid;
+  margin: 0 auto;
+  background: #666;
+  padding: 5px 17px 0px 17px;
+  border-radius: 50px;
+  /* border: 1px solid; */
   shadow: 10px 10px 10px #333;
-  transition: 1s;
+  transition: 0.3s;
   cursor: pointer;
+  font-size: 40px;
 }
 
 /****************************/
