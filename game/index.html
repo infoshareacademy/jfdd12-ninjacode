@@ -1,39 +1,45 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <link rel="stylesheet" href="style.css">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <link rel="stylesheet" href="style.css" />
     <title>Catch coins game</title>
-</head>
-<body>
-    <main><h1>Nasza super gra!</h1> 
-    <div id="instruction">
+  </head>
+  <body>
+    <main>
+      <h1>Nasza super gra!</h1>
+      <div id="instruction">
+        <button id="instrukcja" type="button">Instrukcja</button>
+        <div id="myModal" class="modal">
+          <div class="modal-fill">
+            <h2>Łowca monet</h2>
+            <p>Uzbieraj jak najwięcej monet przez 30s!</p>
+            <div class="control">
+              <p>Kontrola gry:</p>
+              <span><img src="#" />Ruch w prawo</span>
+              <span><img src="#" />Ruch w lewo</span>
+            </div>
+            <button class="wyniki" type="button">WYNIKI</button>
+            <button class="start-gry" type="button">START GRY</button>
+            <button class="exit" type="button">WYJŚCIE</button>
+          </div>
+        </div>
+      </div>
+      <div id="score">
+        <div>
+          <span id="playerName">Asia</span>
+        </div>
+        <div>
+          <button id="scoreBoard" type="butoon">WYNIKI</button>
+        </div>
+      </div>
 
-
-
-
-    </div>
-    <div id="score">
-
-
-
-
-    </div>
-    <div id="level">
-
-
-
-
-    </div>
-    <div id="game">
-
-
-
-
-    </div></main>
+      <div id="level"></div>
+      <div id="game"></div>
+    </main>
 
     <script src="gamescript.js"></script>
-</body>
+  </body>
 </html>

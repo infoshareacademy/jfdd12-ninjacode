@@ -17,8 +17,13 @@
 <body>
     <header>
         <nav>
+            <div id="icons">
+                <a class="logo" href="index.html"><img src="icons/cb-blue.svg" alt="cash bake logo" ></a>
+                <div id="burger">
+                    <img src="icons/burger1.svg" alt="burger menu">
+                </div>
+            </div>
             <ul>
-                <li><a class="logo" href="#"><img src="icons/cb-blue.svg" alt="cash bake logo" ></a></li>
                 <li><a href="#use">usługi</a></li>
                 <li><a href="#features">funkcje</a></li>
                 <li><a href="#team">o nas</a></li>
@@ -42,9 +47,7 @@
             <h6><span id="use"></span></h6>
             <section class="feature_34">
 
-                <!-- 4 ikony dla każdej ikony po jednym haśle mówiącym o funkcjonalnościach przyszłej aplikacji ułożone w poziomie (obok siebie) 
-            Planer finansowy - na podstawie wprowadzonych przez użytkowników danych o transakcjach (przychód/wydatek) planner 
-            pozwala przeglądać historię, kategoryzować transakcje i rysować wykresy (np. środków na koncie w danym miesiącu)-->
+           
 
                 <div class="content">
 
@@ -189,14 +192,7 @@
 
             <h6><span id="team"></span></h6>
             <section class="feature_32">
-
-                <!-- wszyscy członkowie zespołu
-
-            imię i nazwisko
-            
-            linki do profili w social media
-            
-            linki do stron domowych (o mnie) -->                
+                
                 <div class="container-32">
                     <h1> O NAS </h1>
                     <div class="content-1">
@@ -210,10 +206,13 @@
                                 
                                 <div class="social-icons">
                                     <div class="github">                                    
-                                        <a href="https://github.com/LucynaMaliszewska"><img src="icons/github.svg" alt="" ></a>
+                                        <a href="https://github.com/LucynaMaliszewska" target="_blank"><img src="icons/github.svg" alt="" ></a>
                                     </div>
                                     <div class="linkedin">                                     
-                                        <a href="adres"><img src="icons/linkedin.svg" alt=""></a> 
+                                        <a href="adres" target="_blank"><img src="icons/linkedin.svg" alt=""></a> 
+                                    </div>
+                                    <div class="personal">                                     
+                                        <a href="adres" target="_blank"><img src="icons/person.svg" alt=""></a> 
                                     </div>
                                 </div>                                
                             </div>
@@ -229,10 +228,13 @@
                                 <h3> Joanna Skrzypińska</h3>
                                 <div class="social-icons">
                                     <div class="github">                                    
-                                        <a href="https://github.com/jskrzypinska"><img src="icons/github.svg" alt="" ></a>
+                                        <a href="https://github.com/jskrzypinska" target="_blank" ><img src="icons/github.svg" alt="" ></a>
                                     </div>
                                     <div class="linkedin">                                     
-                                        <a href="https://www.linkedin.com/in/joanna-skrzypi%C5%84ska/"><img src="icons/linkedin.svg" alt=""></a>
+                                        <a href="https://www.linkedin.com/in/joanna-skrzypi%C5%84ska/" target="_blank" ><img src="icons/linkedin.svg" alt=""></a>
+                                    </div>
+                                    <div class="personal">                                     
+                                        <a href="adres" target="_blank"><img src="icons/person.svg" alt=""></a> 
                                     </div>
                                 </div>                                                                
                             </div>
@@ -252,10 +254,13 @@
 
                                     <div class="social-icons">
                                         <div class="github">                                    
-                                            <a href="adres"><img src="icons/github.svg" alt="" ></a>
+                                            <a href="adres" target="_blank"><img src="icons/github.svg" alt="" ></a>
                                         </div>
                                         <div class="linkedin">                                     
-                                            <a href="adres"><img src="icons/linkedin.svg" alt=""></a>
+                                            <a href="adres" target="_blank"><img src="icons/linkedin.svg" alt=""></a>
+                                        </div>
+                                        <div class="personal">                                     
+                                            <a href="adres" target="_blank"><img src="icons/person.svg" alt=""></a> 
                                         </div>
                                     </div>                                
                                 </div>
@@ -275,10 +280,13 @@
 
                                     <div class="social-icons">
                                         <div class="github">                                    
-                                            <a href="https://github.com/MarcinPietkiewicz"><img src="icons/github.svg" alt="" ></a>
+                                            <a href="https://github.com/MarcinPietkiewicz" target="_blank" ><img src="icons/github.svg" alt="" ></a>
                                         </div>
                                         <div class="linkedin">                                     
-                                            <a href="https://pl.linkedin.com/in/marcin-pietkiewicz-184929186"><img src="icons/linkedin.svg" alt=""></a>
+                                            <a href="https://pl.linkedin.com/in/marcin-pietkiewicz-184929186" target="_blank"><img src="icons/linkedin.svg" alt=""></a>
+                                        </div>
+                                        <div class="personal">                                     
+                                            <a href="adres" target="_blank"><img src="icons/person.svg" alt=""></a> 
                                         </div>
                                     </div>                                                                   
                                 </div>
@@ -297,7 +305,7 @@
                 <p>
                     <form id="emailForm" action="/gra" method="post">
  
-                        <input type="email" name="email" title="Twój e-mail" placeholder="Twój e-mail" required>
+                        <input class="email" type="email" name="email" title="Twój e-mail" placeholder="Twój e-mail" required>
 
                         <button type="submit" form="emailForm" value="Submit">Wyślij</button>
                         <div id="myModal" class="modal">
@@ -305,8 +313,8 @@
                                 <span class="close">&times;</span>
                                 <p>Dziękujemy za podanie maila!</p>
                                 <p>Czy chcesz zagrać w mini-grę?</p>
-                                <button type="button">TAK</button>
-                                <button type="button">NIE</button>
+                                <button class="open-page" type="button">TAK</button>
+                                <button id="no" class="close" type="button">NIE</button>
                             </div>
                         </div>
                         <p>
@@ -333,6 +341,7 @@
         </main>
     </div>
     <script src="lucyna.js"></script>
+    <script src="marcin.js"></script>
 </body>
 
 </html>
