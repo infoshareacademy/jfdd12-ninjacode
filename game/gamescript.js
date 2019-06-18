@@ -46,7 +46,7 @@ function draw(imageUrl, x, y, w, h, onload = () => { }) {
 }
 // game (Damian)
 const player = {
-  x: GAME_WIDTH / 2,
+  x: (GAME_WIDTH - PLAYER_WIDTH) / 2,
   y: GAME_HEIGHT - FLOOR_HEIGHT - PLAYER_HEIGHT
 }
 
@@ -71,24 +71,7 @@ function moveLeft() {
     player.x = 0
   }
 }
-function Player(positionX, step = 10, direction = 1) {
-  this.x = positionX
-  this.step = step // TODO: how fast this Player go by frame
-  this.direction = direction // left move -1; rigth move 1
-  this.draw("cashBakeMan.png", 0, 400, 400, 0)
-}
 
-Player.prototype = {
-
-  move: function () {
-    this.x += this.step * this.direction
-    console.log("Player move: " + this.x)
-  },
-  jump: function () {
-    // TODO: (optional) - when press spacebar or tap screen
-  },
-  restartPosition: function () { }
-}
 
 function GameArea(
   width,
