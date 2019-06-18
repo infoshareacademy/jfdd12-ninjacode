@@ -72,7 +72,14 @@
   padding-left: 20px;
   padding-right: 20px;
 }
+.email {
+  width: 290px;
+  margin-right: 20px;
+}
 @media (max-width: 639px) {
+  .email {
+    margin-right: 0;
+  }
   .feater_30 .column {
     display: flex;
     flex-direction: column;
