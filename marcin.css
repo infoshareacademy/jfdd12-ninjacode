@@ -58,8 +58,6 @@ nav ul li a {
   color: #333;
 }
 
-/* footer styling */
-
 footer {
   background: white;
   color: #777;
@@ -117,6 +115,20 @@ footer a:hover img {
   padding: 40px;
 }
 
+#scrollButton {
+  color: #fff;
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  background: #666;
+  padding: 5px 17px 0px 17px;
+  border-radius: 50px;
+  shadow: 10px 10px 10px #333;
+  transition: 0.3s;
+  cursor: pointer;
+  font-size: 40px;
+}
+
 /****************************/
 /* Desktop & laptop styling */
 /****************************/
@@ -136,7 +148,6 @@ footer a:hover img {
 
   nav #icons {
     max-width: 130px;
-    /* background: red; */
   }
   nav ul {
     flex-flow: row nowrap;
@@ -170,8 +181,6 @@ footer a:hover img {
     margin: 0;
     text-align: center;
   }
-
-  /* footer styling */
 
   footer {
     flex-flow: row nowrap;
