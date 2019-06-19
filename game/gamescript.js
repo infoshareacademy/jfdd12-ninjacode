@@ -11,7 +11,6 @@ function displayScores() {
   scoresModal.classList.toggle("scores-modal-shown");
 }
 
-
 scoresBtn.addEventListener("click", displayScores);
 
 instructionBtn.addEventListener("click", function() {
