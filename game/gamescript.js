@@ -3,6 +3,7 @@ const instructionModal = document.getElementById("instruction-modal");
 const scoresModal = document.getElementById("scores-modal");
 const instructionBtn = document.getElementById("instruction-btn");
 const scoresBtn = document.getElementById("scores-btn");
+const closeButton = document.getElementById("exit-btn");
 
 function displayScores() {
   instructionModal.style.display = "none";
@@ -15,7 +16,6 @@ instructionBtn.addEventListener("click", function() {
   instructionModal.style.display = "block";
 });
 
-var closeButton = document.getElementById("exit-btn");
 closeButton.addEventListener("click", function() {
   instructionModal.style.display = "none";
 });
