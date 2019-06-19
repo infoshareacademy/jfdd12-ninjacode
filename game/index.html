@@ -11,34 +11,46 @@
     <main>
       <h1>Nasza super gra!</h1>
       <div id="instruction">
-        <button id="instrukcja" type="button">Instrukcja</button>
-        <div id="myModal" class="modal">
-          <div class="modal-fill">
-            <h2>Łowca monet</h2>
-            <p>Uzbieraj jak najwięcej monet przez 30s!</p>
-            <div class="control">
-              <p>Kontrola gry:</p>
-              <span><img src="#" />Ruch w prawo</span>
-              <span><img src="#" />Ruch w lewo</span>
-            </div>
-            <button class="wyniki" type="button">WYNIKI</button>
-            <button class="start-gry" type="button">START GRY</button>
-            <button class="exit" type="button">WYJŚCIE</button>
-          </div>
-        </div>
+        <button id="instruction-btn" type="button">Instrukcja</button>
       </div>
       <div id="score">
         <div>
           <span id="playerName">Asia</span>
         </div>
         <div>
-          <button id="scoreBoard" type="butoon">WYNIKI</button>
+          <button id="scoreBoard" type="button">WYNIKI</button>
         </div>
       </div>
 
       <div id="level"></div>
       <div id="game"></div>
     </main>
+
+    <div id="instruction-modal" class="modal">
+      <div class="modal-fill">
+        <h2>Łowca monet</h2>
+        <p>Uzbieraj jak najwięcej monet przez 30s!</p>
+        <div class="control">
+          <p>Kontrola gry:</p>
+          <span><img src="#" />Ruch w prawo</span>
+          <span><img src="#" />Ruch w lewo</span>
+        </div>
+        <button id="scores-btn" class="wyniki" type="button">WYNIKI</button>
+        <button class="start-gry" type="button">START GRY</button>
+        <button id="exit-btn" class="exit" type="button">WYJŚCIE</button>
+      </div>
+    </div>
+
+    <div id="scores-modal" class="scores-modal">
+      <div class="modal-fill">
+        Lorem ipsum dolor sit, amet consectetur adipisicing elit. Aut iure quis
+        quisquam. Voluptatum numquam iure enim quam laboriosam natus, aliquam
+        fugiat ratione asperiores optio corrupti praesentium non eveniet. Quod
+        consectetur libero ex? Voluptatibus sequi aut, non fugit quaerat,
+        mollitia ad veniam esse, accusamus doloremque aliquid id quidem
+        necessitatibus similique harum.
+      </div>
+    </div>
 
     <script src="gamescript.js"></script>
   </body>
