@@ -6,12 +6,14 @@ const scoresBoardBtn = document.getElementById("scores-board-btn");
 const scoresBtn = document.getElementById("scores-btn");
 const scoreTxt = document.getElementById("score-number")
 
-function displayScores() {
+startGameButton.addEventListener("click", function() {
+  instructionModal.style.display = "none";
+});
+
+scoresBtn.addEventListener("click", function() {
   instructionModal.style.display = "none";
   scoresModal.classList.toggle("scores-modal-shown");
-}
-
-scoresBtn.addEventListener("click", displayScores);
+});
 
 instructionBtn.addEventListener("click", function () {
   instructionModal.style.display = "block";
