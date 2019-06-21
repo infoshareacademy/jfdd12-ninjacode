@@ -8,6 +8,7 @@ const startGameButton = document.getElementById("start-game");
 
 startGameButton.addEventListener("click", function() {
   instructionModal.style.display = "none";
+  game.gameLoop();
 });
 
 scoresBtn.addEventListener("click", function() {
@@ -15,11 +16,11 @@ scoresBtn.addEventListener("click", function() {
   scoresModal.classList.toggle("scores-modal-shown");
 });
 
-instructionBtn.addEventListener("click", function () {
+instructionBtn.addEventListener("click", function() {
   instructionModal.style.display = "block";
 });
 
-closeButton.addEventListener("click", function () {
+closeButton.addEventListener("click", function() {
   instructionModal.style.display = "none";
 });
 
@@ -60,10 +61,10 @@ body.addEventListener("keydown", event => {
   } else direction = 0;
 });
 
-function draw(imageUrl, x, y, w, h, onload = () => { }) {
+function draw(imageUrl, x, y, w, h, onload = () => {}) {
   const image = new Image();
   image.src = `${IMAGES_PATH}${imageUrl}`;
-  image.onload = function () {
+  image.onload = function() {
     context.drawImage(image, x, y, w, h);
     onload();
   };
@@ -78,9 +79,7 @@ function drawPlayer() {
   draw("cashBakeMan.png", player.x, player.y, PLAYER_WIDTH, PLAYER_HEIGHT);
 }
 
-function drawCoin() {
-
-}
+function drawCoin() {}
 
 function moveRight() {
   if (player.x < GAME_WIDTH - PLAYER_WIDTH) {
@@ -111,19 +110,19 @@ function GameArea(
 }
 
 GameArea.prototype = {
-  drawMyImage: function (imageUrl, x, y, w, h, onload = () => { }) {
+  drawMyImage: function(imageUrl, x, y, w, h, onload = () => {}) {
     this.x = x;
     this.y = y;
     this.w = w;
 
     const image = new Image();
     image.src = `${IMAGES_PATH}${imageUrl}`;
-    image.onload = function () {
+    image.onload = function() {
       context.drawImage(image, x, y, w, h);
       onload();
     };
   },
-  drawFloor: function (context) {
+  drawFloor: function(context) {
     const floorImage = this.drawMyImage(
       "floor.png",
       0,
@@ -132,7 +131,7 @@ GameArea.prototype = {
       FLOOR_HEIGHT
     );
   },
-  drawBackground: function (context) {
+  drawBackground: function(context) {
     const backgroundImage = this.drawMyImage(
       "background-day.png",
       0,
@@ -141,14 +140,14 @@ GameArea.prototype = {
       GAME_HEIGHT
     );
   },
-  generateCanvas: function () {
+  generateCanvas: function() {
     this.drawBackground(this.context);
     this.drawFloor(this.context);
     drawPlayer();
   },
-  gameLoop: function (time) {
-    this.drawBackground()
-    this.drawFloor()
+  gameLoop: function(time) {
+    this.drawBackground();
+    this.drawFloor();
     drawPlayer();
 
     requestAnimationFrame(this.gameLoop.bind(this));
