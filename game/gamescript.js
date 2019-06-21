@@ -4,13 +4,16 @@ const scoresModal = document.getElementById("scores-modal");
 const instructionBtn = document.getElementById("instruction-btn");
 const scoresBtn = document.getElementById("scores-btn");
 const closeButton = document.getElementById("exit-btn");
+const startGameButton = document.getElementById("start-game");
 
-function displayScores() {
+startGameButton.addEventListener("click", function() {
+  instructionModal.style.display = "none";
+});
+
+scoresBtn.addEventListener("click", function() {
   instructionModal.style.display = "none";
   scoresModal.classList.toggle("scores-modal-shown");
-}
-
-scoresBtn.addEventListener("click", displayScores);
+});
 
 instructionBtn.addEventListener("click", function() {
   instructionModal.style.display = "block";
@@ -20,10 +23,6 @@ closeButton.addEventListener("click", function() {
   instructionModal.style.display = "none";
 });
 
-//var wynikiButton = document.getElementsByClassName("wyniki")[0];
-//wynikiButton.onclick = function() {
-
-//}
 // instruction-end
 
 // game (Damian)
