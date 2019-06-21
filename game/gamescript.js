@@ -2,6 +2,7 @@
 const instructionModal = document.getElementById("instruction-modal");
 const scoresModal = document.getElementById("scores-modal");
 const instructionBtn = document.getElementById("instruction-btn");
+const scoresBoardBtn = document.getElementById("scores-board-btn");
 const scoresBtn = document.getElementById("scores-btn");
 
 function displayScores() {
@@ -9,16 +10,27 @@ function displayScores() {
   scoresModal.classList.toggle("scores-modal-shown");
 }
 
+
 scoresBtn.addEventListener("click", displayScores);
 
 instructionBtn.addEventListener("click", function() {
   instructionModal.style.display = "block";
 });
 
+scoresBoardBtn.addEventListener("click", function() {
+  scoresModal.style.display = "block";
+});
+
 var closeButton = document.getElementById("exit-btn");
 closeButton.addEventListener("click", function() {
   instructionModal.style.display = "none";
 });
+
+const scoreCloseButton = document.getElementById("score-exit-btn");
+scoreCloseButton.addEventListener("click", function() {
+  scoresModal.style.display = "none";
+});
+
 
 //var wynikiButton = document.getElementsByClassName("wyniki")[0];
 //wynikiButton.onclick = function() {
@@ -156,7 +168,7 @@ game.gameLoop();
 // game-end(Damian)
 
 // score (Asia)
-
+let score = 0;
 // pobranie  scoreboard z localstorage lub dodanie pustej tablicy
 let scoreboard = JSON.parse(localStorage.getItem("scoreboard")) || [];
 
