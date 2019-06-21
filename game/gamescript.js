@@ -13,7 +13,7 @@ function displayScores() {
 
 scoresBtn.addEventListener("click", displayScores);
 
-instructionBtn.addEventListener("click", function() {
+instructionBtn.addEventListener("click", function () {
   instructionModal.style.display = "block";
 });
 
@@ -67,16 +67,16 @@ body.addEventListener("keydown", event => {
   console.log(event);
   if (event.key === "ArrowRight") {
     moveRight();
-    direction = 1;
+    // direction = 1;
   } else if (event.key === "ArrowLeft") {
     moveLeft();
   } else direction = 0;
 });
 
-function draw(imageUrl, x, y, w, h, onload = () => {}) {
+function draw(imageUrl, x, y, w, h, onload = () => { }) {
   const image = new Image();
   image.src = `${IMAGES_PATH}${imageUrl}`;
-  image.onload = function() {
+  image.onload = function () {
     context.drawImage(image, x, y, w, h);
     onload();
   };
@@ -91,10 +91,14 @@ function drawPlayer() {
   draw("cashBakeMan.png", player.x, player.y, PLAYER_WIDTH, PLAYER_HEIGHT);
 }
 
+function drawCoin() {
+
+}
+
 function moveRight() {
   if (player.x < GAME_WIDTH - PLAYER_WIDTH) {
     player.x = player.x + 10;
-    console.log(player);
+    // console.log(player);
   } else {
     player.x = GAME_WIDTH - PLAYER_WIDTH;
   }
@@ -102,7 +106,7 @@ function moveRight() {
 function moveLeft() {
   if (player.x > 0) {
     player.x -= 10;
-    console.log(player);
+    // console.log(player);
   } else {
     player.x = 0;
   }
@@ -113,26 +117,26 @@ function GameArea(
   height,
   difficultyLevel = "easy" /* values: 'easy', 'hard' */
 ) {
-  this.width = width;
-  this.height = height;
-  this.difficultyLevel = difficultyLevel; //TODO: add difficulty choice in begin game
+  // this.width = width;
+  // this.height = height;
+  // this.difficultyLevel = difficultyLevel; //TODO: add difficulty choice in begin game
   this.generateCanvas();
 }
 
 GameArea.prototype = {
-  drawMyImage: function(imageUrl, x, y, w, h, onload = () => {}) {
+  drawMyImage: function (imageUrl, x, y, w, h, onload = () => { }) {
     this.x = x;
     this.y = y;
     this.w = w;
 
     const image = new Image();
     image.src = `${IMAGES_PATH}${imageUrl}`;
-    image.onload = function() {
+    image.onload = function () {
       context.drawImage(image, x, y, w, h);
       onload();
     };
   },
-  drawFloor: function(context) {
+  drawFloor: function (context) {
     const floorImage = this.drawMyImage(
       "floor.png",
       0,
@@ -141,7 +145,7 @@ GameArea.prototype = {
       FLOOR_HEIGHT
     );
   },
-  drawBackground: function(context) {
+  drawBackground: function (context) {
     const backgroundImage = this.drawMyImage(
       "background-day.png",
       0,
@@ -150,18 +154,22 @@ GameArea.prototype = {
       GAME_HEIGHT
     );
   },
-  generateCanvas: function() {
+  generateCanvas: function () {
     this.drawBackground(this.context);
     this.drawFloor(this.context);
-  },
-  gameLoop: function(time) {
     drawPlayer();
+  },
+  gameLoop: function (time) {
+    this.drawBackground()
+    this.drawFloor()
+    drawPlayer();
+
     requestAnimationFrame(this.gameLoop.bind(this));
   }
 };
 
-const game = new GameArea(600, 500, "easy");
-game.gameLoop();
+const game = new GameArea(1200, 500, "easy");
+// game.gameLoop();
 
 //TODO: add  loop function
 
