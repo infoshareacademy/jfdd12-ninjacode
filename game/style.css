@@ -56,8 +56,15 @@ main {
 }
 
 /* instruction-end */
-/* score */
 
+/* score */
+/* hud */
+#hud-item {
+  display: flex;
+}
+.hud-prefix {
+  padding: 20px;
+}
 /* score-end */
 /* level */
 

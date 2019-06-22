@@ -4,6 +4,7 @@ const scoresModal = document.getElementById("scores-modal");
 const instructionBtn = document.getElementById("instruction-btn");
 const scoresBoardBtn = document.getElementById("scores-board-btn");
 const scoresBtn = document.getElementById("scores-btn");
+const scoreTxt = document.getElementById("score-number")
 
 function displayScores() {
   instructionModal.style.display = "none";
@@ -81,8 +82,8 @@ function draw(imageUrl, x, y, w, h, onload = () => {}) {
     onload();
   };
 }
-// game (Damian)
-const player = {
+//game (Damian)
+let player = {
   x: (GAME_WIDTH - PLAYER_WIDTH) / 2,
   y: GAME_HEIGHT - FLOOR_HEIGHT - PLAYER_HEIGHT
 };
@@ -168,7 +169,15 @@ game.gameLoop();
 // game-end(Damian)
 
 // score (Asia)
+
 let score = 0;
+let coinGet = 0
+
+incrementScore = num => {
+  score += num;
+  scoreTxt.innerHTML = score;
+}
+
 // pobranie  scoreboard z localstorage lub dodanie pustej tablicy
 let scoreboard = JSON.parse(localStorage.getItem("scoreboard")) || [];
 
