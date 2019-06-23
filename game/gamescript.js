@@ -16,6 +16,7 @@ const scoreDisplay = document.getElementById("yourScore")
 let currentScore = 0;
 let coinGet = 0;
 let isGamePaused = false;
+let hardReset = false;
 
 const GAME_WIDTH = 600; //288
 const GAME_HEIGHT = 512;
@@ -311,10 +312,12 @@ GameArea.prototype = {
 
     timerClock();
 
-
     if (!isGamePaused && timer > 0) {
       requestAnimationFrame(this.gameLoop.bind(this));
     }
+
+
+
     if (timer <= 0) {
       scoresModal.style.display = "block"
       scoreDisplay.innerText = currentScore // score display for now
@@ -384,8 +387,12 @@ function resetGame() {
   timer = 10 * 1000; // 10 seconds again
   removeAllCoins();
   player.x = GAME_WIDTH / 2 - PLAYER_WIDTH / 2;
+  if (!isGamePaused) { // fix for sped up game after reset
+    window.cancelAnimationFrame();
+  }
   resumeGame();
 }
+
 
 function timerClock() {
   timer--;
