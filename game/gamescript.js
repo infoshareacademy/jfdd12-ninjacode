@@ -10,10 +10,12 @@ const pauseBtn = document.getElementById("pause-btn");
 const replayBtn = document.getElementById("replay-btn")
 const closeButton = document.getElementById("exit-btn");
 const scoreCloseButton = document.getElementById("score-exit-btn");
+const timeDisplay = document.getElementById("timeDisplay")
+const scoreDisplay = document.getElementById("yourScore")
 
-let score = 0;
+let currentScore = 0;
 let coinGet = 0;
-let isGamePaused = true;
+let isGamePaused = false;
 
 const GAME_WIDTH = 600; //288
 const GAME_HEIGHT = 512;
@@ -27,6 +29,9 @@ let GRAVITY = 2;
 const COIN_WIDTH = 44;
 const COIN_HEIGHT = 40;
 let game;
+
+var timer = 10 * 1000; // 10 seconds
+
 
 // top game buttons
 
@@ -71,7 +76,7 @@ closeButton.addEventListener("click", function () {
 
 scoreCloseButton.addEventListener("click", function () {
   scoresModal.style.display = "none";
-  resumeGame();
+  resetGame();
 });
 
 // load assets
@@ -181,10 +186,17 @@ function checkCoinPlayerCollision(coin) {
   let playerx1 = player.x + PLAYER_WIDTH;
   let playery1 = player.y + PLAYER_HEIGHT;
 
-  if (coin.x < playerx1 && player.x < coinx1 && coin.y < playery1)
-    return player.y < coiny1;
-  else
+  if (coin.x < playerx1
+    && player.x < coinx1
+    && coin.y < playery1
+    && coiny1 > player.y) {
+    currentScore++;
+    scoreTxt.innerText = currentScore;
+    return true;
+  }
+  else {
     return false;
+  }
 }
 
 function spawnCoins() {
@@ -221,6 +233,8 @@ function moveLeft() {
   }
 }
 
+
+
 function GameArea(
   width,
   height,
@@ -250,6 +264,8 @@ GameArea.prototype = {
       lastTime = time;
       timeToRotateCoinCounter += delta;
       timeToSpawnCoinCounter += delta;
+      timer -= delta;
+      // console.log(time)
     }
 
     coinFall();
@@ -269,7 +285,7 @@ GameArea.prototype = {
     coins.forEach(coin => {
       if (checkCoinPlayerCollision(coin)) {
         console.log("coin successfuly caught");
-        console.log(score);
+        console.log(currentScore);
         coin.forRemoval = true;
       }
     });
@@ -286,9 +302,15 @@ GameArea.prototype = {
     drawPlayer();
     drawCoins();
 
-    if (!isGamePaused) {
+    timerClock();
 
+
+    if (!isGamePaused && timer > 0) {
       requestAnimationFrame(this.gameLoop.bind(this));
+    }
+    if (timer <= 0) {
+      scoresModal.style.display = "block"
+      scoreDisplay.innerText = currentScore // score display for now
     }
   }
 };
@@ -306,8 +328,8 @@ GameArea.prototype = {
 
 
 incrementScore = num => {
-  score += num;
-  scoreTxt.innerHTML = score;
+  currentScore += num;
+  scoreTxt.innerHTML = currentScore;
 }
 
 // pobranie  scoreboard z localstorage lub dodanie pustej tablicy
@@ -335,7 +357,6 @@ addToScoreboard(updatedScoreboard);
 function togglePause() {
   if (!isGamePaused) {
     pauseGame();
-    // window.cancelAnimationFrame(gameLoop);
   } else {
     resumeGame();
   }
@@ -345,21 +366,30 @@ function pauseGame() {
   isGamePaused = true;
   pauseBtn.innerHTML = ">";
   console.log('game is paused')
-
 }
+
 function resumeGame() {
   isGamePaused = false;
   pauseBtn.innerHTML = "| |";
   game.gameLoop();
   console.log('game is playing')
-
 }
 
 function resetGame() {
   console.log('restarted the game')
-  // reset score
-  // reset timer
+  currentScore = 0;
+  scoreTxt.innerText = currentScore;
+  console.log(currentScore)
+  timer = 10 * 1000; // 10 seconds again
   // remove coins
   // reset dude position
   resumeGame();
+}
+
+function timerClock() {
+  timer--;
+  let timerShort = Math.trunc((timer / 1000) + 1);
+  // console.log('timer: ' + timer);
+  timeDisplay.innerHTML = Math.ceil(timerShort);
+  // timeDisplay.innerHTML = timer / 1000;
 }
