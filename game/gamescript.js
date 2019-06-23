@@ -6,9 +6,14 @@ const scoresBoardBtn = document.getElementById("scores-board-btn");
 const scoresBtn = document.getElementById("scores-btn");
 const scoreTxt = document.getElementById("score-number");
 const startGameButton = document.getElementById("start-game");
+const pauseBtn = document.getElementById("pause-btn");
+const replayBtn = document.getElementById("replay-btn")
+const closeButton = document.getElementById("exit-btn");
+const scoreCloseButton = document.getElementById("score-exit-btn");
 
 let score = 0;
 let coinGet = 0;
+let isGamePaused = true;
 
 const GAME_WIDTH = 600; //288
 const GAME_HEIGHT = 512;
@@ -18,7 +23,7 @@ const FLOOR_START = GAME_HEIGHT - FLOOR_HEIGHT;
 const PLAYER_HEIGHT = 100;
 const PLAYER_WIDTH = 49;
 const IMAGES_PATH = "/game/img/";
-const GRAVITY = 2.0;
+let GRAVITY = 2;
 const COIN_WIDTH = 44;
 const COIN_HEIGHT = 40;
 let game;
@@ -26,10 +31,22 @@ let game;
 // top game buttons
 
 startGameButton.addEventListener("click", function () {
+  resumeGame();
   instructionModal.style.display = "none";
-  spawnCoins();
-  game.gameLoop();
 });
+
+pauseBtn.addEventListener("click", function () {
+  togglePause();
+})
+
+window.addEventListener('keydown', function (event) {
+  var key = event.keyCode;
+  if (key === 80) { togglePause() } // shortcut key p for pause
+});
+
+replayBtn.addEventListener("click", function () {
+  resetGame();
+})
 
 scoresBtn.addEventListener("click", function () {
   instructionModal.style.display = "none";
@@ -37,24 +54,28 @@ scoresBtn.addEventListener("click", function () {
 });
 
 instructionBtn.addEventListener("click", function () {
+  pauseGame();
   instructionModal.style.display = "block";
 });
 
 scoresBoardBtn.addEventListener("click", function () {
+  pauseGame();
   scoresModal.style.display = "block";
 });
 
-var closeButton = document.getElementById("exit-btn");
+
 closeButton.addEventListener("click", function () {
   instructionModal.style.display = "none";
+  resumeGame();
 });
 
-const scoreCloseButton = document.getElementById("score-exit-btn");
 scoreCloseButton.addEventListener("click", function () {
   scoresModal.style.display = "none";
+  resumeGame();
 });
 
 // load assets
+
 let backgroundImage;
 let floorImage;
 let cashBakeManImage;
@@ -111,8 +132,6 @@ body.addEventListener("keydown", event => {
     moveLeft();
   } else direction = 0;
 });
-
-//game (Damian)
 
 let lastTime = 0; //time last loop was executed
 
@@ -267,7 +286,10 @@ GameArea.prototype = {
     drawPlayer();
     drawCoins();
 
-    requestAnimationFrame(this.gameLoop.bind(this));
+    if (!isGamePaused) {
+
+      requestAnimationFrame(this.gameLoop.bind(this));
+    }
   }
 };
 
@@ -309,3 +331,35 @@ const addToScoreboard = newScoreboard =>
 addToScoreboard(updatedScoreboard);
 
 // score-end
+
+function togglePause() {
+  if (!isGamePaused) {
+    pauseGame();
+    // window.cancelAnimationFrame(gameLoop);
+  } else {
+    resumeGame();
+  }
+}
+
+function pauseGame() {
+  isGamePaused = true;
+  pauseBtn.innerHTML = ">";
+  console.log('game is paused')
+
+}
+function resumeGame() {
+  isGamePaused = false;
+  pauseBtn.innerHTML = "| |";
+  game.gameLoop();
+  console.log('game is playing')
+
+}
+
+function resetGame() {
+  console.log('restarted the game')
+  // reset score
+  // reset timer
+  // remove coins
+  // reset dude position
+  resumeGame();
+}
