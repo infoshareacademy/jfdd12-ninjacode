@@ -10,6 +10,8 @@ const pauseBtn = document.getElementById("pause-btn");
 const replayBtn = document.getElementById("replay-btn")
 const closeButton = document.getElementById("exit-btn");
 const scoreCloseButton = document.getElementById("score-exit-btn");
+const timeDisplay = document.getElementById("timeDisplay")
+const scoreDisplay = document.getElementById("yourScore")
 
 let score = 0;
 let coinGet = 0;
@@ -27,6 +29,9 @@ let GRAVITY = 2;
 const COIN_WIDTH = 44;
 const COIN_HEIGHT = 40;
 let game;
+
+var timer = 10 * 1000; // 10 seconds
+
 
 // top game buttons
 
@@ -71,7 +76,7 @@ closeButton.addEventListener("click", function () {
 
 scoreCloseButton.addEventListener("click", function () {
   scoresModal.style.display = "none";
-  resumeGame();
+  resetGame();
 });
 
 // load assets
@@ -250,6 +255,8 @@ GameArea.prototype = {
       lastTime = time;
       timeToRotateCoinCounter += delta;
       timeToSpawnCoinCounter += delta;
+      timer -= delta;
+      // console.log(time)
     }
 
     coinFall();
@@ -286,9 +293,15 @@ GameArea.prototype = {
     drawPlayer();
     drawCoins();
 
-    if (!isGamePaused) {
+    timerClock();
 
+
+    if (!isGamePaused && timer > 0) {
       requestAnimationFrame(this.gameLoop.bind(this));
+    }
+    if (timer <= 0) {
+      scoresModal.style.display = "block"
+      scoreDisplay.innerText = "-1" // score display for now
     }
   }
 };
@@ -335,7 +348,6 @@ addToScoreboard(updatedScoreboard);
 function togglePause() {
   if (!isGamePaused) {
     pauseGame();
-    // window.cancelAnimationFrame(gameLoop);
   } else {
     resumeGame();
   }
@@ -345,21 +357,28 @@ function pauseGame() {
   isGamePaused = true;
   pauseBtn.innerHTML = ">";
   console.log('game is paused')
-
 }
+
 function resumeGame() {
   isGamePaused = false;
   pauseBtn.innerHTML = "| |";
   game.gameLoop();
   console.log('game is playing')
-
 }
 
 function resetGame() {
   console.log('restarted the game')
   // reset score
-  // reset timer
+  timer = 10 * 1000; // 10 seconds again
   // remove coins
   // reset dude position
   resumeGame();
+}
+
+function timerClock() {
+  timer--;
+  let timerShort = Math.trunc((timer / 1000) + 1);
+  // console.log('timer: ' + timer);
+  timeDisplay.innerHTML = Math.ceil(timerShort);
+  // timeDisplay.innerHTML = timer / 1000;
 }
