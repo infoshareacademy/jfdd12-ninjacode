@@ -73,6 +73,7 @@ scoreCloseButton.addEventListener("click", function () {
   scoresModal.style.display = "none";
   resumeGame();
 });
+instructionModal.style.display="block";
 
 // load assets
 
