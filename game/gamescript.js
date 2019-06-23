@@ -78,7 +78,7 @@ scoreCloseButton.addEventListener("click", function () {
   scoresModal.style.display = "none";
   resetGame();
 });
-instructionModal.style.display="block";
+instructionModal.style.display = "block";
 
 // load assets
 
@@ -143,7 +143,7 @@ let lastTime = 0; //time last loop was executed
 
 let timeToRotateCoinCounter = 0; //is it time to rotate the coin
 const timeToRotateCoin = 100; //coin frame changed every 100 ms
-let timeToSpawnCoin = 2 * 1000; //a coin is spawned every 5s
+let timeToSpawnCoin = 0.5 * 1000; //a coin is spawned every 5s
 let timeToSpawnCoinCounter = 0; //is it time to spawn a new coin
 
 let player = {
@@ -217,6 +217,12 @@ function removeCoins() {
   });
 }
 
+function removeAllCoins() {
+  coins = coins.filter(coin => {
+    return false;
+  })
+}
+
 function moveRight() {
   if (player.x < GAME_WIDTH - PLAYER_WIDTH) {
     player.x = player.x + 10;
@@ -266,7 +272,6 @@ GameArea.prototype = {
       timeToRotateCoinCounter += delta;
       timeToSpawnCoinCounter += delta;
       timer -= delta;
-      // console.log(time)
     }
 
     coinFall();
@@ -317,21 +322,15 @@ GameArea.prototype = {
 };
 
 //const game = new GameArea(1200, 500, "easy");   
-
 // game.gameLoop();
-
 //TODO: add  loop function
-
 // game-end(Damian)
-
 // score (Asia)
 
-
-
-incrementScore = num => {
-  currentScore += num;
-  scoreTxt.innerHTML = currentScore;
-}
+// incrementScore = num => {
+//   currentScore += num;
+//   scoreTxt.innerHTML = currentScore;
+// }
 
 // pobranie  scoreboard z localstorage lub dodanie pustej tablicy
 let scoreboard = JSON.parse(localStorage.getItem("scoreboard")) || [];
@@ -382,7 +381,7 @@ function resetGame() {
   scoreTxt.innerText = currentScore;
   console.log(currentScore)
   timer = 10 * 1000; // 10 seconds again
-  // remove coins
+  removeAllCoins();
   // reset dude position
   resumeGame();
 }
