@@ -12,8 +12,11 @@ document.getElementById("emailForm").addEventListener('submit', function(event) 
 });
 const openPageButton = document.getElementsByClassName('open-page')[0]
 openPageButton.onclick = function(){
-  window.location.pathname = "game/index.html"
-}
+  window.location.pathname = "game/index.html";
+   // pauseGame();
+    //instructionModal.style.display = "block";
+  };
+
 
 
 // Get the button that opens the modal
