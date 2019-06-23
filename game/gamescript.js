@@ -7,11 +7,11 @@ const scoresBtn = document.getElementById("scores-btn");
 const scoreTxt = document.getElementById("score-number");
 const startGameButton = document.getElementById("start-game");
 const pauseBtn = document.getElementById("pause-btn");
-const replayBtn = document.getElementById("replay-btn")
+const replayBtn = document.getElementById("replay-btn");
 const closeButton = document.getElementById("exit-btn");
 const scoreCloseButton = document.getElementById("score-exit-btn");
-const timeDisplay = document.getElementById("timeDisplay")
-const scoreDisplay = document.getElementById("yourScore")
+const timeDisplay = document.getElementById("timeDisplay");
+const scoreDisplay = document.getElementById("yourScore");
 
 let currentScore = 0;
 let coinGet = 0;
@@ -32,53 +32,53 @@ let game;
 
 var timer = 10 * 1000; // 10 seconds
 
-
 // top game buttons
 
-startGameButton.addEventListener("click", function () {
+startGameButton.addEventListener("click", function() {
   resumeGame();
   instructionModal.style.display = "none";
 });
 
-pauseBtn.addEventListener("click", function () {
+pauseBtn.addEventListener("click", function() {
   togglePause();
-})
-
-window.addEventListener('keydown', function (event) {
-  var key = event.keyCode;
-  if (key === 80) { togglePause() } // shortcut key p for pause
 });
 
-replayBtn.addEventListener("click", function () {
-  resetGame();
-})
+window.addEventListener("keydown", function(event) {
+  var key = event.keyCode;
+  if (key === 80) {
+    togglePause();
+  } // shortcut key p for pause
+});
 
-scoresBtn.addEventListener("click", function () {
+replayBtn.addEventListener("click", function() {
+  resetGame();
+});
+
+scoresBtn.addEventListener("click", function() {
   instructionModal.style.display = "none";
   scoresModal.style.display = "block";
 });
 
-scoresBoardBtn.addEventListener("click", function () {
+scoresBoardBtn.addEventListener("click", function() {
   pauseGame();
   scoresModal.style.display = "block";
 });
 
-instructionBtn.addEventListener("click", function () {
+instructionBtn.addEventListener("click", function() {
   pauseGame();
   instructionModal.style.display = "block";
 });
 
-
-closeButton.addEventListener("click", function () {
+closeButton.addEventListener("click", function() {
   instructionModal.style.display = "none";
   resumeGame();
 });
 
-scoreCloseButton.addEventListener("click", function () {
+scoreCloseButton.addEventListener("click", function() {
   scoresModal.style.display = "none";
   resetGame();
 });
-instructionModal.style.display="block";
+instructionModal.style.display = "block";
 
 // load assets
 
@@ -91,10 +91,10 @@ function loadImage(imageUrl, x, y, w, h) {
   return new Promise((resolve, reject) => {
     const image = new Image();
     image.src = `/game/img/${imageUrl}`;
-    image.onload = function () {
+    image.onload = function() {
       resolve(image);
     };
-    image.onabort = function () {
+    image.onabort = function() {
       reject(`Couldn't load image from /game/img/${imageUrl}`);
     };
   });
@@ -103,7 +103,13 @@ function loadImage(imageUrl, x, y, w, h) {
 function loadAllImages() {
   Promise.all([
     loadImage("background-day.png", 0, 0, GAME_WIDTH, GAME_HEIGHT),
-    loadImage("floor.png", 0, GAME_HEIGHT - FLOOR_HEIGHT, FLOOR_WIDTH, FLOOR_HEIGHT),
+    loadImage(
+      "floor.png",
+      0,
+      GAME_HEIGHT - FLOOR_HEIGHT,
+      FLOOR_WIDTH,
+      FLOOR_HEIGHT
+    ),
     loadImage("cashBakeMan.png"),
     loadImage("coin-sprite.png")
   ]).then(values => {
@@ -127,13 +133,10 @@ const gameCanvas = document.querySelector("#game");
 gameCanvas.append(canvas);
 
 const body = document.querySelector("body");
-let direction;
 
 body.addEventListener("keydown", event => {
-  console.log(event);
   if (event.key === "ArrowRight") {
     moveRight();
-    // direction = 1;
   } else if (event.key === "ArrowLeft") {
     moveLeft();
   } else direction = 0;
@@ -154,12 +157,28 @@ let player = {
 let coins = [];
 
 function drawPlayer() {
-  context.drawImage(cashBakeManImage, player.x, player.y, PLAYER_WIDTH, PLAYER_HEIGHT);
+  context.drawImage(
+    cashBakeManImage,
+    player.x,
+    player.y,
+    PLAYER_WIDTH,
+    PLAYER_HEIGHT
+  );
 }
 
 function drawCoins() {
   coins.forEach(coin => {
-    context.drawImage(coinImage, coin.frame * COIN_WIDTH, 0, COIN_WIDTH, COIN_HEIGHT, coin.x, coin.y, COIN_WIDTH, COIN_HEIGHT);
+    context.drawImage(
+      coinImage,
+      coin.frame * COIN_WIDTH,
+      0,
+      COIN_WIDTH,
+      COIN_HEIGHT,
+      coin.x,
+      coin.y,
+      COIN_WIDTH,
+      COIN_HEIGHT
+    );
   });
 }
 
@@ -173,8 +192,7 @@ function rotateCoins() {
   coins.forEach(coin => {
     if (coin.frame == 9) {
       coin.frame = 0;
-    }
-    else {
+    } else {
       coin.frame++;
     }
   });
@@ -187,15 +205,16 @@ function checkCoinPlayerCollision(coin) {
   let playerx1 = player.x + PLAYER_WIDTH;
   let playery1 = player.y + PLAYER_HEIGHT;
 
-  if (coin.x < playerx1
-    && player.x < coinx1
-    && coin.y < playery1
-    && coiny1 > player.y) {
+  if (
+    coin.x < playerx1 &&
+    player.x < coinx1 &&
+    coin.y < playery1 &&
+    coiny1 > player.y
+  ) {
     currentScore++;
     scoreTxt.innerText = currentScore;
     return true;
-  }
-  else {
+  } else {
     return false;
   }
 }
@@ -220,7 +239,6 @@ function removeCoins() {
 function moveRight() {
   if (player.x < GAME_WIDTH - PLAYER_WIDTH) {
     player.x = player.x + 10;
-    // console.log(player);
   } else {
     player.x = GAME_WIDTH - PLAYER_WIDTH;
   }
@@ -228,45 +246,44 @@ function moveRight() {
 function moveLeft() {
   if (player.x > 0) {
     player.x -= 10;
-    // console.log(player);
   } else {
     player.x = 0;
   }
 }
-
-
 
 function GameArea(
   width,
   height,
   difficultyLevel = "easy" /* values: 'easy', 'hard' */
 ) {
-  // this.width = width;
-  // this.height = height;
-  // this.difficultyLevel = difficultyLevel; //TODO: add difficulty choice in begin game
   this.generateCanvas();
 }
 
 GameArea.prototype = {
-  drawFloor: function () {
-    context.drawImage(floorImage, 0, GAME_HEIGHT - FLOOR_HEIGHT, FLOOR_WIDTH, FLOOR_HEIGHT);
+  drawFloor: function() {
+    context.drawImage(
+      floorImage,
+      0,
+      GAME_HEIGHT - FLOOR_HEIGHT,
+      FLOOR_WIDTH,
+      FLOOR_HEIGHT
+    );
   },
-  drawBackground: function () {
+  drawBackground: function() {
     context.drawImage(backgroundImage, 0, 0, GAME_WIDTH, GAME_HEIGHT);
   },
-  generateCanvas: function () {
+  generateCanvas: function() {
     this.drawBackground();
     this.drawFloor();
     drawPlayer();
   },
-  gameLoop: function (time) {
+  gameLoop: function(time) {
+    let delta = 0;
     if (time) {
-      let delta = time - lastTime;
+      delta = time - lastTime;
       lastTime = time;
       timeToRotateCoinCounter += delta;
       timeToSpawnCoinCounter += delta;
-      timer -= delta;
-      // console.log(time)
     }
 
     coinFall();
@@ -302,36 +319,25 @@ GameArea.prototype = {
     this.drawFloor();
     drawPlayer();
     drawCoins();
-
-    timerClock();
-
-
     if (!isGamePaused && timer > 0) {
+      timerClock(delta);
       requestAnimationFrame(this.gameLoop.bind(this));
     }
     if (timer <= 0) {
-      scoresModal.style.display = "block"
-      scoreDisplay.innerText = currentScore // score display for now
+      scoresModal.style.display = "block";
+      scoreDisplay.innerText = currentScore; // score display for now
     }
   }
 };
-
-//const game = new GameArea(1200, 500, "easy");   
-
-// game.gameLoop();
-
-//TODO: add  loop function
 
 // game-end(Damian)
 
 // score (Asia)
 
-
-
 incrementScore = num => {
   currentScore += num;
   scoreTxt.innerHTML = currentScore;
-}
+};
 
 // pobranie  scoreboard z localstorage lub dodanie pustej tablicy
 let scoreboard = JSON.parse(localStorage.getItem("scoreboard")) || [];
@@ -366,31 +372,32 @@ function togglePause() {
 function pauseGame() {
   isGamePaused = true;
   pauseBtn.innerHTML = ">";
-  console.log('game is paused')
+  console.log("game is paused");
+  time = 0;
 }
 
 function resumeGame() {
   isGamePaused = false;
   pauseBtn.innerHTML = "| |";
   game.gameLoop();
-  console.log('game is playing')
+  console.log("game is playing");
 }
 
 function resetGame() {
-  console.log('restarted the game')
+  console.log("restarted the game");
   currentScore = 0;
   scoreTxt.innerText = currentScore;
-  console.log(currentScore)
+  console.log(currentScore);
   timer = 10 * 1000; // 10 seconds again
   // remove coins
+
   // reset dude position
   resumeGame();
 }
 
-function timerClock() {
-  timer--;
-  let timerShort = Math.trunc((timer / 1000) + 1);
-  // console.log('timer: ' + timer);
+function timerClock(delta) {
+  let deltaChecked = delta > 20 ? 0 : delta;
+  timer -= deltaChecked;
+  let timerShort = Math.trunc(timer / 1000 + 1);
   timeDisplay.innerHTML = Math.ceil(timerShort);
-  // timeDisplay.innerHTML = timer / 1000;
 }
