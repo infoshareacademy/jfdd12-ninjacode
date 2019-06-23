@@ -143,7 +143,7 @@ let lastTime = 0; //time last loop was executed
 
 let timeToRotateCoinCounter = 0; //is it time to rotate the coin
 const timeToRotateCoin = 100; //coin frame changed every 100 ms
-let timeToSpawnCoin = 0.5 * 1000; //a coin is spawned every 5s
+let timeToSpawnCoin = 0.5 * 1000; //a coin is spawned every half second
 let timeToSpawnCoinCounter = 0; //is it time to spawn a new coin
 
 let player = {
@@ -272,6 +272,7 @@ GameArea.prototype = {
       timeToRotateCoinCounter += delta;
       timeToSpawnCoinCounter += delta;
       timer -= delta;
+      console.log(delta)
     }
 
     coinFall();
@@ -382,7 +383,7 @@ function resetGame() {
   console.log(currentScore)
   timer = 10 * 1000; // 10 seconds again
   removeAllCoins();
-  // reset dude position
+  player.x = GAME_WIDTH / 2 - PLAYER_WIDTH / 2;
   resumeGame();
 }
 
