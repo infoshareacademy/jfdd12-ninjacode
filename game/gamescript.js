@@ -13,9 +13,9 @@ const scoreCloseButton = document.getElementById("score-exit-btn");
 const timeDisplay = document.getElementById("timeDisplay")
 const scoreDisplay = document.getElementById("yourScore")
 
-let score = 0;
+let currentScore = 0;
 let coinGet = 0;
-let isGamePaused = true;
+let isGamePaused = false;
 
 const GAME_WIDTH = 600; //288
 const GAME_HEIGHT = 512;
@@ -186,10 +186,17 @@ function checkCoinPlayerCollision(coin) {
   let playerx1 = player.x + PLAYER_WIDTH;
   let playery1 = player.y + PLAYER_HEIGHT;
 
-  if (coin.x < playerx1 && player.x < coinx1 && coin.y < playery1)
-    return player.y < coiny1;
-  else
+  if (coin.x < playerx1
+    && player.x < coinx1
+    && coin.y < playery1
+    && coiny1 > player.y) {
+    currentScore++;
+    scoreTxt.innerText = currentScore;
+    return true;
+  }
+  else {
     return false;
+  }
 }
 
 function spawnCoins() {
@@ -225,6 +232,8 @@ function moveLeft() {
     player.x = 0;
   }
 }
+
+
 
 function GameArea(
   width,
@@ -276,7 +285,7 @@ GameArea.prototype = {
     coins.forEach(coin => {
       if (checkCoinPlayerCollision(coin)) {
         console.log("coin successfuly caught");
-        console.log(score);
+        console.log(currentScore);
         coin.forRemoval = true;
       }
     });
@@ -301,7 +310,7 @@ GameArea.prototype = {
     }
     if (timer <= 0) {
       scoresModal.style.display = "block"
-      scoreDisplay.innerText = "-1" // score display for now
+      scoreDisplay.innerText = currentScore // score display for now
     }
   }
 };
@@ -319,8 +328,8 @@ GameArea.prototype = {
 
 
 incrementScore = num => {
-  score += num;
-  scoreTxt.innerHTML = score;
+  currentScore += num;
+  scoreTxt.innerHTML = currentScore;
 }
 
 // pobranie  scoreboard z localstorage lub dodanie pustej tablicy
@@ -368,7 +377,9 @@ function resumeGame() {
 
 function resetGame() {
   console.log('restarted the game')
-  // reset score
+  currentScore = 0;
+  scoreTxt.innerText = currentScore;
+  console.log(currentScore)
   timer = 10 * 1000; // 10 seconds again
   // remove coins
   // reset dude position
