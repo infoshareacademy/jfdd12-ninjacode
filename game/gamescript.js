@@ -239,7 +239,6 @@ function removeCoins() {
 function moveRight() {
   if (player.x < GAME_WIDTH - PLAYER_WIDTH) {
     player.x = player.x + 10;
-    // console.log(player);
   } else {
     player.x = GAME_WIDTH - PLAYER_WIDTH;
   }
@@ -247,7 +246,6 @@ function moveRight() {
 function moveLeft() {
   if (player.x > 0) {
     player.x -= 10;
-    // console.log(player);
   } else {
     player.x = 0;
   }
@@ -258,9 +256,6 @@ function GameArea(
   height,
   difficultyLevel = "easy" /* values: 'easy', 'hard' */
 ) {
-  // this.width = width;
-  // this.height = height;
-  // this.difficultyLevel = difficultyLevel; //TODO: add difficulty choice in begin game
   this.generateCanvas();
 }
 
@@ -325,7 +320,6 @@ GameArea.prototype = {
     drawPlayer();
     drawCoins();
     if (!isGamePaused && timer > 0) {
-      console.log("Zatrzymana gra");
       timerClock(delta);
       requestAnimationFrame(this.gameLoop.bind(this));
     }
@@ -403,11 +397,7 @@ function resetGame() {
 
 function timerClock(delta) {
   let deltaChecked = delta > 20 ? 0 : delta;
-  console.log("My checked" + deltaChecked);
   timer -= deltaChecked;
-  console.log("my delta: " + delta);
   let timerShort = Math.trunc(timer / 1000 + 1);
-  console.log("timer: " + timer);
   timeDisplay.innerHTML = Math.ceil(timerShort);
-  // timeDisplay.innerHTML = timer / 1000;
 }
