@@ -6,61 +6,76 @@ const scoresBoardBtn = document.getElementById("scores-board-btn");
 const scoresBtn = document.getElementById("scores-btn");
 const scoreTxt = document.getElementById("score-number");
 const startGameButton = document.getElementById("start-game");
-
-startGameButton.addEventListener("click", function() {
-  instructionModal.style.display = "none";
-  spawnCoins();
-  game.gameLoop();
-});
-
-scoresBtn.addEventListener("click", function() {
-  instructionModal.style.display = "none";
-  scoresModal.classList.toggle("scores-modal-shown");
-});
-
-instructionBtn.addEventListener("click", function() {
-  instructionModal.style.display = "block";
-});
-
-scoresBoardBtn.addEventListener("click", function() {
-  scoresModal.style.display = "block";
-});
-
-var closeButton = document.getElementById("exit-btn");
-closeButton.addEventListener("click", function() {
-  instructionModal.style.display = "none";
-});
-
+const pauseBtn = document.getElementById("pause-btn");
+const replayBtn = document.getElementById("replay-btn")
+const closeButton = document.getElementById("exit-btn");
 const scoreCloseButton = document.getElementById("score-exit-btn");
-scoreCloseButton.addEventListener("click", function() {
-  scoresModal.style.display = "none";
-});
 
+let score = 0;
+let coinGet = 0;
+let isGamePaused = true;
 
-//var wynikiButton = document.getElementsByClassName("wyniki")[0];
-//wynikiButton.onclick = function() {
-
-//}
-// instruction-end
-
-// game (Damian)
-const GAME_WIDTH = 288;
+const GAME_WIDTH = 600; //288
 const GAME_HEIGHT = 512;
 const FLOOR_HEIGHT = 112;
-const FLOOR_WIDTH = 336;
+const FLOOR_WIDTH = 600; //336
 const FLOOR_START = GAME_HEIGHT - FLOOR_HEIGHT;
 const PLAYER_HEIGHT = 100;
 const PLAYER_WIDTH = 49;
 const IMAGES_PATH = "/game/img/";
-const GRAVITY = 1.0;
+let GRAVITY = 2;
 const COIN_WIDTH = 44;
 const COIN_HEIGHT = 40;
 let game;
 
-// instruction-end
+// top game buttons
 
+startGameButton.addEventListener("click", function () {
+  resumeGame();
+  instructionModal.style.display = "none";
+});
+
+pauseBtn.addEventListener("click", function () {
+  togglePause();
+})
+
+window.addEventListener('keydown', function (event) {
+  var key = event.keyCode;
+  if (key === 80) { togglePause() } // shortcut key p for pause
+});
+
+replayBtn.addEventListener("click", function () {
+  resetGame();
+})
+
+scoresBtn.addEventListener("click", function () {
+  instructionModal.style.display = "none";
+  scoresModal.style.display = "block";
+});
+
+scoresBoardBtn.addEventListener("click", function () {
+  pauseGame();
+  scoresModal.style.display = "block";
+});
+
+instructionBtn.addEventListener("click", function () {
+  pauseGame();
+  instructionModal.style.display = "block";
+});
+
+
+closeButton.addEventListener("click", function () {
+  instructionModal.style.display = "none";
+  resumeGame();
+});
+
+scoreCloseButton.addEventListener("click", function () {
+  scoresModal.style.display = "none";
+  resumeGame();
+});
 
 // load assets
+
 let backgroundImage;
 let floorImage;
 let cashBakeManImage;
@@ -70,10 +85,10 @@ function loadImage(imageUrl, x, y, w, h) {
   return new Promise((resolve, reject) => {
     const image = new Image();
     image.src = `/game/img/${imageUrl}`;
-    image.onload = function() {
+    image.onload = function () {
       resolve(image);
     };
-    image.onabort = function() {
+    image.onabort = function () {
       reject(`Couldn't load image from /game/img/${imageUrl}`);
     };
   });
@@ -82,21 +97,16 @@ function loadImage(imageUrl, x, y, w, h) {
 function loadAllImages() {
   Promise.all([
     loadImage("background-day.png", 0, 0, GAME_WIDTH, GAME_HEIGHT),
-    loadImage("floor.png", 0, GAME_HEIGHT - FLOOR_HEIGHT, FLOOR_WIDTH, FLOOR_HEIGHT),    
+    loadImage("floor.png", 0, GAME_HEIGHT - FLOOR_HEIGHT, FLOOR_WIDTH, FLOOR_HEIGHT),
     loadImage("cashBakeMan.png"),
-    loadImage("coin-sprite.png")   
+    loadImage("coin-sprite.png")
   ]).then(values => {
-    const [
-      background,
-      floor,
-      cashBakeMan,
-      coinSprite    
-    ] = values;
+    const [background, floor, cashBakeMan, coinSprite] = values;
     backgroundImage = background;
     floorImage = floor;
-    cashBakeManImage = cashBakeMan; 
+    cashBakeManImage = cashBakeMan;
     coinImage = coinSprite;
-    game = new GameArea(1200, 500, "easy");   
+    game = new GameArea(1200, 500, "easy");
   });
 }
 
@@ -123,8 +133,6 @@ body.addEventListener("keydown", event => {
   } else direction = 0;
 });
 
-//game (Damian)
-
 let lastTime = 0; //time last loop was executed
 
 let timeToRotateCoinCounter = 0; //is it time to rotate the coin
@@ -140,19 +148,19 @@ let player = {
 let coins = [];
 
 function drawPlayer() {
-  context.drawImage(cashBakeManImage, player.x, player.y, PLAYER_WIDTH, PLAYER_HEIGHT);  
+  context.drawImage(cashBakeManImage, player.x, player.y, PLAYER_WIDTH, PLAYER_HEIGHT);
 }
 
 function drawCoins() {
   coins.forEach(coin => {
     context.drawImage(coinImage, coin.frame * COIN_WIDTH, 0, COIN_WIDTH, COIN_HEIGHT, coin.x, coin.y, COIN_WIDTH, COIN_HEIGHT);
-  });    
+  });
 }
 
 function coinFall() {
   coins.forEach(coin => {
     coin.y += GRAVITY;
-  });  
+  });
 }
 
 function rotateCoins() {
@@ -172,7 +180,7 @@ function checkCoinPlayerCollision(coin) {
 
   let playerx1 = player.x + PLAYER_WIDTH;
   let playery1 = player.y + PLAYER_HEIGHT;
-  
+
   if (coin.x < playerx1 && player.x < coinx1 && coin.y < playery1)
     return player.y < coiny1;
   else
@@ -225,18 +233,18 @@ function GameArea(
 }
 
 GameArea.prototype = {
-  drawFloor: function() {
-    context.drawImage(floorImage, 0, GAME_HEIGHT - FLOOR_HEIGHT, FLOOR_WIDTH, FLOOR_HEIGHT);      
+  drawFloor: function () {
+    context.drawImage(floorImage, 0, GAME_HEIGHT - FLOOR_HEIGHT, FLOOR_WIDTH, FLOOR_HEIGHT);
   },
-  drawBackground: function() {
-    context.drawImage(backgroundImage, 0, 0, GAME_WIDTH, GAME_HEIGHT);          
+  drawBackground: function () {
+    context.drawImage(backgroundImage, 0, 0, GAME_WIDTH, GAME_HEIGHT);
   },
-  generateCanvas: function() {
+  generateCanvas: function () {
     this.drawBackground();
     this.drawFloor();
     drawPlayer();
   },
-  gameLoop: function(time) {
+  gameLoop: function (time) {
     if (time) {
       let delta = time - lastTime;
       lastTime = time;
@@ -247,37 +255,41 @@ GameArea.prototype = {
     coinFall();
 
     if (timeToRotateCoinCounter >= timeToRotateCoin) {
-      rotateCoins();            
+      rotateCoins();
       timeToRotateCoinCounter = 0;
     }
-    
+
     coins.forEach(coin => {
       if (coin.y >= FLOOR_START - COIN_HEIGHT) {
-        console.log("game over");
+        console.log("coin lost");
         coin.forRemoval = true;
       }
     });
-    
+
     coins.forEach(coin => {
       if (checkCoinPlayerCollision(coin)) {
-        console.log("złapano monetę");
+        console.log("coin successfuly caught");
+        console.log(score);
         coin.forRemoval = true;
-      } 
+      }
     });
-    
+
     removeCoins();
 
     if (timeToSpawnCoinCounter >= timeToSpawnCoin) {
       spawnCoins();
       timeToSpawnCoinCounter = 0;
     }
-    
+
     this.drawBackground();
     this.drawFloor();
     drawPlayer();
     drawCoins();
 
-    requestAnimationFrame(this.gameLoop.bind(this));
+    if (!isGamePaused) {
+
+      requestAnimationFrame(this.gameLoop.bind(this));
+    }
   }
 };
 
@@ -291,8 +303,7 @@ GameArea.prototype = {
 
 // score (Asia)
 
-let score = 0;
-let coinGet = 0
+
 
 incrementScore = num => {
   score += num;
@@ -320,3 +331,35 @@ const addToScoreboard = newScoreboard =>
 addToScoreboard(updatedScoreboard);
 
 // score-end
+
+function togglePause() {
+  if (!isGamePaused) {
+    pauseGame();
+    // window.cancelAnimationFrame(gameLoop);
+  } else {
+    resumeGame();
+  }
+}
+
+function pauseGame() {
+  isGamePaused = true;
+  pauseBtn.innerHTML = ">";
+  console.log('game is paused')
+
+}
+function resumeGame() {
+  isGamePaused = false;
+  pauseBtn.innerHTML = "| |";
+  game.gameLoop();
+  console.log('game is playing')
+
+}
+
+function resetGame() {
+  console.log('restarted the game')
+  // reset score
+  // reset timer
+  // remove coins
+  // reset dude position
+  resumeGame();
+}
