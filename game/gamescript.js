@@ -19,23 +19,27 @@ let isGamePaused = false;
 
 const GAME_WIDTH = 600; //288
 const GAME_HEIGHT = 512;
+const BG_WIDTH = 288;
+const BG_HEIGHT = 512;
 const FLOOR_HEIGHT = 112;
 const FLOOR_WIDTH = 600; //336
 const FLOOR_START = GAME_HEIGHT - FLOOR_HEIGHT;
 const PLAYER_HEIGHT = 100;
 const PLAYER_WIDTH = 49;
 const IMAGES_PATH = "/game/img/";
-let GRAVITY = 2;
+const GRAVITY = 2;
 const COIN_WIDTH = 44;
 const COIN_HEIGHT = 40;
 let game;
+let gameId;
+const TIME_PLAY = 100;
 
-var timer = 10 * 1000; // 10 seconds
+var timer = TIME_PLAY * 1000; // 10 seconds
 
 // top game buttons
 
 startGameButton.addEventListener("click", function() {
-  resumeGame();
+  resetGame(); //
   instructionModal.style.display = "none";
 });
 
@@ -112,14 +116,17 @@ function loadAllImages() {
     ),
     loadImage("cashBakeMan.png"),
     loadImage("coin-sprite.png")
-  ]).then(values => {
-    const [background, floor, cashBakeMan, coinSprite] = values;
-    backgroundImage = background;
-    floorImage = floor;
-    cashBakeManImage = cashBakeMan;
-    coinImage = coinSprite;
-    game = new GameArea(1200, 500, "easy");
-  });
+  ])
+    .then(values => {
+      const [background, floor, cashBakeMan, coinSprite] = values;
+      backgroundImage = background;
+      floorImage = floor;
+      cashBakeManImage = cashBakeMan;
+      coinImage = coinSprite;
+    })
+    .finally(function() {
+      game = new GameArea(1200, 500, "easy");
+    });
 }
 
 loadAllImages();
@@ -146,7 +153,7 @@ let lastTime = 0; //time last loop was executed
 
 let timeToRotateCoinCounter = 0; //is it time to rotate the coin
 const timeToRotateCoin = 100; //coin frame changed every 100 ms
-let timeToSpawnCoin = 2 * 1000; //a coin is spawned every 5s
+let timeToSpawnCoin = 1 * 1000; //a coin is spawned every 5s
 let timeToSpawnCoinCounter = 0; //is it time to spawn a new coin
 
 let player = {
@@ -319,9 +326,9 @@ GameArea.prototype = {
     this.drawFloor();
     drawPlayer();
     drawCoins();
+    timerClock(delta, !isGamePaused);
     if (!isGamePaused && timer > 0) {
-      timerClock(delta);
-      requestAnimationFrame(this.gameLoop.bind(this));
+      gameId = requestAnimationFrame(this.gameLoop.bind(this));
     }
     if (timer <= 0) {
       scoresModal.style.display = "block";
@@ -373,7 +380,6 @@ function pauseGame() {
   isGamePaused = true;
   pauseBtn.innerHTML = ">";
   console.log("game is paused");
-  time = 0;
 }
 
 function resumeGame() {
@@ -385,19 +391,26 @@ function resumeGame() {
 
 function resetGame() {
   console.log("restarted the game");
+  cancelAnimationFrame(gameId);
   currentScore = 0;
   scoreTxt.innerText = currentScore;
   console.log(currentScore);
-  timer = 10 * 1000; // 10 seconds again
+  timer = TIME_PLAY * 1000; // 10 seconds again
   // remove coins
-
+  coins = [];
   // reset dude position
+  player.x = (GAME_WIDTH - PLAYER_WIDTH) / 2;
   resumeGame();
 }
 
-function timerClock(delta) {
-  let deltaChecked = delta > 20 ? 0 : delta;
-  timer -= deltaChecked;
+function timerClock(delta, isGamePlaying) {
+  if (isGamePlaying && delta < 20) {
+    timer -= delta;
+  }
+
+  if (delta > 40) {
+    console.log("Duza Delta!!! " + delta + " \n isPlaying: " + isGamePlaying);
+  }
   let timerShort = Math.trunc(timer / 1000 + 1);
   timeDisplay.innerHTML = Math.ceil(timerShort);
 }
