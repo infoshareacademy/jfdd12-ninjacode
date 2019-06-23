@@ -50,17 +50,17 @@ replayBtn.addEventListener("click", function () {
 
 scoresBtn.addEventListener("click", function () {
   instructionModal.style.display = "none";
-  scoresModal.classList.toggle("scores-modal-shown");
-});
-
-instructionBtn.addEventListener("click", function () {
-  pauseGame();
-  instructionModal.style.display = "block";
+  scoresModal.style.display = "block";
 });
 
 scoresBoardBtn.addEventListener("click", function () {
   pauseGame();
   scoresModal.style.display = "block";
+});
+
+instructionBtn.addEventListener("click", function () {
+  pauseGame();
+  instructionModal.style.display = "block";
 });
 
 
