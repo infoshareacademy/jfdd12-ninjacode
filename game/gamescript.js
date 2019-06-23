@@ -78,6 +78,7 @@ scoreCloseButton.addEventListener("click", function () {
   scoresModal.style.display = "none";
   resetGame();
 });
+instructionModal.style.display="block";
 
 // load assets
 
