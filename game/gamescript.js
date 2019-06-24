@@ -14,9 +14,7 @@ const timeDisplay = document.getElementById("timeDisplay");
 const scoreDisplay = document.getElementById("yourScore");
 const difficultyModal = document.getElementById("difficulty-modal");
 const easyButton = document.getElementById("easy-btn");
-const hardButton = document.getElementById("hard-btn")
-
-
+const hardButton = document.getElementById("hard-btn");
 
 let currentScore = 0;
 let coinGet = 0;
@@ -34,6 +32,7 @@ const PLAYER_WIDTH = 49;
 const IMAGES_PATH = "/game/img/";
 const GRAVITY = 2;
 let gravityMult = 1;
+let gravityAccWithTime = 0.0005;
 const COIN_WIDTH = 44;
 const COIN_HEIGHT = 40;
 let game;
@@ -45,64 +44,63 @@ var timer = TIME_PLAY * 1000; // 10 seconds
 
 // top game buttons
 
-startGameButton.addEventListener("click", function () {
+startGameButton.addEventListener("click", function() {
   instructionModal.style.display = "none";
-  difficultyModal.style.display = "block"
+  difficultyModal.style.display = "block";
 });
 
-pauseBtn.addEventListener("click", function () {
+pauseBtn.addEventListener("click", function() {
   togglePause();
 });
 
-window.addEventListener("keydown", function (event) {
+window.addEventListener("keydown", function(event) {
   var key = event.keyCode;
   if (key === 80) {
     togglePause();
   } // shortcut key p for pause
 });
 
-replayBtn.addEventListener("click", function () {
+replayBtn.addEventListener("click", function() {
   pauseGame();
   difficultyModal.style.display = "block";
 });
 
-easyButton.addEventListener('click', function () {
+easyButton.addEventListener("click", function() {
   gravityMult = 1;
   difficultyModal.style.display = "none";
   resetGame();
-})
+});
 
-hardButton.addEventListener('click', function () {
+hardButton.addEventListener("click", function() {
   gravityMult = 2;
   difficultyModal.style.display = "none";
   resetGame();
-})
+});
 
-scoresBtn.addEventListener("click", function () {
+scoresBtn.addEventListener("click", function() {
   instructionModal.style.display = "none";
   scoresModal.style.display = "block";
 });
 
-scoresBoardBtn.addEventListener("click", function () {
+scoresBoardBtn.addEventListener("click", function() {
   pauseGame();
   scoresModal.style.display = "block";
 });
 
-instructionBtn.addEventListener("click", function () {
+instructionBtn.addEventListener("click", function() {
   pauseGame();
   instructionModal.style.display = "block";
 });
 
-closeButton.addEventListener("click", function () {
+closeButton.addEventListener("click", function() {
   instructionModal.style.display = "none";
   resumeGame();
 });
 
-scoreCloseButton.addEventListener("click", function () {
+scoreCloseButton.addEventListener("click", function() {
   scoresModal.style.display = "none";
   resumeGame();
 });
-
 
 instructionModal.style.display = "block";
 difficultyModal.style.display = "none";
@@ -118,10 +116,10 @@ function loadImage(imageUrl, x, y, w, h) {
   return new Promise((resolve, reject) => {
     const image = new Image();
     image.src = `/game/img/${imageUrl}`;
-    image.onload = function () {
+    image.onload = function() {
       resolve(image);
     };
-    image.onabort = function () {
+    image.onabort = function() {
       reject(`Couldn't load image from /game/img/${imageUrl}`);
     };
   });
@@ -141,7 +139,7 @@ function loadAllImages() {
       cashBakeManImage = cashBakeMan;
       coinImage = coinSprite;
     })
-    .finally(function () {
+    .finally(function() {
       game = new GameArea(1200, 500, "easy");
     });
 }
@@ -284,7 +282,7 @@ function GameArea(
 }
 
 GameArea.prototype = {
-  drawFloor: function () {
+  drawFloor: function() {
     const howManyTimesDraw = GAME_WIDTH / FLOOR_WIDTH;
     for (let i = 0; i < howManyTimesDraw; i++) {
       context.drawImage(
@@ -297,7 +295,7 @@ GameArea.prototype = {
     }
   },
 
-  drawBackground: function () {
+  drawBackground: function() {
     let howManyTimesDraw = GAME_WIDTH / BG_WIDTH;
     for (let i = 0; i < howManyTimesDraw; i++) {
       context.drawImage(
@@ -309,12 +307,12 @@ GameArea.prototype = {
       );
     }
   },
-  generateCanvas: function () {
+  generateCanvas: function() {
     this.drawBackground();
     this.drawFloor();
     drawPlayer();
   },
-  gameLoop: function (time) {
+  gameLoop: function(time) {
     let delta = 0;
     if (time) {
       delta = time - lastTime;
@@ -324,6 +322,8 @@ GameArea.prototype = {
     }
 
     coinFall();
+
+    gravityMult += gravityAccWithTime;
 
     if (timeToRotateCoinCounter >= timeToRotateCoin) {
       rotateCoins();
