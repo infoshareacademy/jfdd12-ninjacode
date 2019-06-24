@@ -51,10 +51,16 @@ main {
   font-size: 30px;
   padding-top: 40px;
 }
-.modal-fill > button {
+.modal-fill > div > button {
   width: 30%;
   font-size: 20px;
   cursor: pointer;
+  margin: 10px 20px 10px 20px;
+  padding: 10px;
+}
+#i-buttons {
+  display: flex;
+  margin: 10px 20px 10px 20px;
 }
 
 .modal-fill2 {

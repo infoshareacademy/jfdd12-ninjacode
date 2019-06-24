@@ -93,8 +93,7 @@ instructionBtn.addEventListener("click", function() {
 });
 
 closeButton.addEventListener("click", function() {
-  instructionModal.style.display = "none";
-  resumeGame();
+  window.location.pathname = "index.html";
 });
 
 scoreCloseButton.addEventListener("click", function() {
