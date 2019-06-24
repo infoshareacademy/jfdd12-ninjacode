@@ -34,47 +34,47 @@ var timer = 10 * 1000; // 10 seconds
 
 // top game buttons
 
-startGameButton.addEventListener("click", function() {
+startGameButton.addEventListener("click", function () {
   resumeGame();
   instructionModal.style.display = "none";
 });
 
-pauseBtn.addEventListener("click", function() {
+pauseBtn.addEventListener("click", function () {
   togglePause();
 });
 
-window.addEventListener("keydown", function(event) {
+window.addEventListener("keydown", function (event) {
   var key = event.keyCode;
   if (key === 80) {
     togglePause();
   } // shortcut key p for pause
 });
 
-replayBtn.addEventListener("click", function() {
+replayBtn.addEventListener("click", function () {
   resetGame();
 });
 
-scoresBtn.addEventListener("click", function() {
+scoresBtn.addEventListener("click", function () {
   instructionModal.style.display = "none";
   scoresModal.style.display = "block";
 });
 
-scoresBoardBtn.addEventListener("click", function() {
+scoresBoardBtn.addEventListener("click", function () {
   pauseGame();
   scoresModal.style.display = "block";
 });
 
-instructionBtn.addEventListener("click", function() {
+instructionBtn.addEventListener("click", function () {
   pauseGame();
   instructionModal.style.display = "block";
 });
 
-closeButton.addEventListener("click", function() {
+closeButton.addEventListener("click", function () {
   instructionModal.style.display = "none";
   resumeGame();
 });
 
-scoreCloseButton.addEventListener("click", function() {
+scoreCloseButton.addEventListener("click", function () {
   scoresModal.style.display = "none";
   resetGame();
 });
@@ -91,10 +91,10 @@ function loadImage(imageUrl, x, y, w, h) {
   return new Promise((resolve, reject) => {
     const image = new Image();
     image.src = `/game/img/${imageUrl}`;
-    image.onload = function() {
+    image.onload = function () {
       resolve(image);
     };
-    image.onabort = function() {
+    image.onabort = function () {
       reject(`Couldn't load image from /game/img/${imageUrl}`);
     };
   });
@@ -146,7 +146,7 @@ let lastTime = 0; //time last loop was executed
 
 let timeToRotateCoinCounter = 0; //is it time to rotate the coin
 const timeToRotateCoin = 100; //coin frame changed every 100 ms
-let timeToSpawnCoin = 2 * 1000; //a coin is spawned every 5s
+let timeToSpawnCoin = 0.5 * 1000; //a coin is spawned every 5s
 let timeToSpawnCoinCounter = 0; //is it time to spawn a new coin
 
 let player = {
@@ -260,7 +260,7 @@ function GameArea(
 }
 
 GameArea.prototype = {
-  drawFloor: function() {
+  drawFloor: function () {
     context.drawImage(
       floorImage,
       0,
@@ -269,15 +269,15 @@ GameArea.prototype = {
       FLOOR_HEIGHT
     );
   },
-  drawBackground: function() {
+  drawBackground: function () {
     context.drawImage(backgroundImage, 0, 0, GAME_WIDTH, GAME_HEIGHT);
   },
-  generateCanvas: function() {
+  generateCanvas: function () {
     this.drawBackground();
     this.drawFloor();
     drawPlayer();
   },
-  gameLoop: function(time) {
+  gameLoop: function (time) {
     let delta = 0;
     if (time) {
       delta = time - lastTime;
@@ -384,15 +384,26 @@ function resumeGame() {
 }
 
 function resetGame() {
-  console.log("restarted the game");
+  pauseGame();
   currentScore = 0;
   scoreTxt.innerText = currentScore;
   console.log(currentScore);
   timer = 10 * 1000; // 10 seconds again
-  // remove coins
+  removeAllCoins();
+  console.log('restarting the game')
 
-  // reset dude position
-  resumeGame();
+  resetPlayerPosition();
+  togglePause();
+}
+
+function removeAllCoins() {
+  coins = coins.filter(coin => {
+    return false;
+  })
+}
+
+function resetPlayerPosition() {
+  player.x = GAME_WIDTH / 2 - PLAYER_WIDTH / 2
 }
 
 function timerClock(delta) {
