@@ -2,6 +2,7 @@
 
 body {
   background-color: #436984;
+  font-family: 'Lato', sans-serif;
 }
 
 main {
@@ -31,11 +32,50 @@ main {
 /* Modal Content */
 .modal-fill {
   background-color: #fefefe;
+  top: -80px;
   margin: auto;
-  padding: 20px;
   border: 5px solid #436984;
-  width: 60%;
+  width: 600px;
+  height: 730px;
   text-align: center;
+  position: relative;
+  padding-top: 80px;
+}
+.modal-fill > p {
+  font-size: 28px;
+}
+.modal-fill > img {
+  width: 80%;
+}
+.modal-fill > h2 {
+  font-size: 30px;
+  padding-top: 40px;
+}
+.modal-fill > button {
+  width: 30%;
+  font-size: 20px;
+  cursor: pointer;
+}
+
+.modal-fill2 {
+  position:relative;
+  background-color: #fefefe;
+  top:-80px;
+  margin: auto;
+  border: 5px solid #436984;
+  width: 600px;
+  height:730px;
+  text-align: center;
+}
+.modal-fill2 p{
+  font-size:30px;
+  margin-top:230px;
+}
+
+#easy-btn, #hard-btn{
+  font-size:30px;
+  margin:15px;
+  padding:15px;
 }
 
 .modal-fill2 {
@@ -75,6 +115,17 @@ main {
 }
 .control {
   padding-bottom: 20px;
+  font-size: 28px;
+}
+.control > div {
+  display: flex;
+  justify-content: space-around;
+}
+.control > div > span >img {
+  padding-right: 20px;
+}
+.control > div > span > p{
+  margin-top: 0;
 }
 
 /* instruction-end */
