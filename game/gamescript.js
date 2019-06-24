@@ -12,6 +12,9 @@ const closeButton = document.getElementById("exit-btn");
 const scoreCloseButton = document.getElementById("score-exit-btn");
 const timeDisplay = document.getElementById("timeDisplay");
 const scoreDisplay = document.getElementById("yourScore");
+const difficultyModal = document.getElementById("difficulty-modal");
+const easyButton = document.getElementById("easy-btn");
+const hardButton = document.getElementById("hard-btn");
 
 let currentScore = 0;
 let coinGet = 0;
@@ -28,20 +31,22 @@ const PLAYER_HEIGHT = 100;
 const PLAYER_WIDTH = 49;
 const IMAGES_PATH = "/game/img/";
 const GRAVITY = 2;
+let gravityMult = 1;
+let gravityAccWithTime = 0.0005;
 const COIN_WIDTH = 44;
 const COIN_HEIGHT = 40;
 let game;
 let gameId;
-const TIME_PLAY = 100;
-const TIME_COIN_SPAWN = 1;
+const TIME_PLAY = 10;
+const TIME_COIN_SPAWN = 0.5;
 
 var timer = TIME_PLAY * 1000; // 10 seconds
 
 // top game buttons
 
 startGameButton.addEventListener("click", function() {
-  resetGame(); //
   instructionModal.style.display = "none";
+  difficultyModal.style.display = "block";
 });
 
 pauseBtn.addEventListener("click", function() {
@@ -56,6 +61,19 @@ window.addEventListener("keydown", function(event) {
 });
 
 replayBtn.addEventListener("click", function() {
+  pauseGame();
+  difficultyModal.style.display = "block";
+});
+
+easyButton.addEventListener("click", function() {
+  gravityMult = 1;
+  difficultyModal.style.display = "none";
+  resetGame();
+});
+
+hardButton.addEventListener("click", function() {
+  gravityMult = 2;
+  difficultyModal.style.display = "none";
   resetGame();
 });
 
@@ -81,9 +99,11 @@ closeButton.addEventListener("click", function() {
 
 scoreCloseButton.addEventListener("click", function() {
   scoresModal.style.display = "none";
-  resetGame();
+  resumeGame();
 });
+
 instructionModal.style.display = "block";
+difficultyModal.style.display = "none";
 
 // load assets
 
@@ -186,7 +206,7 @@ function drawCoins() {
 
 function coinFall() {
   coins.forEach(coin => {
-    coin.y += GRAVITY;
+    coin.y += GRAVITY * gravityMult;
   });
 }
 
@@ -303,6 +323,8 @@ GameArea.prototype = {
 
     coinFall();
 
+    gravityMult += gravityAccWithTime;
+
     if (timeToRotateCoinCounter >= timeToRotateCoin) {
       rotateCoins();
       timeToRotateCoinCounter = 0;
@@ -350,10 +372,10 @@ GameArea.prototype = {
 
 // score (Asia)
 
-incrementScore = num => {
-  currentScore += num;
-  scoreTxt.innerHTML = currentScore;
-};
+// incrementScore = num => {
+//   currentScore += num;
+//   scoreTxt.innerHTML = currentScore;
+// };
 
 // pobranie  scoreboard z localstorage lub dodanie pustej tablicy
 let scoreboard = JSON.parse(localStorage.getItem("scoreboard")) || [];
