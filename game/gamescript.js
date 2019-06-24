@@ -89,6 +89,7 @@ scoresBoardBtn.addEventListener("click", function() {
 
 instructionBtn.addEventListener("click", function() {
   pauseGame();
+  continueGame();
   instructionModal.style.display = "block";
 });
 
@@ -100,6 +101,18 @@ scoreCloseButton.addEventListener("click", function() {
   scoresModal.style.display = "none";
   resumeGame();
 });
+
+function continueGame() {
+  isGamePaused = true;
+  startGameButton.innerHTML = "WZNÓW GRĘ";
+  startGameButton.addEventListener("click", function() {
+    instructionModal.style.display = "none";
+    difficultyModal.style.display = "none"
+  });
+  resumeGame();
+  console.log("game to be continued");
+}
+
 
 instructionModal.style.display = "block";
 difficultyModal.style.display = "none";
