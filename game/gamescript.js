@@ -31,14 +31,16 @@ const PLAYER_HEIGHT = 100;
 const PLAYER_WIDTH = 49;
 const IMAGES_PATH = "/game/img/";
 const GRAVITY = 2;
-let gravityMult = 1;
+let gravityMult = 0.8;
+let goldCoinGravityMult = 2;
+let goldCoinChance = 0.2;
 let gravityAccWithTime = 0.0005;
 const COIN_WIDTH = 44;
 const COIN_HEIGHT = 40;
 let game;
 let gameId;
 const TIME_PLAY = 10;
-const TIME_COIN_SPAWN = 0.5;
+const TIME_COIN_SPAWN = 0.4;
 
 var timer = TIME_PLAY * 1000; // 10 seconds
 
@@ -72,7 +74,7 @@ easyButton.addEventListener("click", function() {
 });
 
 hardButton.addEventListener("click", function() {
-  gravityMult = 2;
+  gravityMult = 1.6;
   difficultyModal.style.display = "none";
   resetGame();
 });
@@ -233,7 +235,11 @@ function drawCoins() {
 
 function coinFall() {
   coins.forEach(coin => {
-    coin.y += GRAVITY * gravityMult;
+    if (!coin.isGolden) {
+      coin.y += GRAVITY * gravityMult;
+    } else {
+      coin.y += GRAVITY * gravityMult * goldCoinGravityMult;
+    }
   });
 }
 
@@ -260,7 +266,11 @@ function checkCoinPlayerCollision(coin) {
     coin.y < playery1 &&
     coiny1 > player.y
   ) {
-    currentScore++;
+    if (coin.isGolden) {
+      currentScore += 5;
+    } else {
+      currentScore++;
+    }
     scoreTxt.innerText = currentScore;
     return true;
   } else {
@@ -270,8 +280,7 @@ function checkCoinPlayerCollision(coin) {
 
 function spawnCoins() {
   let coinX = Math.random() * (GAME_WIDTH - COIN_WIDTH);
-  let isGolden = Math.random() > 0.5;
-  console.log(isGolden);
+  let isGolden = Math.random() < goldCoinChance;
   coinX = coinX < 0 ? 0 : coinX;
   coins.push({
     x: coinX,
