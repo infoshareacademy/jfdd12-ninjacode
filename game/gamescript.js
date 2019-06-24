@@ -445,6 +445,7 @@ function timerClock(delta, isGamePlaying) {
   let timerShort = Math.trunc(timer / 1000 + 1);
   timeDisplay.innerHTML = Math.ceil(timerShort);
 }
+
 function drawFps(delta) {
   delta > 0 ? Math.floor(delta) : 1;
   context.fillStyle = "#fff";
