@@ -38,16 +38,16 @@ const COIN_WIDTH = 44;
 const COIN_HEIGHT = 40;
 let game;
 let gameId;
-const TIME_PLAY = 100;
-const TIME_COIN_SPAWN = 1;
+const TIME_PLAY = 10;
+const TIME_COIN_SPAWN = 0.5;
 
 var timer = TIME_PLAY * 1000; // 10 seconds
 
 // top game buttons
 
 startGameButton.addEventListener("click", function () {
-  resetGame(); //
   instructionModal.style.display = "none";
+  difficultyModal.style.display = "block"
 });
 
 pauseBtn.addEventListener("click", function () {
@@ -68,12 +68,14 @@ replayBtn.addEventListener("click", function () {
 
 easyButton.addEventListener('click', function () {
   gravityMult = 1;
-  resumeGame();
+  difficultyModal.style.display = "none";
+  resetGame();
 })
 
 hardButton.addEventListener('click', function () {
   gravityMult = 2;
-  resumeGame();
+  difficultyModal.style.display = "none";
+  resetGame();
 })
 
 scoresBtn.addEventListener("click", function () {
@@ -97,8 +99,8 @@ closeButton.addEventListener("click", function () {
 });
 
 scoreCloseButton.addEventListener("click", function () {
-  // scoresModal.style.display = "none";
-  resetGame();
+  scoresModal.style.display = "none";
+  resumeGame();
 });
 
 
