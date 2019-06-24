@@ -12,6 +12,11 @@ const closeButton = document.getElementById("exit-btn");
 const scoreCloseButton = document.getElementById("score-exit-btn");
 const timeDisplay = document.getElementById("timeDisplay");
 const scoreDisplay = document.getElementById("yourScore");
+const difficultyModal = document.getElementById("difficulty-modal");
+const easyButton = document.getElementById("easy-btn");
+const hardButton = document.getElementById("hard-btn")
+
+
 
 let currentScore = 0;
 let coinGet = 0;
@@ -29,7 +34,7 @@ let GRAVITY = 2;
 const COIN_WIDTH = 44;
 const COIN_HEIGHT = 40;
 let game;
-
+let gravityMult = 1;
 var timer = 10 * 1000; // 10 seconds
 
 // top game buttons
@@ -51,8 +56,19 @@ window.addEventListener("keydown", function (event) {
 });
 
 replayBtn.addEventListener("click", function () {
-  resetGame();
+  pauseGame();
+  difficultyModal.style.display = "block";
 });
+
+easyButton.addEventListener('click', function () {
+  gravityMult = 1;
+  resumeGame();
+})
+
+hardButton.addEventListener('click', function () {
+  gravityMult = 2;
+  resumeGame();
+})
 
 scoresBtn.addEventListener("click", function () {
   instructionModal.style.display = "none";
@@ -75,10 +91,13 @@ closeButton.addEventListener("click", function () {
 });
 
 scoreCloseButton.addEventListener("click", function () {
-  scoresModal.style.display = "none";
+  // scoresModal.style.display = "none";
   resetGame();
 });
+
+
 instructionModal.style.display = "block";
+difficultyModal.style.display = "none";
 
 // load assets
 
@@ -184,7 +203,7 @@ function drawCoins() {
 
 function coinFall() {
   coins.forEach(coin => {
-    coin.y += GRAVITY;
+    coin.y += GRAVITY * gravityMult;
   });
 }
 
@@ -334,10 +353,10 @@ GameArea.prototype = {
 
 // score (Asia)
 
-incrementScore = num => {
-  currentScore += num;
-  scoreTxt.innerHTML = currentScore;
-};
+// incrementScore = num => {
+//   currentScore += num;
+//   scoreTxt.innerHTML = currentScore;
+// };
 
 // pobranie  scoreboard z localstorage lub dodanie pustej tablicy
 let scoreboard = JSON.parse(localStorage.getItem("scoreboard")) || [];
