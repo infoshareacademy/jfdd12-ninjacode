@@ -111,7 +111,7 @@ let backgroundImage;
 let floorImage;
 let cashBakeManImage;
 let coinImage;
-let coinSilverImage;
+let coinGoldImage;
 let backgroundNightImage;
 
 function loadImage(imageUrl, x, y, w, h) {
@@ -141,15 +141,15 @@ function loadAllImages() {
         background,
         floor,
         cashBakeMan,
+        coinGoldSprite,
         coinSprite,
-        coinSilverSprite,
         backgroundNight
       ] = values;
       backgroundImage = background;
       floorImage = floor;
       cashBakeManImage = cashBakeMan;
+      coinGoldImage = coinGoldSprite;
       coinImage = coinSprite;
-      coinSilverImage = coinSilverSprite;
       backgroundNightImage = backgroundNight;
     })
     .finally(function() {
@@ -203,17 +203,31 @@ function drawPlayer() {
 
 function drawCoins() {
   coins.forEach(coin => {
-    context.drawImage(
-      coinImage,
-      coin.frame * COIN_WIDTH,
-      0,
-      COIN_WIDTH,
-      COIN_HEIGHT,
-      coin.x,
-      coin.y,
-      COIN_WIDTH,
-      COIN_HEIGHT
-    );
+    if (coin.isGolden == false) {
+      context.drawImage(
+        coinImage,
+        coin.frame * COIN_WIDTH,
+        0,
+        COIN_WIDTH,
+        COIN_HEIGHT,
+        coin.x,
+        coin.y,
+        COIN_WIDTH,
+        COIN_HEIGHT
+      );
+    } else {
+      context.drawImage(
+        coinGoldImage,
+        coin.frame * COIN_WIDTH,
+        0,
+        COIN_WIDTH,
+        COIN_HEIGHT,
+        coin.x,
+        coin.y,
+        COIN_WIDTH,
+        COIN_HEIGHT
+      );
+    }
   });
 }
 
@@ -256,13 +270,17 @@ function checkCoinPlayerCollision(coin) {
 
 function spawnCoins() {
   let coinX = Math.random() * (GAME_WIDTH - COIN_WIDTH);
+  let isGolden = Math.random() > 0.5;
+  console.log(isGolden);
   coinX = coinX < 0 ? 0 : coinX;
   coins.push({
     x: coinX,
     y: 0,
     forRemoval: false,
+    isGolden: isGolden,
     frame: Math.floor(Math.random() * 10)
   });
+  console.log("silver coin spawned");
 }
 
 function removeCoins() {
