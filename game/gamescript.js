@@ -372,13 +372,46 @@ GameArea.prototype = {
 
 // score (Asia)
 
+function createScoreTable(scoreboard) {
+  // nick, wynik
+  // scoreboard
+  const scores = scoreboard
+    .slice(0, 10)
+    .map((row, index) => {
+      return `<tr>
+      <td>${row.name}</td>
+      <td>${row.score}</td>
+    </tr>
+  `;
+    })
+    .join("\n");
+
+  const cardBody = `
+  <table>
+  <caption>
+    Tabela cardBody wyników - top 10
+  </caption>
+  <tr>
+    <th>Nick</th>
+    <th>wynik</th>
+  </tr>
+  ${scores}
+</table>
+`;
+  const div = document.createElement("div");
+  div.innerHTML = cardBody;
+  return div;
+}
 // incrementScore = num => {
 //   currentScore += num;
 //   scoreTxt.innerHTML = currentScore;
+
 // };
 
 // pobranie  scoreboard z localstorage lub dodanie pustej tablicy
 let scoreboard = JSON.parse(localStorage.getItem("scoreboard")) || [];
+const scoresModalFill = document.querySelector(".scores-modal-fill");
+scoresModalFill.appendChild(createScoreTable(scoreboard));
 
 // przygotowanie wyniku do dodania
 const getScore = (playerName, score) => {
@@ -398,7 +431,6 @@ const addToScoreboard = newScoreboard =>
 addToScoreboard(updatedScoreboard);
 
 // score-end
-
 function togglePause() {
   if (!isGamePaused) {
     pauseGame();

@@ -1,37 +1,38 @@
 <!DOCTYPE html>
 <html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <link
+      href="https://fonts.googleapis.com/css?family=Lato&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="style.css" />
+    <title>ŁOWCA MONET</title>
+  </head>
 
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <meta http-equiv="X-UA-Compatible" content="ie=edge" />
-  <link href="https://fonts.googleapis.com/css?family=Lato&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="style.css" />
-  <title>ŁOWCA MONET</title>
-</head>
-
-<body>
-  <main>
-    <h1>ŁOWCA MONET</h1>
-    <div id="nav-bar">
-      <button id="instruction-btn" type="button">INSTRUKCJA</button>
-      <button id="scores-board-btn" type="button">RANKING NAJLEPSZYCH</button>
-      <button id="pause-btn" type="button">| |</button>
-      <button id="replay-btn" type="button">GRA OD NOWA</button>
-    </div>
-
-    <div id="score-time">
-      <div id="score">
-        <p>WYNIK</p>
-        <p id="score-number">0</p>
-      </div>
-      <div id="time">
-        <p>CZAS</p>
-        <p id="timeDisplay">--</p>
+  <body>
+    <main>
+      <h1>ŁOWCA MONET</h1>
+      <div id="nav-bar">
+        <button id="instruction-btn" type="button">INSTRUKCJA</button>
+        <button id="scores-board-btn" type="button">RANKING NAJLEPSZYCH</button>
+        <button id="pause-btn" type="button">| |</button>
+        <button id="replay-btn" type="button">GRA OD NOWA</button>
       </div>
 
+      <div id="score-time">
+        <div id="score">
+          <p>WYNIK</p>
+          <p id="score-number">0</p>
+        </div>
+        <div id="time">
+          <p>CZAS</p>
+          <p id="timeDisplay">--</p>
+        </div>
 
-      <!-- 
+        <!-- 
 
       <div id="hud">
         <div id="hud-item">
@@ -44,63 +45,79 @@
         </div>
       </div> -->
 
-
-      <!-- 
+        <!-- 
 
       <div>
         <span id="playerName">Asia</span>
       </div> -->
-
-
-
-    </div>
-
-    <div id="level"></div>
-    <div id="game"></div>
-  </main>
-
-  <div id="instruction-modal" class="modal">
-    <div class="modal-fill">
-      <img src="img/coin-sprite.png">
-      <h2>ŁOWCA MONET</h2>
-      <p>Uzbieraj jak najwięcej monet przez 30s!</p>
-      <div class="control">
-        <p>Kontrola gry:</p>
-        <div>
-        <span><img src="img/ArrowLeft.png" /><p>Ruch w lewo</p></span>
-        <span><img src="img/ArrowRight.png" /><p>Ruch w prawo<p></span>
       </div>
+
+      <div id="level"></div>
+      <div id="game"></div>
+    </main>
+
+    <div id="instruction-modal" class="modal">
+      <div class="modal-fill">
+        <img src="img/coin-sprite.png" />
+        <h2>ŁOWCA MONET</h2>
+        <p>Uzbieraj jak najwięcej monet przez 30s!</p>
+        <div class="control">
+          <p>Kontrola gry:</p>
+          <div>
+            <span
+              ><img src="img/ArrowLeft.png" />
+              <p>Ruch w lewo</p></span
+            >
+            <span
+              ><img src="img/ArrowRight.png"/>
+              <p>Ruch w prawo</p>
+              <p></p
+            ></span>
+          </div>
+        </div>
+        <button id="scores-btn" class="wyniki" type="button">WYNIKI</button>
+        <button id="start-game" class="start-gry" type="button">
+          START
+        </button>
+        <button id="exit-btn" class="exit" type="button">WYJŚCIE</button>
       </div>
-      <button id="scores-btn" class="wyniki" type="button">WYNIKI</button>
-      <button id="start-game" class="start-gry" type="button">
-        START
-      </button>
-      <button id="exit-btn" class="exit" type="button">WYJŚCIE</button>
     </div>
-  </div>
 
-  <div id="scores-modal" class="scores-modal">
-    <div class="modal-fill">
-      <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Aut iure quis
-        quisquam. Voluptatum numquam iure enim quam laboriosam natus, aliquam
-        fugiat ratione asperiores optio corrupti praesentium non eveniet. Quod
-        consectetur libero ex? Voluptatibus sequi aut, non fugit quaerat,
-        mollitia ad veniam esse, accusamus doloremque aliquid id quidem
-        necessitatibus similique harum.</p>
-      <h2>Twój wynik to: <span id="yourScore">0</span></h2>
-      <button id="score-exit-btn" class="score-exit-btn" type="button">WYJŚCIE</button>
+    <div id="scores-modal" class="scores-modal">
+      <div class="modal-fill scores-modal-fill">
+        <table>
+          <caption>
+            Tabela wyników - top 10
+          </caption>
+          <tr>
+            <th>Nick</th>
+            <th>wynik</th>
+          </tr>
+          <tr id="scoreTableValue">
+            <td>Asia</td>
+            <td>10</td>
+          </tr>
+        </table>
+
+        <h2>Twój wynik to: <span id="yourScore">0</span></h2>
+        <button id="score-exit-btn" class="score-exit-btn" type="button">
+          WYJŚCIE
+        </button>
+      </div>
     </div>
-  </div>
 
-  <div id="difficulty-modal" class="difficulty-modal">
-    <div class="modal-fill2">
-      <p>Wybierz poziom trudności:</p>
-      <button id="easy-btn" class="easy-btn button" type="button">ŁATWY</button>
-      <button id="hard-btn" class="hard-btn button" type="button">TRUDNY</button>
+    <div id="difficulty-modal" class="difficulty-modal">
+      <div class="modal-fill2">
+        <p>Wybierz poziom trudności:</p>
+        <button id="easy-btn" class="easy-btn button" type="button">
+          ŁATWY
+        </button>
+        <button id="hard-btn" class="hard-btn button" type="button">
+          TRUDNY
+        </button>
+      </div>
     </div>
-  </div>
 
-  <script src="gamescript.js"></script>
-</body>
-
+    <script src="gamescript.js"></script>
+  </body>
 </html>
