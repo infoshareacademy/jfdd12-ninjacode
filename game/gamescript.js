@@ -17,12 +17,12 @@ let currentScore = 0;
 let coinGet = 0;
 let isGamePaused = false;
 
-const GAME_WIDTH = 600; //288
+const GAME_WIDTH = document.querySelector("#game").offsetWidth; //600
 const GAME_HEIGHT = 512;
 const BG_WIDTH = 288;
 const BG_HEIGHT = 512;
 const FLOOR_HEIGHT = 112;
-const FLOOR_WIDTH = 600; //336
+const FLOOR_WIDTH = 336;
 const FLOOR_START = GAME_HEIGHT - FLOOR_HEIGHT;
 const PLAYER_HEIGHT = 100;
 const PLAYER_WIDTH = 49;
@@ -33,6 +33,7 @@ const COIN_HEIGHT = 40;
 let game;
 let gameId;
 const TIME_PLAY = 100;
+const TIME_COIN_SPAWN = 1;
 
 var timer = TIME_PLAY * 1000; // 10 seconds
 
@@ -106,14 +107,8 @@ function loadImage(imageUrl, x, y, w, h) {
 
 function loadAllImages() {
   Promise.all([
-    loadImage("background-day.png", 0, 0, GAME_WIDTH, GAME_HEIGHT),
-    loadImage(
-      "floor.png",
-      0,
-      GAME_HEIGHT - FLOOR_HEIGHT,
-      FLOOR_WIDTH,
-      FLOOR_HEIGHT
-    ),
+    loadImage("background-day.png"),
+    loadImage("floor.png"),
     loadImage("cashBakeMan.png"),
     loadImage("coin-sprite.png")
   ])
@@ -153,7 +148,7 @@ let lastTime = 0; //time last loop was executed
 
 let timeToRotateCoinCounter = 0; //is it time to rotate the coin
 const timeToRotateCoin = 100; //coin frame changed every 100 ms
-let timeToSpawnCoin = 1 * 1000; //a coin is spawned every 5s
+let timeToSpawnCoin = TIME_COIN_SPAWN * 1000; //a coin is spawned every 5s
 let timeToSpawnCoinCounter = 0; //is it time to spawn a new coin
 
 let player = {
@@ -268,16 +263,29 @@ function GameArea(
 
 GameArea.prototype = {
   drawFloor: function() {
-    context.drawImage(
-      floorImage,
-      0,
-      GAME_HEIGHT - FLOOR_HEIGHT,
-      FLOOR_WIDTH,
-      FLOOR_HEIGHT
-    );
+    const howManyTimesDraw = GAME_WIDTH / FLOOR_WIDTH;
+    for (let i = 0; i < howManyTimesDraw; i++) {
+      context.drawImage(
+        floorImage,
+        FLOOR_WIDTH * i,
+        FLOOR_START,
+        FLOOR_WIDTH,
+        FLOOR_HEIGHT
+      );
+    }
   },
+
   drawBackground: function() {
-    context.drawImage(backgroundImage, 0, 0, GAME_WIDTH, GAME_HEIGHT);
+    let howManyTimesDraw = GAME_WIDTH / BG_WIDTH;
+    for (let i = 0; i < howManyTimesDraw; i++) {
+      context.drawImage(
+        backgroundImage,
+        BG_WIDTH * i,
+        0,
+        BG_WIDTH,
+        GAME_HEIGHT
+      );
+    }
   },
   generateCanvas: function() {
     this.drawBackground();
@@ -327,6 +335,7 @@ GameArea.prototype = {
     drawPlayer();
     drawCoins();
     timerClock(delta, !isGamePaused);
+    drawFps(delta);
     if (!isGamePaused && timer > 0) {
       gameId = requestAnimationFrame(this.gameLoop.bind(this));
     }
@@ -404,7 +413,7 @@ function resetGame() {
 }
 
 function timerClock(delta, isGamePlaying) {
-  if (isGamePlaying && delta < 20) {
+  if (isGamePlaying && delta < 40) {
     timer -= delta;
   }
 
@@ -413,4 +422,17 @@ function timerClock(delta, isGamePlaying) {
   }
   let timerShort = Math.trunc(timer / 1000 + 1);
   timeDisplay.innerHTML = Math.ceil(timerShort);
+}
+function drawFps(delta) {
+  delta > 0 ? Math.floor(delta) : 1;
+  context.fillStyle = "#fff";
+  context.font = "24px Arial";
+  // context.textAlign = "center";
+  context.textBaseline = "middle";
+  context.fillText(
+    `${Math.floor(1000 / Math.round(delta))}fps`,
+    10,
+    BG_HEIGHT - 10,
+    GAME_WIDTH
+  );
 }
