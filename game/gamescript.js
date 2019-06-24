@@ -111,6 +111,8 @@ let backgroundImage;
 let floorImage;
 let cashBakeManImage;
 let coinImage;
+let coinSilverImage;
+let backgroundNightImage;
 
 function loadImage(imageUrl, x, y, w, h) {
   return new Promise((resolve, reject) => {
@@ -130,14 +132,25 @@ function loadAllImages() {
     loadImage("background-day.png"),
     loadImage("floor.png"),
     loadImage("cashBakeMan.png"),
-    loadImage("coin-sprite.png")
+    loadImage("coin-sprite.png"),
+    loadImage("coin-silver-sprite.png"),
+    loadImage("background-night.png")
   ])
     .then(values => {
-      const [background, floor, cashBakeMan, coinSprite] = values;
+      const [
+        background,
+        floor,
+        cashBakeMan,
+        coinSprite,
+        coinSilverSprite,
+        backgroundNight
+      ] = values;
       backgroundImage = background;
       floorImage = floor;
       cashBakeManImage = cashBakeMan;
       coinImage = coinSprite;
+      coinSilverImage = coinSilverSprite;
+      backgroundNightImage = backgroundNight;
     })
     .finally(function() {
       game = new GameArea(1200, 500, "easy");
@@ -298,13 +311,23 @@ GameArea.prototype = {
   drawBackground: function() {
     let howManyTimesDraw = GAME_WIDTH / BG_WIDTH;
     for (let i = 0; i < howManyTimesDraw; i++) {
-      context.drawImage(
-        backgroundImage,
-        BG_WIDTH * i,
-        0,
-        BG_WIDTH,
-        GAME_HEIGHT
-      );
+      if (gravityMult < 1.5) {
+        context.drawImage(
+          backgroundImage,
+          BG_WIDTH * i,
+          0,
+          BG_WIDTH,
+          GAME_HEIGHT
+        );
+      } else {
+        context.drawImage(
+          backgroundNightImage,
+          BG_WIDTH * i,
+          0,
+          BG_WIDTH,
+          GAME_HEIGHT
+        );
+      }
     }
   },
   generateCanvas: function() {
