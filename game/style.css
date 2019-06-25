@@ -78,6 +78,27 @@ main {
   padding:15px;
 }
 
+.modal-fill2 {
+  position:relative;
+  background-color: #fefefe;
+  top:-80px;
+  margin: auto;
+  border: 5px solid #436984;
+  width: 600px;
+  height:730px;
+  text-align: center;
+}
+.modal-fill2 p{
+  font-size:30px;
+  margin-top:230px;
+}
+
+#easy-btn, #hard-btn{
+  font-size:30px;
+  margin:15px;
+  padding:15px;
+}
+
 /* The Close Button */
 .close {
   color: #aaaaaa;
