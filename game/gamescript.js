@@ -371,35 +371,28 @@ GameArea.prototype = {
 // game-end(Damian)
 
 // score (Asia)
-
 function createScoreTable(scoreboard) {
-  // nick, wynik
-  // scoreboard
+  // scoreboard: nick, wynik
   const scores = scoreboard
-    .slice(0, 10)
+    .slice(0, 10) // take first 10 objects from scoreboard
     .map((row, index) => {
-      return `<tr>
-      <td>${row.name}</td>
-      <td>${row.score}</td>
-    </tr>
+      return `
+      <div class="Rtable-cell"><h3>${index + 1}</h3></div>
+      <div class="Rtable-cell"><h3>${row.name}</h3></div>
+      <div class="Rtable-cell">${row.score}</div>  
   `;
     })
     .join("\n");
 
   const cardBody = `
-  <table>
-  <caption>
-    Tabela cardBody wyników - top 10
-  </caption>
-  <tr>
-    <th>Nick</th>
-    <th>wynik</th>
-  </tr>
+  <h2>Ściana chwały</h2>
+  <div class="Rtable Rtable--3cols">
   ${scores}
-</table>
+  </div>
 `;
   const div = document.createElement("div");
   div.innerHTML = cardBody;
+  div.className = "scoretable";
   return div;
 }
 // incrementScore = num => {
@@ -410,7 +403,8 @@ function createScoreTable(scoreboard) {
 
 // pobranie  scoreboard z localstorage lub dodanie pustej tablicy
 let scoreboard = JSON.parse(localStorage.getItem("scoreboard")) || [];
-const scoresModalFill = document.querySelector(".scores-modal-fill");
+
+const scoresModalFill = document.querySelector("#score-table-modal");
 scoresModalFill.appendChild(createScoreTable(scoreboard));
 
 // przygotowanie wyniku do dodania
@@ -489,4 +483,8 @@ function drawFps(delta) {
     BG_HEIGHT - 10,
     GAME_WIDTH
   );
+}
+
+function enterNick() {
+  // TODO: pobierz nicka na koniec gry
 }
