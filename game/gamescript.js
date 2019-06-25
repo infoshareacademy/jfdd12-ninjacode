@@ -63,7 +63,6 @@ function keyPressed(evt) {
     console.log("right");
     keyHeldRight = true;
   }
-  // evt.preventDefault();
 }
 
 function keyReleased(evt) {
@@ -148,8 +147,6 @@ function continueGame() {
 instructionModal.style.display = "block";
 difficultyModal.style.display = "none";
 
-// load assets
-
 let backgroundImage;
 let floorImage;
 let cashBakeManImage;
@@ -201,6 +198,26 @@ function loadAllImages() {
 }
 
 loadAllImages();
+
+function sound(src) {
+  this.sound = document.createElement("audio");
+  this.sound.src = src;
+  this.sound.setAttribute("preload", "auto");
+  this.sound.setAttribute("controls", "none");
+  this.sound.style.display = "none";
+  document.body.appendChild(this.sound);
+  this.play = function() {
+    this.sound.play();
+  };
+  this.stop = function() {
+    this.sound.pause();
+  };
+}
+
+let catchCoinSound = new sound("sounds/coin1.mp3");
+let catchCoinSound2 = new sound("sounds/coin2.mp3");
+let dropCoinSound = new sound("sounds/drop.mp3");
+let winSound = new sound("sounds/win.mp3");
 
 // Canvas on global
 const canvas = document.createElement("canvas");
@@ -299,8 +316,10 @@ function checkCoinPlayerCollision(coin) {
   ) {
     if (coin.isGolden) {
       currentScore += 5;
+      catchCoinSound2.play();
     } else {
       currentScore++;
+      catchCoinSound.play();
     }
     scoreTxt.innerText = currentScore;
     return true;
@@ -320,7 +339,6 @@ function spawnCoins() {
     isGolden: isGolden,
     frame: Math.floor(Math.random() * 10)
   });
-  // console.log("silver coin spawned");
 }
 
 function removeCoins() {
@@ -328,21 +346,6 @@ function removeCoins() {
     return !coin.forRemoval;
   });
 }
-
-// function moveRight() {
-//   if (player.x < GAME_WIDTH - PLAYER_WIDTH) {
-//     player.x = player.x + 1;
-//   } else {
-//     player.x = GAME_WIDTH - PLAYER_WIDTH;
-//   }
-// }
-// function moveLeft() {
-//   if (player.x > 0) {
-//     player.x -= 1;
-//   } else {
-//     player.x = 0;
-//   }
-// }
 
 function movePlayer() {
   if (player.x < 0) {
@@ -475,6 +478,7 @@ GameArea.prototype = {
       gameId = requestAnimationFrame(this.gameLoop.bind(this));
     }
     if (timer <= 0) {
+      winSound.play();
       scoresModal.style.display = "block";
       scoreDisplay.innerText = currentScore; // score display for now
     }
