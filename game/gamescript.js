@@ -39,7 +39,7 @@ const COIN_WIDTH = 44;
 const COIN_HEIGHT = 40;
 let game;
 let gameId;
-const TIME_PLAY = 10;
+const TIME_PLAY = 30;
 const TIME_COIN_SPAWN = 0.4;
 
 var timer = TIME_PLAY * 1000; // 10 seconds
@@ -49,7 +49,7 @@ const KEY_LEFT_ARROW = 37;
 let keyHeldLeft = false;
 let keyHeldRight = false;
 let playerXSpeed = 0;
-let playerMAxSpeed = 20;
+let playerMaxSpeed = 10;
 
 document.addEventListener("keydown", keyPressed);
 document.addEventListener("keyup", keyReleased);
@@ -345,14 +345,35 @@ function removeCoins() {
 // }
 
 function movePlayer() {
-  // console.log(keyHeldLeft);
+  if (player.x < 0) {
+    player.x = 0;
+    playerXSpeed *= -0.2;
+  }
+  if (player.x > GAME_WIDTH - PLAYER_WIDTH) {
+    player.x = GAME_WIDTH - PLAYER_WIDTH;
+    playerXSpeed *= -0.2;
+  }
+
+  if (playerXSpeed > 0) {
+    playerXSpeed -= 0.7;
+  } else if (playerXSpeed < 0) {
+    playerXSpeed += 0.7;
+  }
+  if (playerXSpeed < 0.3 && playerXSpeed > -0.3) {
+    playerXSpeed = 0;
+  }
   if (keyHeldLeft) {
-    player.x -= 10;
+    playerXSpeed -= 1.2;
   }
   if (keyHeldRight) {
-    player.x += 10;
+    playerXSpeed += 1.2;
   }
-  // player.x += playerXSpeed;
+
+  if (playerXSpeed < 0) {
+    player.x += Math.max(playerXSpeed, -playerMaxSpeed);
+  } else if (playerXSpeed >= 0) {
+    player.x += Math.min(playerXSpeed, playerMaxSpeed);
+  }
 }
 
 function GameArea(
