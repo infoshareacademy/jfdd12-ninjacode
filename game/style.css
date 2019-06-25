@@ -51,10 +51,37 @@ main {
   font-size: 30px;
   padding-top: 40px;
 }
-.modal-fill > button {
+.modal-fill > div > button {
   width: 30%;
   font-size: 20px;
   cursor: pointer;
+  margin: 10px 20px 10px 20px;
+  padding: 10px;
+}
+#i-buttons {
+  display: flex;
+  margin: 10px 20px 10px 20px;
+}
+
+.modal-fill2 {
+  position:relative;
+  background-color: #fefefe;
+  top:-80px;
+  margin: auto;
+  border: 5px solid #436984;
+  width: 600px;
+  height:730px;
+  text-align: center;
+}
+.modal-fill2 p{
+  font-size:30px;
+  margin-top:230px;
+}
+
+#easy-btn, #hard-btn{
+  font-size:30px;
+  margin:15px;
+  padding:15px;
 }
 
 .modal-fill2 {

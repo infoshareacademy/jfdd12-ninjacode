@@ -31,18 +31,49 @@ const PLAYER_HEIGHT = 100;
 const PLAYER_WIDTH = 49;
 const IMAGES_PATH = "/game/img/";
 const GRAVITY = 2;
-let gravityMult = 1;
+let gravityMult = 0.8;
+let goldCoinGravityMult = 2;
+let goldCoinChance = 0.2;
 let gravityAccWithTime = 0.0005;
 const COIN_WIDTH = 44;
 const COIN_HEIGHT = 40;
 let game;
 let gameId;
-const TIME_PLAY = 10;
-const TIME_COIN_SPAWN = 0.5;
+const TIME_PLAY = 30;
+const TIME_COIN_SPAWN = 0.4;
 
 var timer = TIME_PLAY * 1000; // 10 seconds
 
-// top game buttons
+const KEY_RIGHT_ARROW = 39;
+const KEY_LEFT_ARROW = 37;
+let keyHeldLeft = false;
+let keyHeldRight = false;
+let playerXSpeed = 0;
+let playerMaxSpeed = 10;
+
+document.addEventListener("keydown", keyPressed);
+document.addEventListener("keyup", keyReleased);
+
+function keyPressed(evt) {
+  if (evt.keyCode == KEY_LEFT_ARROW) {
+    console.log("left");
+    keyHeldLeft = true;
+  }
+  if (evt.keyCode == KEY_RIGHT_ARROW) {
+    console.log("right");
+    keyHeldRight = true;
+  }
+  // evt.preventDefault();
+}
+
+function keyReleased(evt) {
+  if (evt.keyCode == KEY_LEFT_ARROW) {
+    keyHeldLeft = false;
+  }
+  if (evt.keyCode == KEY_RIGHT_ARROW) {
+    keyHeldRight = false;
+  }
+}
 
 startGameButton.addEventListener("click", function() {
   instructionModal.style.display = "none";
@@ -72,7 +103,7 @@ easyButton.addEventListener("click", function() {
 });
 
 hardButton.addEventListener("click", function() {
-  gravityMult = 2;
+  gravityMult = 1.6;
   difficultyModal.style.display = "none";
   resetGame();
 });
@@ -89,18 +120,30 @@ scoresBoardBtn.addEventListener("click", function() {
 
 instructionBtn.addEventListener("click", function() {
   pauseGame();
+  continueGame();
   instructionModal.style.display = "block";
 });
 
 closeButton.addEventListener("click", function() {
-  instructionModal.style.display = "none";
-  resumeGame();
+  window.location.pathname = "index.html";
 });
 
 scoreCloseButton.addEventListener("click", function() {
   scoresModal.style.display = "none";
   resumeGame();
 });
+
+function continueGame() {
+  isGamePaused = true;
+  startGameButton.innerHTML = "WZNÓW GRĘ";
+  startGameButton.addEventListener("click", function() {
+    instructionModal.style.display = "none";
+    difficultyModal.style.display = "none";
+    cancelAnimationFrame(gameId);
+    resumeGame();
+  });
+  console.log("game to be continued");
+}
 
 instructionModal.style.display = "block";
 difficultyModal.style.display = "none";
@@ -111,6 +154,8 @@ let backgroundImage;
 let floorImage;
 let cashBakeManImage;
 let coinImage;
+let coinGoldImage;
+let backgroundNightImage;
 
 function loadImage(imageUrl, x, y, w, h) {
   return new Promise((resolve, reject) => {
@@ -130,14 +175,25 @@ function loadAllImages() {
     loadImage("background-day.png"),
     loadImage("floor.png"),
     loadImage("cashBakeMan.png"),
-    loadImage("coin-sprite.png")
+    loadImage("coin-sprite.png"),
+    loadImage("coin-silver-sprite.png"),
+    loadImage("background-night.png")
   ])
     .then(values => {
-      const [background, floor, cashBakeMan, coinSprite] = values;
+      const [
+        background,
+        floor,
+        cashBakeMan,
+        coinGoldSprite,
+        coinSprite,
+        backgroundNight
+      ] = values;
       backgroundImage = background;
       floorImage = floor;
       cashBakeManImage = cashBakeMan;
+      coinGoldImage = coinGoldSprite;
       coinImage = coinSprite;
+      backgroundNightImage = backgroundNight;
     })
     .finally(function() {
       game = new GameArea(1200, 500, "easy");
@@ -153,16 +209,6 @@ canvas.setAttribute("width", `${GAME_WIDTH}px`);
 this.context = canvas.getContext("2d");
 const gameCanvas = document.querySelector("#game");
 gameCanvas.append(canvas);
-
-const body = document.querySelector("body");
-
-body.addEventListener("keydown", event => {
-  if (event.key === "ArrowRight") {
-    moveRight();
-  } else if (event.key === "ArrowLeft") {
-    moveLeft();
-  } else direction = 0;
-});
 
 let lastTime = 0; //time last loop was executed
 
@@ -190,23 +236,41 @@ function drawPlayer() {
 
 function drawCoins() {
   coins.forEach(coin => {
-    context.drawImage(
-      coinImage,
-      coin.frame * COIN_WIDTH,
-      0,
-      COIN_WIDTH,
-      COIN_HEIGHT,
-      coin.x,
-      coin.y,
-      COIN_WIDTH,
-      COIN_HEIGHT
-    );
+    if (coin.isGolden == false) {
+      context.drawImage(
+        coinImage,
+        coin.frame * COIN_WIDTH,
+        0,
+        COIN_WIDTH,
+        COIN_HEIGHT,
+        coin.x,
+        coin.y,
+        COIN_WIDTH,
+        COIN_HEIGHT
+      );
+    } else {
+      context.drawImage(
+        coinGoldImage,
+        coin.frame * COIN_WIDTH,
+        0,
+        COIN_WIDTH,
+        COIN_HEIGHT,
+        coin.x,
+        coin.y,
+        COIN_WIDTH,
+        COIN_HEIGHT
+      );
+    }
   });
 }
 
 function coinFall() {
   coins.forEach(coin => {
-    coin.y += GRAVITY * gravityMult;
+    if (!coin.isGolden) {
+      coin.y += GRAVITY * gravityMult;
+    } else {
+      coin.y += GRAVITY * gravityMult * goldCoinGravityMult;
+    }
   });
 }
 
@@ -233,7 +297,11 @@ function checkCoinPlayerCollision(coin) {
     coin.y < playery1 &&
     coiny1 > player.y
   ) {
-    currentScore++;
+    if (coin.isGolden) {
+      currentScore += 5;
+    } else {
+      currentScore++;
+    }
     scoreTxt.innerText = currentScore;
     return true;
   } else {
@@ -243,13 +311,16 @@ function checkCoinPlayerCollision(coin) {
 
 function spawnCoins() {
   let coinX = Math.random() * (GAME_WIDTH - COIN_WIDTH);
+  let isGolden = Math.random() < goldCoinChance;
   coinX = coinX < 0 ? 0 : coinX;
   coins.push({
     x: coinX,
     y: 0,
     forRemoval: false,
+    isGolden: isGolden,
     frame: Math.floor(Math.random() * 10)
   });
+  // console.log("silver coin spawned");
 }
 
 function removeCoins() {
@@ -258,18 +329,50 @@ function removeCoins() {
   });
 }
 
-function moveRight() {
-  if (player.x < GAME_WIDTH - PLAYER_WIDTH) {
-    player.x = player.x + 10;
-  } else {
-    player.x = GAME_WIDTH - PLAYER_WIDTH;
-  }
-}
-function moveLeft() {
-  if (player.x > 0) {
-    player.x -= 10;
-  } else {
+// function moveRight() {
+//   if (player.x < GAME_WIDTH - PLAYER_WIDTH) {
+//     player.x = player.x + 1;
+//   } else {
+//     player.x = GAME_WIDTH - PLAYER_WIDTH;
+//   }
+// }
+// function moveLeft() {
+//   if (player.x > 0) {
+//     player.x -= 1;
+//   } else {
+//     player.x = 0;
+//   }
+// }
+
+function movePlayer() {
+  if (player.x < 0) {
     player.x = 0;
+    playerXSpeed *= -0.2;
+  }
+  if (player.x > GAME_WIDTH - PLAYER_WIDTH) {
+    player.x = GAME_WIDTH - PLAYER_WIDTH;
+    playerXSpeed *= -0.2;
+  }
+
+  if (playerXSpeed > 0) {
+    playerXSpeed -= 0.7;
+  } else if (playerXSpeed < 0) {
+    playerXSpeed += 0.7;
+  }
+  if (playerXSpeed < 0.3 && playerXSpeed > -0.3) {
+    playerXSpeed = 0;
+  }
+  if (keyHeldLeft) {
+    playerXSpeed -= 1.2;
+  }
+  if (keyHeldRight) {
+    playerXSpeed += 1.2;
+  }
+
+  if (playerXSpeed < 0) {
+    player.x += Math.max(playerXSpeed, -playerMaxSpeed);
+  } else if (playerXSpeed >= 0) {
+    player.x += Math.min(playerXSpeed, playerMaxSpeed);
   }
 }
 
@@ -298,13 +401,23 @@ GameArea.prototype = {
   drawBackground: function() {
     let howManyTimesDraw = GAME_WIDTH / BG_WIDTH;
     for (let i = 0; i < howManyTimesDraw; i++) {
-      context.drawImage(
-        backgroundImage,
-        BG_WIDTH * i,
-        0,
-        BG_WIDTH,
-        GAME_HEIGHT
-      );
+      if (gravityMult < 1.5) {
+        context.drawImage(
+          backgroundImage,
+          BG_WIDTH * i,
+          0,
+          BG_WIDTH,
+          GAME_HEIGHT
+        );
+      } else {
+        context.drawImage(
+          backgroundNightImage,
+          BG_WIDTH * i,
+          0,
+          BG_WIDTH,
+          GAME_HEIGHT
+        );
+      }
     }
   },
   generateCanvas: function() {
@@ -320,7 +433,7 @@ GameArea.prototype = {
       timeToRotateCoinCounter += delta;
       timeToSpawnCoinCounter += delta;
     }
-
+    movePlayer();
     coinFall();
 
     gravityMult += gravityAccWithTime;
@@ -332,14 +445,14 @@ GameArea.prototype = {
 
     coins.forEach(coin => {
       if (coin.y >= FLOOR_START - COIN_HEIGHT) {
-        console.log("coin lost");
+        // console.log("coin lost");
         coin.forRemoval = true;
       }
     });
 
     coins.forEach(coin => {
       if (checkCoinPlayerCollision(coin)) {
-        console.log("coin successfuly caught");
+        // console.log("coin successfuly caught");
         console.log(currentScore);
         coin.forRemoval = true;
       }
@@ -471,6 +584,7 @@ function timerClock(delta, isGamePlaying) {
   let timerShort = Math.trunc(timer / 1000 + 1);
   timeDisplay.innerHTML = Math.ceil(timerShort);
 }
+
 function drawFps(delta) {
   delta > 0 ? Math.floor(delta) : 1;
   context.fillStyle = "#fff";
