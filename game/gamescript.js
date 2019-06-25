@@ -63,7 +63,6 @@ function keyPressed(evt) {
     console.log("right");
     keyHeldRight = true;
   }
-  // evt.preventDefault();
 }
 
 function keyReleased(evt) {
@@ -149,8 +148,6 @@ function continueGame() {
 instructionModal.style.display = "block";
 difficultyModal.style.display = "none";
 
-// load assets
-
 let backgroundImage;
 let floorImage;
 let cashBakeManImage;
@@ -202,6 +199,30 @@ function loadAllImages() {
 }
 
 loadAllImages();
+
+function sound(src) {
+  this.sound = document.createElement("audio");
+  this.sound.src = src;
+  this.sound.setAttribute("preload", "auto");
+  this.sound.setAttribute("controls", "none");
+  this.sound.style.display = "none";
+  document.body.appendChild(this.sound);
+  this.play = function() {
+    this.sound.play();
+  };
+  this.stop = function() {
+    this.sound.pause();
+  };
+}
+
+let catchCoinSound = new Audio("sounds/coin1.mp3");
+let catchCoinSound1 = new Audio("sounds/coin1.mp3");
+let catchGoldCoinSound = new Audio("sounds/coin2.mp3");
+let catchGoldCoinSound2 = new Audio("sounds/coin2.mp3");
+let dropCoinSound = new Audio("sounds/drop.mp3");
+let dropCoinSound2 = new Audio("sounds/drop.mp3");
+let dropCoinSound3 = new Audio("sounds/drop.mp3");
+let winSound = new Audio("sounds/win.mp3");
 
 // Canvas on global
 const canvas = document.createElement("canvas");
@@ -300,8 +321,19 @@ function checkCoinPlayerCollision(coin) {
   ) {
     if (coin.isGolden) {
       currentScore += 5;
+      if (
+        catchGoldCoinSound.currentTime > 0 &&
+        catchGoldCoinSound.currentTime < 0.78
+      ) {
+        catchGoldCoinSound2.play();
+      }
+      catchGoldCoinSound.play();
     } else {
       currentScore++;
+      if (catchCoinSound.currentTime > 0 && catchCoinSound.currentTime < 0.48) {
+        catchCoinSound1.play();
+      }
+      catchCoinSound.play();
     }
     scoreTxt.innerText = currentScore;
     return true;
@@ -321,7 +353,6 @@ function spawnCoins() {
     isGolden: isGolden,
     frame: Math.floor(Math.random() * 10)
   });
-  // console.log("silver coin spawned");
 }
 
 function removeCoins() {
@@ -329,21 +360,6 @@ function removeCoins() {
     return !coin.forRemoval;
   });
 }
-
-// function moveRight() {
-//   if (player.x < GAME_WIDTH - PLAYER_WIDTH) {
-//     player.x = player.x + 1;
-//   } else {
-//     player.x = GAME_WIDTH - PLAYER_WIDTH;
-//   }
-// }
-// function moveLeft() {
-//   if (player.x > 0) {
-//     player.x -= 1;
-//   } else {
-//     player.x = 0;
-//   }
-// }
 
 function movePlayer() {
   if (player.x < 0) {
@@ -446,7 +462,22 @@ GameArea.prototype = {
 
     coins.forEach(coin => {
       if (coin.y >= FLOOR_START - COIN_HEIGHT) {
-        // console.log("coin lost");
+        if (dropCoinSound.currentTime > 0 && dropCoinSound.currentTime < 0.42) {
+          dropCoinSound2.play();
+          console.log("drop2 play");
+          console.log(dropCoinSound.currentTime);
+        }
+        if (
+          dropCoinSound2.currentTime > 0 &&
+          dropCoinSound2.currentTime < 0.42
+        ) {
+          dropCoinSound3.play();
+          console.log("drop3 play");
+        }
+        dropCoinSound.play();
+        console.log("drop1 play");
+        console.log(dropCoinSound.currentTime);
+
         coin.forRemoval = true;
       }
     });
@@ -476,6 +507,7 @@ GameArea.prototype = {
       gameId = requestAnimationFrame(this.gameLoop.bind(this));
     }
     if (timer <= 0) {
+      winSound.play();
       scoresModal.style.display = "block";
       scoreDisplay.innerText = currentScore; // score display for now
     }
