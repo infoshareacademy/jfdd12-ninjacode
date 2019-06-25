@@ -144,11 +144,43 @@ scoreNickBtn.addEventListener("click", function() {
   // aktualizowanie scorebordu
   // updateScoreboard()
   let updatedScoreboard = [...scoreboard, myScore];
+  // sort
+  updatedScoreboard = updatedScoreboard
+    .sort(function(a, b) {
+      return b.score - a.score;
+    })
+    .slice(0, 10);
+  console.log(updatedScoreboard);
   //dodanie do localstorage
   addToScoreboard(updatedScoreboard);
   scoresModalFill.innerText = "";
   scoresModalFill.appendChild(createScoreTable(updatedScoreboard));
   nickModal.style.display = "none";
+});
+
+scoreNickInput.addEventListener("keypress", function(evt) {
+  console.log(evt.keyCode);
+  if (evt.keyCode === 13) {
+    // 13 is the Enter
+    let myScore = getScore(scoreNickInput.value, currentScore);
+    console.log(myScore);
+    // aktualizowanie scorebordu
+    // updateScoreboard()
+    let updatedScoreboard = [...scoreboard, myScore];
+    // sort
+    let x = updatedScoreboard.sort(function(a, b) {
+      return b.score - a.score;
+    });
+
+    console.log(updatedScoreboard);
+    console.log(x);
+    //dodanie do localstorage
+    addToScoreboard(updatedScoreboard);
+    scoresModalFill.innerText = "";
+    scoresModalFill.appendChild(createScoreTable(updatedScoreboard));
+    // nickModal.style.display = "none";
+    console.log("enter w nicku");
+  }
 });
 
 scoreCloseButton.addEventListener("click", function() {
