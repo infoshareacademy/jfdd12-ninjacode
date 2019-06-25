@@ -109,7 +109,6 @@ hardButton.addEventListener("click", function() {
 });
 
 scoresBtn.addEventListener("click", function() {
-  instructionModal.style.display = "none";
   scoresModal.style.display = "block";
 });
 
@@ -130,7 +129,9 @@ closeButton.addEventListener("click", function() {
 
 scoreCloseButton.addEventListener("click", function() {
   scoresModal.style.display = "none";
-  resumeGame();
+  if (isGamePaused) {
+    resumeGame();
+  }
 });
 
 function continueGame() {
@@ -144,7 +145,7 @@ function continueGame() {
   });
   console.log("game to be continued");
 }
-
+// WTF??
 instructionModal.style.display = "block";
 difficultyModal.style.display = "none";
 
