@@ -44,7 +44,36 @@ const TIME_COIN_SPAWN = 0.4;
 
 var timer = TIME_PLAY * 1000; // 10 seconds
 
-// top game buttons
+const KEY_RIGHT_ARROW = 39;
+const KEY_LEFT_ARROW = 37;
+let keyHeldLeft = false;
+let keyHeldRight = false;
+let playerXSpeed = 0;
+let playerMAxSpeed = 20;
+
+document.addEventListener("keydown", keyPressed);
+document.addEventListener("keyup", keyReleased);
+
+function keyPressed(evt) {
+  if (evt.keyCode == KEY_LEFT_ARROW) {
+    console.log("left");
+    keyHeldLeft = true;
+  }
+  if (evt.keyCode == KEY_RIGHT_ARROW) {
+    console.log("right");
+    keyHeldRight = true;
+  }
+  // evt.preventDefault();
+}
+
+function keyReleased(evt) {
+  if (evt.keyCode == KEY_LEFT_ARROW) {
+    keyHeldLeft = false;
+  }
+  if (evt.keyCode == KEY_RIGHT_ARROW) {
+    keyHeldRight = false;
+  }
+}
 
 startGameButton.addEventListener("click", function() {
   instructionModal.style.display = "none";
@@ -96,8 +125,7 @@ instructionBtn.addEventListener("click", function() {
 });
 
 closeButton.addEventListener("click", function() {
-  window.location.hash="";
-  window.location.pathname = "/";
+  window.location.pathname = "index.html";
 });
 
 scoreCloseButton.addEventListener("click", function() {
@@ -106,16 +134,16 @@ scoreCloseButton.addEventListener("click", function() {
 });
 
 function continueGame() {
-  //isGamePaused = true;
+  isGamePaused = true;
+  cancelAnimationFrame(gameId);
   startGameButton.innerHTML = "WZNÓW GRĘ";
   startGameButton.addEventListener("click", function() {
     instructionModal.style.display = "none";
-    difficultyModal.style.display = "none"
+    difficultyModal.style.display = "none";
   });
   resumeGame();
   console.log("game to be continued");
 }
-
 
 instructionModal.style.display = "block";
 difficultyModal.style.display = "none";
@@ -181,16 +209,6 @@ canvas.setAttribute("width", `${GAME_WIDTH}px`);
 this.context = canvas.getContext("2d");
 const gameCanvas = document.querySelector("#game");
 gameCanvas.append(canvas);
-
-const body = document.querySelector("body");
-
-body.addEventListener("keydown", event => {
-  if (event.key === "ArrowRight") {
-    moveRight();
-  } else if (event.key === "ArrowLeft") {
-    moveLeft();
-  } else direction = 0;
-});
 
 let lastTime = 0; //time last loop was executed
 
@@ -302,7 +320,7 @@ function spawnCoins() {
     isGolden: isGolden,
     frame: Math.floor(Math.random() * 10)
   });
-  console.log("silver coin spawned");
+  // console.log("silver coin spawned");
 }
 
 function removeCoins() {
@@ -311,19 +329,30 @@ function removeCoins() {
   });
 }
 
-function moveRight() {
-  if (player.x < GAME_WIDTH - PLAYER_WIDTH) {
-    player.x = player.x + 10;
-  } else {
-    player.x = GAME_WIDTH - PLAYER_WIDTH;
-  }
-}
-function moveLeft() {
-  if (player.x > 0) {
+// function moveRight() {
+//   if (player.x < GAME_WIDTH - PLAYER_WIDTH) {
+//     player.x = player.x + 1;
+//   } else {
+//     player.x = GAME_WIDTH - PLAYER_WIDTH;
+//   }
+// }
+// function moveLeft() {
+//   if (player.x > 0) {
+//     player.x -= 1;
+//   } else {
+//     player.x = 0;
+//   }
+// }
+
+function movePlayer() {
+  // console.log(keyHeldLeft);
+  if (keyHeldLeft) {
     player.x -= 10;
-  } else {
-    player.x = 0;
   }
+  if (keyHeldRight) {
+    player.x += 10;
+  }
+  // player.x += playerXSpeed;
 }
 
 function GameArea(
@@ -383,7 +412,7 @@ GameArea.prototype = {
       timeToRotateCoinCounter += delta;
       timeToSpawnCoinCounter += delta;
     }
-
+    movePlayer();
     coinFall();
 
     gravityMult += gravityAccWithTime;
@@ -395,14 +424,14 @@ GameArea.prototype = {
 
     coins.forEach(coin => {
       if (coin.y >= FLOOR_START - COIN_HEIGHT) {
-        console.log("coin lost");
+        // console.log("coin lost");
         coin.forRemoval = true;
       }
     });
 
     coins.forEach(coin => {
       if (checkCoinPlayerCollision(coin)) {
-        console.log("coin successfuly caught");
+        // console.log("coin successfuly caught");
         console.log(currentScore);
         coin.forRemoval = true;
       }
@@ -472,7 +501,6 @@ function togglePause() {
 
 function pauseGame() {
   isGamePaused = true;
-  cancelAnimationFrame(gameId);
   pauseBtn.innerHTML = ">";
   console.log("game is paused");
 }
