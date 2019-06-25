@@ -15,7 +15,8 @@ main {
 
 /* main-end */
 /* instruction */
-.modal {
+.modal,
+.nick-modal {
   display: none; /* Hidden by default */
   position: fixed; /* Stay in place */
   z-index: 1; /* Sit on top */
@@ -64,24 +65,25 @@ main {
 }
 
 .modal-fill2 {
-  position:relative;
+  position: relative;
   background-color: #fefefe;
-  top:-80px;
+  top: -80px;
   margin: auto;
   border: 5px solid #436984;
   width: 600px;
-  height:730px;
+  height: 730px;
   text-align: center;
 }
-.modal-fill2 p{
-  font-size:30px;
-  margin-top:230px;
+.modal-fill2 p {
+  font-size: 30px;
+  margin-top: 230px;
 }
 
-#easy-btn, #hard-btn{
-  font-size:30px;
-  margin:15px;
-  padding:15px;
+#easy-btn,
+#hard-btn {
+  font-size: 30px;
+  margin: 15px;
+  padding: 15px;
 }
 
 .modal-fill2 {

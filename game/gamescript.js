@@ -11,11 +11,20 @@ const replayBtn = document.getElementById("replay-btn");
 const closeButton = document.getElementById("exit-btn");
 const scoreCloseButton = document.getElementById("score-exit-btn");
 const timeDisplay = document.getElementById("timeDisplay");
-const scoreDisplay = document.getElementById("yourScore");
 const difficultyModal = document.getElementById("difficulty-modal");
 const easyButton = document.getElementById("easy-btn");
 const hardButton = document.getElementById("hard-btn");
 
+// scoreModal places
+const scoreDisplay = document.getElementById("yourScore");
+const scoreNickForm = document.querySelector(".score-modal_nick--form");
+const scoreNickInput = document.querySelector(".score-modal_nick--input");
+const scoreNickBtn = document.querySelector(".score-modal_nick--btn");
+const nickModal = document.querySelector(".nick-modal");
+
+// pobranie  scoreboard z localstorage lub dodanie pustej tablicy
+let scoreboard = JSON.parse(localStorage.getItem("scoreboard")) || [];
+let updatedScoreboard;
 let currentScore = 0;
 let coinGet = 0;
 let isGamePaused = false;
@@ -39,6 +48,7 @@ const COIN_WIDTH = 44;
 const COIN_HEIGHT = 40;
 let game;
 let gameId;
+let isEndGame;
 const TIME_PLAY = 5;
 const TIME_COIN_SPAWN = 0.1;
 
@@ -127,6 +137,20 @@ closeButton.addEventListener("click", function() {
   window.location.pathname = "index.html";
 });
 
+// nickModal feature/70
+scoreNickBtn.addEventListener("click", function() {
+  let myScore = getScore(scoreNickInput.value, currentScore);
+  console.log(myScore);
+  // aktualizowanie scorebordu
+  // updateScoreboard()
+  let updatedScoreboard = [...scoreboard, myScore];
+  //dodanie do localstorage
+  addToScoreboard(updatedScoreboard);
+  scoresModalFill.innerText = "";
+  scoresModalFill.appendChild(createScoreTable(updatedScoreboard));
+  nickModal.style.display = "none";
+});
+
 scoreCloseButton.addEventListener("click", function() {
   scoresModal.style.display = "none";
 
@@ -157,7 +181,7 @@ function continueGame() {
 }
 // WTF??
 instructionModal.style.display = "block";
-difficultyModal.style.display = "none";
+// difficultyModal.style.display = "none";
 
 // load assets
 
@@ -487,6 +511,8 @@ GameArea.prototype = {
     }
     if (timer <= 0) {
       scoresModal.style.display = "block";
+      nickModal.style.display = "block";
+      isEndGame = true;
       scoreDisplay.innerText = currentScore; // score display for now
     }
   }
@@ -514,22 +540,22 @@ function createScoreTable(scoreboard) {
   ${scores}
   </div>
 `;
+
   const div = document.createElement("div");
   div.innerHTML = cardBody;
   div.className = "scoretable";
   return div;
 }
+const scoresModalFill = document.querySelector("#score-table-modal");
+
+scoresModalFill.appendChild(createScoreTable(scoreboard));
+
 // incrementScore = num => {
+
 //   currentScore += num;
 //   scoreTxt.innerHTML = currentScore;
 
 // };
-
-// pobranie  scoreboard z localstorage lub dodanie pustej tablicy
-let scoreboard = JSON.parse(localStorage.getItem("scoreboard")) || [];
-
-const scoresModalFill = document.querySelector("#score-table-modal");
-scoresModalFill.appendChild(createScoreTable(scoreboard));
 
 // przygotowanie wyniku do dodania
 const getScore = (playerName, score) => {
@@ -539,14 +565,9 @@ const getScore = (playerName, score) => {
   };
 };
 
-// aktualizowanie scorbordu
-let updatedScoreboard = [...scoreboard, getScore("Asia", 10)];
-
 //przygotowanie funkcji dodawania do localstorage
 const addToScoreboard = newScoreboard =>
   localStorage.setItem("scoreboard", JSON.stringify(newScoreboard));
-//dodanie do localstorage
-addToScoreboard(updatedScoreboard);
 
 // score-end
 function togglePause() {
@@ -610,8 +631,4 @@ function drawFps(delta) {
     BG_HEIGHT - 10,
     GAME_WIDTH
   );
-}
-
-function enterNick() {
-  // TODO: pobierz nicka na koniec gry
 }
