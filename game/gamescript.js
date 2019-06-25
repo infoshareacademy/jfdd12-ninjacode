@@ -31,14 +31,16 @@ const PLAYER_HEIGHT = 100;
 const PLAYER_WIDTH = 49;
 const IMAGES_PATH = "/game/img/";
 const GRAVITY = 2;
-let gravityMult = 1;
+let gravityMult = 0.8;
+let goldCoinGravityMult = 2;
+let goldCoinChance = 0.2;
 let gravityAccWithTime = 0.0005;
 const COIN_WIDTH = 44;
 const COIN_HEIGHT = 40;
 let game;
 let gameId;
 const TIME_PLAY = 10;
-const TIME_COIN_SPAWN = 0.5;
+const TIME_COIN_SPAWN = 0.4;
 
 var timer = TIME_PLAY * 1000; // 10 seconds
 
@@ -72,7 +74,7 @@ easyButton.addEventListener("click", function() {
 });
 
 hardButton.addEventListener("click", function() {
-  gravityMult = 2;
+  gravityMult = 1.6;
   difficultyModal.style.display = "none";
   resetGame();
 });
@@ -123,6 +125,8 @@ let backgroundImage;
 let floorImage;
 let cashBakeManImage;
 let coinImage;
+let coinGoldImage;
+let backgroundNightImage;
 
 function loadImage(imageUrl, x, y, w, h) {
   return new Promise((resolve, reject) => {
@@ -142,14 +146,25 @@ function loadAllImages() {
     loadImage("background-day.png"),
     loadImage("floor.png"),
     loadImage("cashBakeMan.png"),
-    loadImage("coin-sprite.png")
+    loadImage("coin-sprite.png"),
+    loadImage("coin-silver-sprite.png"),
+    loadImage("background-night.png")
   ])
     .then(values => {
-      const [background, floor, cashBakeMan, coinSprite] = values;
+      const [
+        background,
+        floor,
+        cashBakeMan,
+        coinGoldSprite,
+        coinSprite,
+        backgroundNight
+      ] = values;
       backgroundImage = background;
       floorImage = floor;
       cashBakeManImage = cashBakeMan;
+      coinGoldImage = coinGoldSprite;
       coinImage = coinSprite;
+      backgroundNightImage = backgroundNight;
     })
     .finally(function() {
       game = new GameArea(1200, 500, "easy");
@@ -202,23 +217,41 @@ function drawPlayer() {
 
 function drawCoins() {
   coins.forEach(coin => {
-    context.drawImage(
-      coinImage,
-      coin.frame * COIN_WIDTH,
-      0,
-      COIN_WIDTH,
-      COIN_HEIGHT,
-      coin.x,
-      coin.y,
-      COIN_WIDTH,
-      COIN_HEIGHT
-    );
+    if (coin.isGolden == false) {
+      context.drawImage(
+        coinImage,
+        coin.frame * COIN_WIDTH,
+        0,
+        COIN_WIDTH,
+        COIN_HEIGHT,
+        coin.x,
+        coin.y,
+        COIN_WIDTH,
+        COIN_HEIGHT
+      );
+    } else {
+      context.drawImage(
+        coinGoldImage,
+        coin.frame * COIN_WIDTH,
+        0,
+        COIN_WIDTH,
+        COIN_HEIGHT,
+        coin.x,
+        coin.y,
+        COIN_WIDTH,
+        COIN_HEIGHT
+      );
+    }
   });
 }
 
 function coinFall() {
   coins.forEach(coin => {
-    coin.y += GRAVITY * gravityMult;
+    if (!coin.isGolden) {
+      coin.y += GRAVITY * gravityMult;
+    } else {
+      coin.y += GRAVITY * gravityMult * goldCoinGravityMult;
+    }
   });
 }
 
@@ -245,7 +278,11 @@ function checkCoinPlayerCollision(coin) {
     coin.y < playery1 &&
     coiny1 > player.y
   ) {
-    currentScore++;
+    if (coin.isGolden) {
+      currentScore += 5;
+    } else {
+      currentScore++;
+    }
     scoreTxt.innerText = currentScore;
     return true;
   } else {
@@ -255,13 +292,16 @@ function checkCoinPlayerCollision(coin) {
 
 function spawnCoins() {
   let coinX = Math.random() * (GAME_WIDTH - COIN_WIDTH);
+  let isGolden = Math.random() < goldCoinChance;
   coinX = coinX < 0 ? 0 : coinX;
   coins.push({
     x: coinX,
     y: 0,
     forRemoval: false,
+    isGolden: isGolden,
     frame: Math.floor(Math.random() * 10)
   });
+  console.log("silver coin spawned");
 }
 
 function removeCoins() {
@@ -310,13 +350,23 @@ GameArea.prototype = {
   drawBackground: function() {
     let howManyTimesDraw = GAME_WIDTH / BG_WIDTH;
     for (let i = 0; i < howManyTimesDraw; i++) {
-      context.drawImage(
-        backgroundImage,
-        BG_WIDTH * i,
-        0,
-        BG_WIDTH,
-        GAME_HEIGHT
-      );
+      if (gravityMult < 1.5) {
+        context.drawImage(
+          backgroundImage,
+          BG_WIDTH * i,
+          0,
+          BG_WIDTH,
+          GAME_HEIGHT
+        );
+      } else {
+        context.drawImage(
+          backgroundNightImage,
+          BG_WIDTH * i,
+          0,
+          BG_WIDTH,
+          GAME_HEIGHT
+        );
+      }
     }
   },
   generateCanvas: function() {
@@ -457,6 +507,7 @@ function timerClock(delta, isGamePlaying) {
   let timerShort = Math.trunc(timer / 1000 + 1);
   timeDisplay.innerHTML = Math.ceil(timerShort);
 }
+
 function drawFps(delta) {
   delta > 0 ? Math.floor(delta) : 1;
   context.fillStyle = "#fff";
