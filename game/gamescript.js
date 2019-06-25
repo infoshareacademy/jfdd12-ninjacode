@@ -106,13 +106,14 @@ scoreCloseButton.addEventListener("click", function() {
 });
 
 function continueGame() {
-  //isGamePaused = true;
+  isGamePaused = true;
   startGameButton.innerHTML = "WZNÓW GRĘ";
   startGameButton.addEventListener("click", function() {
     instructionModal.style.display = "none";
-    difficultyModal.style.display = "none"
+    difficultyModal.style.display = "none";
+    cancelAnimationFrame(gameId);
+    resumeGame()
   });
-  resumeGame();
   console.log("game to be continued");
 }
 
