@@ -103,7 +103,7 @@ scoreCloseButton.addEventListener("click", function() {
 });
 
 function continueGame() {
-  isGamePaused = true;
+  //isGamePaused = true;
   startGameButton.innerHTML = "WZNÓW GRĘ";
   startGameButton.addEventListener("click", function() {
     instructionModal.style.display = "none";
