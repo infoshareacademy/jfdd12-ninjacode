@@ -214,10 +214,14 @@ function sound(src) {
   };
 }
 
-let catchCoinSound = new sound("sounds/coin1.mp3");
-let catchCoinSound2 = new sound("sounds/coin2.mp3");
-let dropCoinSound = new sound("sounds/drop.mp3");
-let winSound = new sound("sounds/win.mp3");
+let catchCoinSound = new Audio("sounds/coin1.mp3");
+let catchCoinSound1 = new Audio("sounds/coin1.mp3");
+let catchGoldCoinSound = new Audio("sounds/coin2.mp3");
+let catchGoldCoinSound2 = new Audio("sounds/coin2.mp3");
+let dropCoinSound = new Audio("sounds/drop.mp3");
+let dropCoinSound2 = new Audio("sounds/drop.mp3");
+let dropCoinSound3 = new Audio("sounds/drop.mp3");
+let winSound = new Audio("sounds/win.mp3");
 
 // Canvas on global
 const canvas = document.createElement("canvas");
@@ -316,9 +320,18 @@ function checkCoinPlayerCollision(coin) {
   ) {
     if (coin.isGolden) {
       currentScore += 5;
-      catchCoinSound2.play();
+      if (
+        catchGoldCoinSound.currentTime > 0 &&
+        catchGoldCoinSound.currentTime < 0.78
+      ) {
+        catchGoldCoinSound2.play();
+      }
+      catchGoldCoinSound.play();
     } else {
       currentScore++;
+      if (catchCoinSound.currentTime > 0 && catchCoinSound.currentTime < 0.48) {
+        catchCoinSound1.play();
+      }
       catchCoinSound.play();
     }
     scoreTxt.innerText = currentScore;
@@ -448,7 +461,22 @@ GameArea.prototype = {
 
     coins.forEach(coin => {
       if (coin.y >= FLOOR_START - COIN_HEIGHT) {
-        // console.log("coin lost");
+        if (dropCoinSound.currentTime > 0 && dropCoinSound.currentTime < 0.42) {
+          dropCoinSound2.play();
+          console.log("drop2 play");
+          console.log(dropCoinSound.currentTime);
+        }
+        if (
+          dropCoinSound2.currentTime > 0 &&
+          dropCoinSound2.currentTime < 0.42
+        ) {
+          dropCoinSound3.play();
+          console.log("drop3 play");
+        }
+        dropCoinSound.play();
+        console.log("drop1 play");
+        console.log(dropCoinSound.currentTime);
+
         coin.forRemoval = true;
       }
     });
