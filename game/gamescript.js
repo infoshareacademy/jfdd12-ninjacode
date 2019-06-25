@@ -125,6 +125,7 @@ instructionBtn.addEventListener("click", function() {
 });
 
 closeButton.addEventListener("click", function() {
+  window.location.hash="";
   window.location.pathname = "index.html";
 });
 
