@@ -39,8 +39,8 @@ const COIN_WIDTH = 44;
 const COIN_HEIGHT = 40;
 let game;
 let gameId;
-const TIME_PLAY = 30;
-const TIME_COIN_SPAWN = 0.4;
+const TIME_PLAY = 5;
+const TIME_COIN_SPAWN = 0.1;
 
 var timer = TIME_PLAY * 1000; // 10 seconds
 
@@ -129,7 +129,17 @@ closeButton.addEventListener("click", function() {
 
 scoreCloseButton.addEventListener("click", function() {
   scoresModal.style.display = "none";
-  if (isGamePaused) {
+
+  if (isGamePaused && timer > 0 && instructionModal.style.display === "block") {
+    console.log("Powrot do instrukcji w trakcie pauzy.");
+  } else if (timer <= 0) {
+    isGamePaused = false;
+    cancelAnimationFrame(gameId);
+    instructionModal.style.display = "block";
+    console.log("exit z scoreModalu Koniec gry");
+  } else {
+    console.log("exit z scoreModalu do gry");
+    cancelAnimationFrame(gameId);
     resumeGame();
   }
 });
@@ -549,12 +559,14 @@ function togglePause() {
 
 function pauseGame() {
   isGamePaused = true;
+  cancelAnimationFrame(gameId);
   pauseBtn.innerHTML = ">";
   console.log("game is paused");
 }
 
 function resumeGame() {
   isGamePaused = false;
+  cancelAnimationFrame(gameId);
   pauseBtn.innerHTML = "| |";
   game.gameLoop();
   console.log("game is playing");
