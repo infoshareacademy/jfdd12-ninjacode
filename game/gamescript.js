@@ -96,7 +96,8 @@ instructionBtn.addEventListener("click", function() {
 });
 
 closeButton.addEventListener("click", function() {
-  window.location.pathname = "index.html";
+  window.location.hash="";
+  window.location.pathname = "/";
 });
 
 scoreCloseButton.addEventListener("click", function() {
@@ -471,6 +472,7 @@ function togglePause() {
 
 function pauseGame() {
   isGamePaused = true;
+  cancelAnimationFrame(gameId);
   pauseBtn.innerHTML = ">";
   console.log("game is paused");
 }
