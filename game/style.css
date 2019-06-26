@@ -2,11 +2,11 @@
 
 body {
   background-color: #436984;
-  font-family: 'Lato', sans-serif;
+  font-family: "Lato", sans-serif;
 }
 
 main {
-  font-family: 'Lato', sans-serif;
+  font-family: "Lato", sans-serif;
   display: block;
   max-width: 600px;
   margin: 0 auto;
@@ -15,7 +15,8 @@ main {
 
 /* main-end */
 /* instruction */
-.modal {
+.modal,
+.nick-modal {
   display: none; /* Hidden by default */
   position: fixed; /* Stay in place */
   z-index: 1; /* Sit on top */
@@ -64,45 +65,47 @@ main {
 }
 
 .modal-fill2 {
-  position:relative;
+  position: relative;
   background-color: #fefefe;
-  top:-80px;
+  top: -80px;
   margin: auto;
   border: 5px solid #436984;
   width: 600px;
-  height:730px;
+  height: 730px;
   text-align: center;
 }
-.modal-fill2 p{
-  font-size:30px;
-  margin-top:230px;
+.modal-fill2 p {
+  font-size: 30px;
+  margin-top: 230px;
 }
 
-#easy-btn, #hard-btn{
-  font-size:30px;
-  margin:15px;
-  padding:15px;
+#easy-btn,
+#hard-btn {
+  font-size: 30px;
+  margin: 15px;
+  padding: 15px;
 }
 
 .modal-fill2 {
-  position:relative;
+  position: relative;
   background-color: #fefefe;
-  top:-80px;
+  top: -80px;
   margin: auto;
   border: 5px solid #436984;
   width: 600px;
-  height:730px;
+  height: 730px;
   text-align: center;
 }
-.modal-fill2 p{
-  font-size:30px;
-  margin-top:230px;
+.modal-fill2 p {
+  font-size: 30px;
+  margin-top: 230px;
 }
 
-#easy-btn, #hard-btn{
-  font-size:30px;
-  margin:15px;
-  padding:15px;
+#easy-btn,
+#hard-btn {
+  font-size: 30px;
+  margin: 15px;
+  padding: 15px;
 }
 
 /* The Close Button */
@@ -127,10 +130,10 @@ main {
   display: flex;
   justify-content: space-around;
 }
-.control > div > span >img {
+.control > div > span > img {
   padding-right: 20px;
 }
-.control > div > span > p{
+.control > div > span > p {
   margin-top: 0;
 }
 
@@ -171,39 +174,38 @@ main {
   opacity: 1;
 }
 
-
-#score-time{
-  display:flex;
-  flex-direction:row;
-  width:100%;
-  justify-content:space-around;
-  height:90px;
+#score-time {
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+  justify-content: space-around;
+  height: 90px;
 }
 
-#score, #time{
-  font-size:25px;
-  width:130px;
-  display:flex;
-  flex-direction:row;
-  justify-content:space-between;;
+#score,
+#time {
+  font-size: 25px;
+  width: 130px;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
 }
 
-#nav-bar{
-  margin:0 auto;
-  display:flex;
-  width:100%;
-  height:50px;
-  justify-content:space-around;
+#nav-bar {
+  margin: 0 auto;
+  display: flex;
+  width: 100%;
+  height: 50px;
+  justify-content: space-around;
 }
 #nav-bar > button {
-width:110px;
+  width: 110px;
 }
 
-main > h1{
-  padding-top:15px;
-  text-align:center;
-  letter-spacing:3px;
-  
+main > h1 {
+  padding-top: 15px;
+  text-align: center;
+  letter-spacing: 3px;
 }
 
 .difficulty-modal {
@@ -218,4 +220,41 @@ main > h1{
   overflow: auto; /* Enable scroll if needed */
   background-color: rgb(0, 0, 0); /* Fallback color */
   background-color: rgba(0, 0, 0, 0.4); /* Black w/ opacity */
+}
+
+/* Tables
+================================== */
+.Rtable {
+  display: flex;
+  flex-wrap: wrap;
+  margin: 0 0 1em 0;
+  padding: 0;
+}
+.Rtable h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  margin: 0;
+}
+
+.Rtable-cell {
+  box-sizing: border-box;
+  flex-grow: 1;
+  width: 100%; /* Default to full width */
+  padding: 0.8em 1.2em;
+  overflow: hidden; /* // Or flex might break */
+  list-style: none;
+  border: solid 1px lightgray;
+  background: fade(slategrey, 20%);
+}
+
+/* Table column sizing
+================================== */
+.Rtable--2cols > .Rtable-cell {
+  width: 50%;
+}
+.Rtable--3cols > .Rtable-cell {
+  width: 33.33%;
 }
