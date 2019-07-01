@@ -24,7 +24,6 @@ const nickModal = document.querySelector(".nick-modal");
 
 // pobranie  scoreboard z localstorage lub dodanie pustej tablicy
 let scoreboard = JSON.parse(localStorage.getItem("scoreboard")) || [];
-let updatedScoreboard;
 let currentScore = 0;
 let coinGet = 0;
 let isGamePaused = false;
@@ -48,9 +47,8 @@ const COIN_WIDTH = 44;
 const COIN_HEIGHT = 40;
 let game;
 let gameId;
-let isEndGame;
-const TIME_PLAY = 30;
-const TIME_COIN_SPAWN = 0.2;
+const TIME_PLAY = 5;
+const TIME_COIN_SPAWN = 0.1;
 
 var timer = TIME_PLAY * 1000; // 10 seconds
 
@@ -84,82 +82,82 @@ function keyReleased(evt) {
   }
 }
 
-startGameButton.addEventListener("click", function() {
+startGameButton.addEventListener("click", function () {
   instructionModal.style.display = "none";
   difficultyModal.style.display = "block";
 });
 
-pauseBtn.addEventListener("click", function() {
+pauseBtn.addEventListener("click", function () {
   togglePause();
 });
 
-window.addEventListener("keydown", function(event) {
+window.addEventListener("keydown", function (event) {
   var key = event.keyCode;
   if (key === 80) {
     togglePause();
   } // shortcut key p for pause
 });
 
-replayBtn.addEventListener("click", function() {
+replayBtn.addEventListener("click", function () {
   pauseGame();
   difficultyModal.style.display = "block";
 });
 
-easyButton.addEventListener("click", function() {
+easyButton.addEventListener("click", function () {
   gravityMult = 1;
   difficultyModal.style.display = "none";
   resetGame();
 });
 
-hardButton.addEventListener("click", function() {
+hardButton.addEventListener("click", function () {
   gravityMult = 1.6;
   difficultyModal.style.display = "none";
   resetGame();
 });
 
-scoresBtn.addEventListener("click", function() {
+scoresBtn.addEventListener("click", function () {
   scoresModal.style.display = "block";
 });
 
-scoresBoardBtn.addEventListener("click", function() {
+scoresBoardBtn.addEventListener("click", function () {
   pauseGame();
   scoresModal.style.display = "block";
 });
 
-instructionBtn.addEventListener("click", function() {
+instructionBtn.addEventListener("click", function () {
   pauseGame();
   continueGame();
   instructionModal.style.display = "block";
 });
 
-closeButton.addEventListener("click", function() {
+closeButton.addEventListener("click", function () {
   window.location.hash = "";
   window.location.pathname = "index.html";
 });
 
 // nickModal feature/70
-scoreNickBtn.addEventListener("click", function() {
+scoreNickBtn.addEventListener("click", function () {
   let myScore = getScore(scoreNickInput.value, currentScore);
   console.log(myScore);
   // aktualizowanie scorebordu
   // updateScoreboard()
-  let updatedScoreboard = [...scoreboard, myScore];
+  scoreboard = [...scoreboard, myScore];
   // sort
-  updatedScoreboard = updatedScoreboard
-    .sort(function(a, b) {
+  scoreboard = scoreboard
+    .sort(function (a, b) {
       return b.score - a.score;
     })
     .slice(0, 10);
-  console.log(updatedScoreboard);
+  console.log(scoreboard);
   //dodanie do localstorage
-  addToScoreboard(updatedScoreboard);
+  addToScoreboard(scoreboard);
   scoresModalFill.innerText = "";
-  scoresModalFill.appendChild(createScoreTable(updatedScoreboard));
+  scoresModalFill.appendChild(createScoreTable(scoreboard));
   nickModal.style.display = "none";
   scoreNickInput.value = "";
 });
 
-scoreCloseButton.addEventListener("click", function() {
+scoreCloseButton.addEventListener("click", function () {
   scoresModal.style.display = "none";
 
   if (isGamePaused && timer > 0 && instructionModal.style.display === "block") {
@@ -179,7 +177,7 @@ scoreCloseButton.addEventListener("click", function() {
 function continueGame() {
   isGamePaused = true;
   startGameButton.innerHTML = "WZNÓW GRĘ";
-  startGameButton.addEventListener("click", function() {
+  startGameButton.addEventListener("click", function () {
     instructionModal.style.display = "none";
     difficultyModal.style.display = "none";
     cancelAnimationFrame(gameId);
@@ -187,9 +185,8 @@ function continueGame() {
   });
   console.log("game to be continued");
 }
-// WTF??
+
 instructionModal.style.display = "block";
-// difficultyModal.style.display = "none";
 
 let backgroundImage;
 let floorImage;
@@ -202,10 +199,10 @@ function loadImage(imageUrl, x, y, w, h) {
   return new Promise((resolve, reject) => {
     const image = new Image();
     image.src = `/game/img/${imageUrl}`;
-    image.onload = function() {
+    image.onload = function () {
       resolve(image);
     };
-    image.onabort = function() {
+    image.onabort = function () {
       reject(`Couldn't load image from /game/img/${imageUrl}`);
     };
   });
@@ -236,7 +233,7 @@ function loadAllImages() {
       coinImage = coinSprite;
       backgroundNightImage = backgroundNight;
     })
-    .finally(function() {
+    .finally(function () {
       game = new GameArea(1200, 500, "easy");
     });
 }
@@ -250,10 +247,10 @@ function sound(src) {
   this.sound.setAttribute("controls", "none");
   this.sound.style.display = "none";
   document.body.appendChild(this.sound);
-  this.play = function() {
+  this.play = function () {
     this.sound.play();
   };
-  this.stop = function() {
+  this.stop = function () {
     this.sound.pause();
   };
 }
@@ -445,7 +442,7 @@ function GameArea(
 }
 
 GameArea.prototype = {
-  drawFloor: function() {
+  drawFloor: function () {
     const howManyTimesDraw = GAME_WIDTH / FLOOR_WIDTH;
     for (let i = 0; i < howManyTimesDraw; i++) {
       context.drawImage(
@@ -458,7 +455,7 @@ GameArea.prototype = {
     }
   },
 
-  drawBackground: function() {
+  drawBackground: function () {
     let howManyTimesDraw = GAME_WIDTH / BG_WIDTH;
     for (let i = 0; i < howManyTimesDraw; i++) {
       if (gravityMult < 1.5) {
@@ -480,12 +477,12 @@ GameArea.prototype = {
       }
     }
   },
-  generateCanvas: function() {
+  generateCanvas: function () {
     this.drawBackground();
     this.drawFloor();
     drawPlayer();
   },
-  gameLoop: function(time) {
+  gameLoop: function (time) {
     let delta = 0;
     if (time) {
       delta = time - lastTime;
