@@ -49,8 +49,8 @@ const COIN_HEIGHT = 40;
 let game;
 let gameId;
 let isEndGame;
-const TIME_PLAY = 5;
-const TIME_COIN_SPAWN = 0.1;
+const TIME_PLAY = 30;
+const TIME_COIN_SPAWN = 0.2;
 
 var timer = TIME_PLAY * 1000; // 10 seconds
 
@@ -133,7 +133,7 @@ instructionBtn.addEventListener("click", function() {
 });
 
 closeButton.addEventListener("click", function() {
-  window.location.hash="";
+  window.location.hash = "";
   window.location.pathname = "index.html";
 });
 
@@ -545,7 +545,7 @@ GameArea.prototype = {
     drawPlayer();
     drawCoins();
     timerClock(delta, !isGamePaused);
-    drawFps(delta);
+    // drawFps(delta);
     if (!isGamePaused && timer > 0) {
       gameId = requestAnimationFrame(this.gameLoop.bind(this));
     }
