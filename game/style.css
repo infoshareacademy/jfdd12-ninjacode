@@ -258,3 +258,7 @@ h6 {
 .Rtable--3cols > .Rtable-cell {
   width: 33.33%;
 }
+
+div#nick-modal input {
+  font-size: 24px;
+}

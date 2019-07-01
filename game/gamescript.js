@@ -47,8 +47,8 @@ const COIN_WIDTH = 44;
 const COIN_HEIGHT = 40;
 let game;
 let gameId;
-const TIME_PLAY = 5;
-const TIME_COIN_SPAWN = 0.1;
+const TIME_PLAY = 30;
+const TIME_COIN_SPAWN = 0.2;
 
 var timer = TIME_PLAY * 1000; // 10 seconds
 
@@ -136,7 +136,8 @@ closeButton.addEventListener("click", function () {
 });
 
 // nickModal feature/70
-scoreNickBtn.addEventListener("click", function () {
+scoreNickForm.addEventListener("submit", function (event) {
+  event.preventDefault()
   let myScore = getScore(scoreNickInput.value, currentScore);
   console.log(myScore);
   // aktualizowanie scorebordu
@@ -156,6 +157,28 @@ scoreNickBtn.addEventListener("click", function () {
   nickModal.style.display = "none";
   scoreNickInput.value = "";
 });
+scoreNickBtn.addEventListener("click", function (event) {
+  event.preventDefault()
+  let myScore = getScore(scoreNickInput.value, currentScore);
+  console.log(myScore);
+  // aktualizowanie scorebordu
+  // updateScoreboard()
+  scoreboard = [...scoreboard, myScore];
+  // sort
+  scoreboard = scoreboard
+    .sort(function (a, b) {
+      return b.score - a.score;
+    })
+    .slice(0, 10);
+  console.log(scoreboard);
+  //dodanie do localstorage
+  addToScoreboard(scoreboard);
+  scoresModalFill.innerText = "";
+  scoresModalFill.appendChild(createScoreTable(scoreboard));
+  nickModal.style.display = "none";
+  scoreNickInput.value = "";
+});
+
 
 scoreCloseButton.addEventListener("click", function () {
   scoresModal.style.display = "none";
@@ -635,6 +658,7 @@ function resetGame() {
   console.log("restarted the game");
   cancelAnimationFrame(gameId);
   currentScore = 0;
+  playerXSpeed = 0;
   scoreTxt.innerText = currentScore;
   console.log(currentScore);
   timer = TIME_PLAY * 1000; // 10 seconds again
