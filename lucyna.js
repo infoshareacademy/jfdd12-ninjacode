@@ -1,20 +1,41 @@
 // Get the modal
 var modal = document.getElementById("myModal");
 
-document.getElementById("emailForm").addEventListener('submit', function(event) {
+document
+  .getElementById("emailForm")
+  .addEventListener("submit", function(event) {
     event.preventDefault();
-
-    modal.style.display = "block";
-    const closeButtons = document.getElementsByClassName('close')
-    closeButtons[1].onclick = function() {
-      modal.style.display = "none"
+    document.getElementById("client-email");
+    var clientEmail = document.getElementById("client-email").value;
+    var currentStorage = localStorage.getItem("client-email");
+    var mailsList = JSON.parse(currentStorage);
+    var emailsToCheck = [...mailsList.emails];
+    if (currentStorage) {
+      mailsList.emails.push(clientEmail);
+      localStorage.setItem(
+        "client-email",
+        JSON.stringify({ emails: mailsList.emails })
+      );
+    } else {
+      localStorage.setItem(
+        "client-email",
+        JSON.stringify({ emails: [clientEmail] })
+      );
     }
-});
-const openPageButton = document.getElementsByClassName('open-page')[0]
-openPageButton.onclick = function(){
-  window.location.pathname = "game/index.html"
-}
-
+    if (emailsToCheck.filter(mail => mail === clientEmail).length > 0) {
+      window.location.pathname = "game/index.html";
+    } else {
+      modal.style.display = "block";
+      const closeButtons = document.getElementsByClassName("close");
+      closeButtons[1].onclick = function() {
+        modal.style.display = "none";
+      };
+    }
+  });
+const openPageButton = document.getElementsByClassName("open-page")[0];
+openPageButton.onclick = function() {
+  window.location.pathname = "game/index.html";
+};
 
 // Get the button that opens the modal
 // var btn = document.getElementById("myBtn");
@@ -22,26 +43,25 @@ openPageButton.onclick = function(){
 // Get the <span> element that closes the modal
 var closeButton = document.getElementsByClassName("close");
 
-// When the user clicks the button, open the modal 
+// When the user clicks the button, open the modal
 // btn.onclick = function() {
 //   modal.style.display = "block";
 // }
-var span = document.getElementsByClassName("close")[0]
+var span = document.getElementsByClassName("close")[0];
 // When the user clicks on <span> (x), close the modal
 span.onclick = function() {
   modal.style.display = "none";
-}
-  //window.location.pathname = 'game.html';dodać do buttona YES
-
+};
+//window.location.pathname = 'game.html';dodać do buttona YES
 
 // When the user clicks anywhere outside of the modal, close it
 window.onclick = function(event) {
   if (event.target == modal) {
     modal.style.display = "none";
   }
-}
+};
 
-// 
+//
 /* document.getElementById('emailForm').addEventListener('submit', (e) => {
     e.preventDefault();
     alert('Thanks');
