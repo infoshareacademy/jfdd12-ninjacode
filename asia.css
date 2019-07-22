@@ -54,18 +54,18 @@
 .feature_32 .social-icons img {  
   max-width: 25px;    
   margin: 10px;
-  color:#777;
   text-decoration:none;
-  transition: 0.5s;
 }
 
- 
-.feature_32 .github, .linkedin, .personal {
+
+.feature_32 .github .linkedin{
   width:30px;
-  opacity:0.5;
   margin:0px 10px;
   transition: 0.5s;
 }
+
+
+
 
 
 

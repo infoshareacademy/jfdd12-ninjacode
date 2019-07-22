@@ -57,20 +57,27 @@
   margin-left: 10px;
 }
 .feater_33 input {
+  border-width:0px;
   font-size: 20px;
-  border-color: white;
-  border-radius: 16px;
-  padding: 5px 10px 5px 10px;
+  border-radius: 40px;
+  padding: 20px 20px;
+  box-shadow: 12px 12px 25px -13px rgba(0,0,0,0.34);
+
 }
 .feater_33 button {
+  border-width:0px;
+  letter-spacing:1px;
+  font-weight:700;
+  text-transform: uppercase;
   font-size: 24px;
   cursor: pointer;
-  border-radius: 16px;
-  border: solid white;
+  border-radius: 40px;
   background-color: rgb(48, 128, 235);
   color: white;
-  padding-left: 20px;
-  padding-right: 20px;
+  padding:20px 60px;
+  font: bold 1.5rem Lato, sans-serif;
+
+  box-shadow: 12px 12px 25px -13px rgba(0,0,0,0.34);
 }
 .email {
   width: 290px;
